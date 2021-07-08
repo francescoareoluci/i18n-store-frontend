@@ -1,4 +1,5 @@
 import { LOGIN } from "../constants/action_types"
+import { SET_TOKEN } from "../constants/action_types"
 import { LOGOUT } from "../constants/action_types"  
 import { GET_PRODUCT_LIST } from "../constants/action_types"
 import { CHANGE_CUSTOMER_SELECTED_PRODUCT } from "../constants/action_types"
@@ -18,7 +19,7 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-    if (action.type == LOGIN) {
+    if (action.type == LOGIN || action.type == SET_TOKEN) {
         const newState = Object.assign({}, state, {
             token: action.payload.token,
             role: action.payload.role

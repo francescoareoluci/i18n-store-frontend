@@ -8,6 +8,11 @@ export function login(username, password) {
     if (username == "admin") {
         userRole = "ADMIN"
     }
+    const token = "123";
     const payload = { token: "123", role: userRole};
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', userRole);
+
     return { type: LOGIN, payload };
 }

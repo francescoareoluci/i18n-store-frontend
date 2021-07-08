@@ -1,4 +1,5 @@
 export const LOGIN = "LOGIN";
+export const SET_TOKEN = "SET_TOKEN";
 export const LOGOUT = "LOGOUT";
 export const GET_PRODUCT_LIST = "GET_PRODUCT_LIST";
 export const CHANGE_CUSTOMER_SELECTED_PRODUCT = "CHANGE_CUSTOMER_SELECTED_PRODUCT";
