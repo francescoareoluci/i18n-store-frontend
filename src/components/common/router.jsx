@@ -21,12 +21,6 @@ import ShoppingList from "../customer/shopping_list"
 import { setToken } from "../../js/actions/setToken";
 
 
-function mapDispatchToProps(dispatch) {
-  return {
-      setToken: (token, role) => dispatch(setToken(token, role))
-  };
-}
-
 const mapStateToProps = (state) => {
   return { 
       token: state.token,
@@ -37,34 +31,6 @@ const mapStateToProps = (state) => {
 class App extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  isObjectEmpty(obj) {
-    for(let key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
-    }
-    return true;
-  }
-
-  componentDidMount() {
-    if (this.props.token == "" || this.props.role == "") {
-      // Trying to get token from a previos save
-      const token = localStorage.getItem('token');
-      const role = localStorage.getItem('role');
-
-      // Check if they are valid
-      if (this.isObjectEmpty(token) || this.isObjectEmpty(role)) {
-        return;
-      }
-
-      // Set token and role in store
-      this.props.setToken(token, role);
-    }
-  }
-
-  componentWillReceiveProps(newProps) {
-    console.log(newProps);
   }
 
   render() {
@@ -126,4 +92,4 @@ Router.propTypes = {
   role: PropTypes.string
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
