@@ -28,7 +28,7 @@ class ShoppingCart extends React.Component {
         this.handleCheckout = this.handleCheckout.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getCart();
     }
 

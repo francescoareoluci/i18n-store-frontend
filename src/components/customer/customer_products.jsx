@@ -24,7 +24,7 @@ class CustomerProducts extends React.Component {
         super(props);
     }
     
-    componentWillMount() {
+    componentDidMount() {
         this.props.getProductList();
     }
 

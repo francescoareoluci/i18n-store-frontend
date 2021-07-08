@@ -207,11 +207,8 @@ a {
 .products-header__addbar {
     flex: 0 1 auto;
     font-size: 14px;
-    border-width: 1px;
-    border-color: #565656;
     border-radius: 8px;
-    background-color: #E1E1E1;
-    border-style: solid;
+    background-color: #83B0DE;
     padding-left: 20px;
     padding-right: 20px;
     margin-right: 20px;
@@ -222,7 +219,7 @@ a {
 .products-header__addbar__text {
     margin-top: 4px;
     font-family: "montserrat-regular";
-    color: rgb(93, 93, 93);
+    color: #EBEBEB;
 }
 
 .products-header__searchbar {
@@ -231,7 +228,7 @@ a {
     border-width: 1px;
     border-color: #565656;
     border-radius: 8px;
-    background-color: #E1E1E1;
+    background-color: #f3f2f2;
     border-style: solid;
     padding-left: 20px;
     padding-right: 20px;
