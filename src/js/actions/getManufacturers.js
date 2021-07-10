@@ -15,19 +15,19 @@ export function getManufacturers() {
                 manufacturer: "Manufacturers2"
             },
             {
-                id: 1,
+                id: 3,
                 manufacturer: "Manufacturer3"
             },
             {
-                id: 2,
+                id: 4,
                 manufacturer: "Manufacturers4"
             },
             {
-                id: 1,
+                id: 5,
                 manufacturer: "Manufacturer5"
             },
             {
-                id: 2,
+                id: 6,
                 manufacturer: "Manufacturers6"
             },
         ]

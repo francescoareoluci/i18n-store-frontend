@@ -204,7 +204,7 @@ a {
     min-width: 200px;
 }
 
-.products-header__addbar {
+.products-header__button {
     flex: 0 1 auto;
     font-size: 14px;
     border-radius: 8px;
@@ -216,9 +216,10 @@ a {
     margin-right: 20px;
     text-align: center;
     min-width: 200px;
+    cursor: pointer;
 }
 
-.products-header__addbar__text {
+.products-header__button__text {
     /* margin-top: 4px; */
     font-family: "montserrat-regular";
     color: #EBEBEB;
@@ -236,14 +237,27 @@ a {
     padding-right: 20px;
     margin-right: 120px;
     min-width: 260px;
-    padding-top: 6px;
-    padding-bottom: 6px
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .products-header__searchbar__text {
     /*margin-top: 4px;*/
     font-family: "montserrat-regular";
     color: rgb(157, 157, 157);
+}
+
+.products-header__searchbar__input {
+    text-decoration: none;
+    border-style: none;
+    background-color: #f3f2f2;
+    font-family: "montserrat-regular";
+    color: rgb(157, 157, 157);
+}
+
+/* @Override */
+.products-header__searchbar__input:focus {
+    outline: 0;
 }
 
 .display-type {

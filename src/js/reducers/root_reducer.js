@@ -10,6 +10,7 @@ import { GET_USERS } from "../constants/action_types"
 import { GET_CURRENCIES } from "../constants/action_types"
 import { GET_MANUFACTURERS } from "../constants/action_types"
 import { GET_LOCALES } from "../constants/action_types"
+import { PERFORM_SEARCH } from "../constants/action_types"
 
 
 const initialState = {
@@ -97,6 +98,12 @@ function rootReducer(state = initialState, action) {
     else if (action.type == GET_LOCALES) {
         const newState = Object.assign({}, state, {
             localeList: action.payload
+        });
+        return newState;
+    }
+    else if (action.type == PERFORM_SEARCH) {
+        const newState = Object.assign({}, state, {
+            productList: action.payload
         });
         return newState;
     }

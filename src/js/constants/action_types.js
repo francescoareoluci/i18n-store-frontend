@@ -10,3 +10,4 @@ export const GET_USERS = "GET_USERS";
 export const GET_MANUFACTURERS = "GET_MANUFACTURERS"; 
 export const GET_LOCALES = "GET_LOCALES";
 export const GET_CURRENCIES = "GET_CURRENCIES";
+export const PERFORM_SEARCH = "PERFORM_SEARCH";

@@ -48,7 +48,7 @@ class Currencies extends React.Component {
                     {!isListEmpty && this.props.currencyList.currencies.map((currency) => (
                         <div className="currencies-card">
                             <div className="currencies-card__id">
-                                Currency id: {currency.id}
+                                Currency ID: {currency.id}
                             </div>
                             <div className="currencies-card__name">
                                 Currency: {currency.currency}

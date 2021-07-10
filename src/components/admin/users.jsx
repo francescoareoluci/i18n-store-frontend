@@ -47,7 +47,7 @@ class Users extends React.Component {
                     {!isListEmpty && this.props.userList.users.map((user) => (
                         <div className="users-card">
                             <div className="users-card__id">
-                                User id: {user.id}
+                                User ID: {user.id}
                             </div>
                             <div className="users-card__firstName">
                                 First Name: {user.firstName}

@@ -47,7 +47,7 @@ class Manufacturers extends React.Component {
                     {!isListEmpty && this.props.manufacturerList.manufacturers.map((manufacturer) => (
                         <div className="manufacturers-card">
                             <div className="manufacturers-card__id">
-                                Manufacturer id: {manufacturer.id}
+                                Manufacturer ID: {manufacturer.id}
                             </div>
                             <div className="manufacturers-card__name">
                                 Manufacturer: {manufacturer.manufacturer}

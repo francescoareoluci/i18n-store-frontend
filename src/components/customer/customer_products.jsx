@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 import ProductCard from "../common/product_card"
 
 import { getProductList } from "../../js/actions/getProductList"
+import { performSearch } from "../../js/actions/performSearch"
 
 
 function mapDispatchToProps(dispatch) {
     return {
         getProductList: () => dispatch(getProductList()),
+        performSearch: (keywords) => dispatch(performSearch(keywords))
     };
 }
 
@@ -22,10 +24,41 @@ const mapStateToProps = (state) => {
 class CustomerProducts extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            inputText: "",
+            showAllProducts: true
+        }
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleShowAll = this.handleShowAll.bind(this);
     }
     
     componentDidMount() {
         this.props.getProductList();
+    }
+
+    handleShowAll(e) {
+        e.preventDefault();
+        this.props.getProductList();
+        this.setState({
+            showAllProducts: true
+        })
+    }
+
+    handleInputChange(e) {
+        e.preventDefault();
+        this.setState({
+            inputText: e.target.value
+        });
+    }
+
+    handleSearch(e) {
+        this.props.performSearch(this.state.inputText);
+        this.setState({
+            showAllProducts: false
+        })
     }
 
     render() {
@@ -42,14 +75,31 @@ class CustomerProducts extends React.Component {
                         Products
                     </div>
                     <div className="product-header__spacer"></div>
+                    <div className="products-header__button"
+                         onClick={(e) => {this.handleShowAll(e)}}>
+                        <div className="products-header__button__text">
+                            Show all products
+                        </div>
+                    </div>
                     <div className="products-header__searchbar">
                         <div className="products-header__searchbar__text">
-                            Search products by keywords
+                            <input className="products-header__searchbar__input" 
+                                   type="text" 
+                                   value={this.state.inputText}
+                                   placeholder="Search products"
+                                   onChange={(e) => {this.handleInputChange(e)}}
+                                   onKeyPress={(e) => {if (e.key == "Enter") this.handleSearch();}}
+                            />
                         </div>
                     </div>
                 </div>
                 <div className="display-type">
-                    All products
+                    {this.state.showAllProducts &&
+                        <label>All products</label>
+                    }
+                    {!this.state.showAllProducts &&
+                        <label>Result of search</label>
+                    }
                 </div>
                 {isListEmpty &&
                     <div>
