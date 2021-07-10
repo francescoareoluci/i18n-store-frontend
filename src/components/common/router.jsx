@@ -73,13 +73,22 @@ class App extends React.Component {
           <Route exact path="/">
             <Redirect to={defaultPath} />
           </Route>
-          <Route exact path="/admin/products" component={AdminProducts} />
-          <Route exact path="/admin/products/info" component={AdminProductInfo} />
-          <Route exact path="/customer/products" component={CustomerProducts} />
-          <Route exact path="/customer/products/info" component={CustomerProductInfo} />
-          <Route exact path="/customer/shopping-cart" component={ShoppingCart} />
-          <Route exact path="/customer/shopping-list" component={ShoppingList} />
-          <Redirect to={defaultPath} />
+          {this.props.role == 'ADMIN' &&
+            <Switch>
+              <Route exact path="/admin/products" component={AdminProducts} />
+              <Route exact path="/admin/products/info" component={AdminProductInfo} />
+              <Redirect to={defaultPath} />
+            </Switch>
+          }
+          {this.props.role == 'CUSTOMER' &&
+            <Switch>
+              <Route exact path="/customer/products" component={CustomerProducts} />
+              <Route exact path="/customer/products/info" component={CustomerProductInfo} />
+              <Route exact path="/customer/shopping-cart" component={ShoppingCart} />
+              <Route exact path="/customer/shopping-list" component={ShoppingList} />
+              <Redirect to={defaultPath} />
+            </Switch>
+          }
         </Switch>
       </Router>
       </div>
