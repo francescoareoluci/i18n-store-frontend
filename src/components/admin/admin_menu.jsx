@@ -41,33 +41,41 @@ class AdminMenu extends React.Component {
                 </div>
                 <nav>
                 <ul>
-                <div className="left-menu__button">
-                    <Link to="/admin/products">
-                    <div className="left-menu__button__text">
-                        Products
+                <Link to="/admin/products">
+                    <div className="left-menu__button">
+                        <div className="left-menu__button__text">
+                            Products
+                        </div>
                     </div>
-                    </Link>
-                </div>
-                <div className="left-menu__button">
-                    <div className="left-menu__button__text">
-                        Users
+                </Link>
+                <Link to="/admin/users">
+                    <div className="left-menu__button">
+                        <div className="left-menu__button__text">
+                            Users
+                        </div>
                     </div>
-                </div>
-                <div className="left-menu__button">
-                    <div className="left-menu__button__text">
-                        Manufacturers
+                </Link>
+                <Link to="/admin/manufacturers">
+                    <div className="left-menu__button">
+                        <div className="left-menu__button__text">
+                            Manufacturers
+                        </div>
                     </div>
-                </div>
-                <div className="left-menu__button">
-                    <div className="left-menu__button__text">
-                        Locales
+                </Link>
+                <Link to="/admin/locales">
+                    <div className="left-menu__button">
+                        <div className="left-menu__button__text">
+                            Locales
+                        </div>
                     </div>
-                </div>
-                <div className="left-menu__button">
-                    <div className="left-menu__button__text">
-                        Currencies
+                </Link>
+                <Link to="/admin/currencies">
+                    <div className="left-menu__button">
+                        <div className="left-menu__button__text">
+                            Currencies
+                        </div>
                     </div>
-                </div>
+                </Link>
                 <div className="left-menu__spacer"></div>
                 <div className="left-menu__button"
                      onClick={() => {this.handleLogout()}}>

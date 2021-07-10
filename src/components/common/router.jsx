@@ -12,6 +12,10 @@ import Login from "./login"
 import AdminMenu from "../admin/admin_menu"
 import AdminProducts from "../admin/admin_products"
 import AdminProductInfo from "../admin/admin_product_info"
+import Locales from "../admin/locales"
+import Users from "../admin/users"
+import Manufacturers from "../admin/manufacturers"
+import Currencies from "../admin/currencies"
 import CustomerMenu from "../customer/customer_menu"
 import CustomerProducts from "../customer/customer_products"
 import CustomerProductInfo from "../customer/customer_product_info"
@@ -77,6 +81,10 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/admin/products" component={AdminProducts} />
               <Route exact path="/admin/products/info" component={AdminProductInfo} />
+              <Route exact path="/admin/users" component={Users} />
+              <Route exact path="/admin/locales" component={Locales} />
+              <Route exact path="/admin/manufacturers" component={Manufacturers} />
+              <Route exact path="/admin/currencies" component={Currencies} />
               <Redirect to={defaultPath} />
             </Switch>
           }
