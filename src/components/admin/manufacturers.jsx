@@ -13,7 +13,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        manufacturerList: state.manufacturerList
+        manufacturerList: state.manufacturerList,
+        token: state.token
     };
 };
 
@@ -23,7 +24,7 @@ class Manufacturers extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getManufacturers();
+        this.props.getManufacturers(this.props.token);
     }
 
     render() {

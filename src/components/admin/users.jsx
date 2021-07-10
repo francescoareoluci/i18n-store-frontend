@@ -13,7 +13,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        userList: state.userList
+        userList: state.userList,
+        token: state.token
     };
 };
 
@@ -23,7 +24,7 @@ class Users extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getUsers();
+        this.props.getUsers(this.props.token);
     }
 
     render() {

@@ -13,7 +13,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        localeList: state.localeList
+        localeList: state.localeList,
+        token: state.token
     };
 };
 
@@ -23,7 +24,7 @@ class Locales extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getLocales();
+        this.props.getLocales(this.props.token);
     }
 
     render() {

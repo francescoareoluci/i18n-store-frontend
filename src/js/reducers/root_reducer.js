@@ -29,6 +29,23 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
     if (action.type == LOGIN || action.type == SET_TOKEN) {
+        if (Object.keys(action.payload).length == 0) {
+            const newState = Object.assign({}, state, {
+                token: "",
+                role: "",
+                customerSelectedProduct: {},
+                adminSelectedProduct: {},
+                productList: [],
+                shoppingCart: {},
+                shoppingList: {},
+                userList: {},
+                currencyList: {},
+                manufacturerList: {},
+                localeList: {}
+            });
+            return newState;
+        }
+
         const newState = Object.assign({}, state, {
             token: action.payload.token,
             role: action.payload.role
@@ -44,6 +61,10 @@ function rootReducer(state = initialState, action) {
             productList: [],
             shoppingCart: {},
             shoppingList: {},
+            userList: {},
+            currencyList: {},
+            manufacturerList: {},
+            localeList: {}
         });
         return newState;
     }

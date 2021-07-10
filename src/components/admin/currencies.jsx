@@ -13,7 +13,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        currencyList: state.currencyList
+        currencyList: state.currencyList,
+        token: state.token
     };
 };
 
@@ -23,7 +24,7 @@ class Currencies extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getCurrencies();
+        this.props.getCurrencies(this.props.token);
     }
 
     render() {
