@@ -1,4 +1,5 @@
 import buildCustomAxios from "../constants/token_axios";
+import dispatchUnauth from "./handleUnauth";
 import { GET_CURRENCIES } from "../constants/action_types";
 import { URL_ADMIN_CURRENCIES } from "../constants/rest_api";
 
@@ -46,6 +47,10 @@ export function getCurrencies(token) {
             })
             .catch(error => {
                 console.log(error);
+                if (error.response.status === 401) {
+                    dispatch(dispatchUnauth());
+                }
+                
                 dispatch(dispatchCurrencies(payload))
             });
     }

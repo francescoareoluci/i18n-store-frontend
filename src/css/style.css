@@ -461,6 +461,12 @@ a {
     margin-left: 20px;
 }
 
+.products-not-available {
+    font-family: "montserrat-regular";
+    color: #2B2B2B;
+    font-size: 16px;
+}
+
 /* =========== Product Info Card ========= */
 
 .product-info-card-wrapper {
@@ -585,6 +591,7 @@ a {
     color: #EBEBEB;
     font-size: 14px;
     min-width: 164px;
+    cursor: pointer;
 }
 
 /* ====== Shopping List ======== */

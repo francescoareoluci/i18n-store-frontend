@@ -1,4 +1,5 @@
 import buildCustomAxios from "../constants/token_axios";
+import dispatchUnauth from "./handleUnauth";
 import { GET_LOCALES } from "../constants/action_types"
 import { URL_ADMIN_LOCALES } from "../constants/rest_api";
 
@@ -49,6 +50,10 @@ export function getLocales(token) {
             })
             .catch(error => {
                 console.log(error);
+                if (error.response.status === 401) {
+                    dispatch(dispatchUnauth());
+                }
+
                 dispatch(dispatchLocales(payload))
             });
     }

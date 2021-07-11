@@ -1,4 +1,5 @@
 import buildCustomAxios from "../constants/token_axios";
+import dispatchUnauth from "./handleUnauth";
 import { GET_MANUFACTURERS } from "../constants/action_types";
 import { URL_ADMIN_MANUFACTURERS } from "../constants/rest_api";
 
@@ -51,6 +52,10 @@ export function getManufacturers(token) {
             })
             .catch(error => {
                 console.log(error);
+                if (error.response.status === 401) {
+                    dispatch(dispatchUnauth());
+                }
+                
                 dispatch(dispatchManufacturers(payload))
             });
     }

@@ -10,14 +10,15 @@ import { performSearch } from "../../js/actions/performSearch"
 
 function mapDispatchToProps(dispatch) {
     return {
-        getProductList: () => dispatch(getProductList()),
-        performSearch: (keywords) => dispatch(performSearch(keywords))
+        getProductList: (isAdmin, token) => dispatch(getProductList(isAdmin, token)),
+        performSearch: (keywords, token) => dispatch(performSearch(keywords, token))
     };
 }
 
 const mapStateToProps = (state) => {
     return {
-        productList: state.productList
+        productList: state.productList,
+        token: state.token
     };
 };
 
@@ -36,12 +37,12 @@ class CustomerProducts extends React.Component {
     }
     
     componentDidMount() {
-        this.props.getProductList();
+        this.props.getProductList(false, this.props.token);
     }
 
     handleShowAll(e) {
         e.preventDefault();
-        this.props.getProductList();
+        this.props.getProductList(false, this.props.token);
         this.setState({
             showAllProducts: true
         })
@@ -55,7 +56,7 @@ class CustomerProducts extends React.Component {
     }
 
     handleSearch(e) {
-        this.props.performSearch(this.state.inputText);
+        this.props.performSearch(this.state.inputText, this.props.token);
         this.setState({
             showAllProducts: false
         })
@@ -98,11 +99,11 @@ class CustomerProducts extends React.Component {
                         <label>All products</label>
                     }
                     {!this.state.showAllProducts &&
-                        <label>Result of search</label>
+                        <label>Search result for: {this.state.inputText}</label>
                     }
                 </div>
                 {isListEmpty &&
-                    <div>
+                    <div className="products-not-available">
                         No products available
                     </div>
                 }

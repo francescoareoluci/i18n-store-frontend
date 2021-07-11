@@ -21,11 +21,22 @@ class AdminProductInfo extends React.Component {
     }
 
     render() {
+        let isProductEmtpy = true;
+        if (Object.keys(this.props.adminSelectedProduct).length != 0) {
+                    isProductEmtpy = false;
+        }
+
         return (
             <div className="product-info-container">
                 <div className="product-info-container__text">
                     Product Informations
                 </div>
+                {isProductEmtpy &&
+                    <div>
+                        Product not found;
+                    </div>
+                }
+                {!isProductEmtpy &&
                 <div className="product-wrapper">
                     <div className="product-wrapper__name">
                         <div className="product-wrapper__name__text">
@@ -38,7 +49,7 @@ class AdminProductInfo extends React.Component {
                         </div>
                     </div>
                     <div className="product-wrapper__manufacturer">
-                        {this.props.adminSelectedProduct.manufacturer}
+                        Manufacturer: {this.props.adminSelectedProduct.manufacturer}
                     </div>
                     {this.props.adminSelectedProduct.translations.map((tr, i) => (
                        <ProductInfoCard 
@@ -50,6 +61,7 @@ class AdminProductInfo extends React.Component {
                        /> 
                     ))}
                 </div>
+                }
             </div>
         );
     }

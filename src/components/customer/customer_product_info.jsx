@@ -7,13 +7,14 @@ import { addProductToCart } from "../../js/actions/addProductToCart";
 
 function mapDispatchToProps(dispatch) {
     return {
-        addProductToCart: (prodId) => dispatch(addProductToCart(prodId))
+        addProductToCart: (prodId, token) => dispatch(addProductToCart(prodId, token))
     };
 }
 
 const mapStateToProps = (state) => {
     return {
-        customerSelectedProduct: state.customerSelectedProduct
+        customerSelectedProduct: state.customerSelectedProduct,
+        token: state.token
     };
 };
 
@@ -25,7 +26,7 @@ class CustomerProductInfo extends React.Component {
     }
 
     handleAddProduct() {
-        this.props.addProductToCart(this.props.customerSelectedProduct.id);    
+        this.props.addProductToCart(this.props.customerSelectedProduct.id, this.props.token);    
     }
 
     render() {
@@ -47,7 +48,7 @@ class CustomerProductInfo extends React.Component {
                         </div>
                     </div>
                     <div className="product-wrapper__manufacturer">
-                        {this.props.customerSelectedProduct.manufacturer}
+                        Manufacturer: {this.props.customerSelectedProduct.manufacturer}
                     </div>
                     <div className="product-wrapper__price">
                         <div className="product-wrapper__price__title">

@@ -6,18 +6,25 @@ import ProductCard from "../common/product_card";
 
 import { getCart } from "../../js/actions/getCart";
 import { performCheckout } from "../../js/actions/performCheckout";
+import { setCheckoutLoading } from "../../js/actions/setCheckoutLoading";
+import { setRemoveCartProdLoading } from "../../js/actions/setRemoveCartProdLoading";
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        getCart: () => dispatch(getCart()),
-        performChekout: () => dispatch(performCheckout())
+        getCart: (token) => dispatch(getCart(token)),
+        performCheckout: (token) => dispatch(performCheckout(token)),
+        setCheckoutLoading: (isDone) => dispatch(setCheckoutLoading(isDone)),
+        setRemoveCartProdLoading: (isDone) => dispatch(setRemoveCartProdLoading(isDone))
     };
 }
 
 const mapStateToProps = (state) => {
     return {
-        shoppingCart: state.shoppingCart
+        shoppingCart: state.shoppingCart,
+        checkoutLoadingDone: state.checkoutLoadingDone,
+        removeCartProductLoading: state.removeCartProductLoading,
+        token: state.token        
     };
 };
 
@@ -29,11 +36,26 @@ class ShoppingCart extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getCart();
+        this.props.getCart(this.props.token);
     }
 
+    componentDidUpdate(previousProps) {
+        if (this.props.checkoutLoadingDone !== previousProps.checkoutLoadingDone &&
+                this.props.checkoutLoadingDone) {       
+            this.props.getCart(this.props.token);
+            this.props.setCheckoutLoading(false);
+        }
+
+        if (this.props.removeCartProductLoading !== previousProps.removeCartProductLoading &&
+                this.props.removeCartProductLoading) {       
+            this.props.getCart(this.props.token);
+            this.props.setRemoveCartProdLoading(false);
+        }
+      }
+
     handleCheckout() {
-        this.props.performCheckout();
+        this.props.setCheckoutLoading(false);
+        this.props.performCheckout(this.props.token);
     }
 
     render() {
@@ -61,13 +83,14 @@ class ShoppingCart extends React.Component {
                 </div>
                 {isCartEmpty &&
                     <div>
-                        Empty Cart
+                        Empty shopping cart
                     </div>
                 }
                 {!isCartEmpty && this.props.shoppingCart.products.map((p, i) =>(
                     <ProductCard 
                         key={i}
                         linkTo="customer"
+                        prodId={p.id}
                         name={p.name}
                         manufacturer={p.manufacturer}
                         price={p.price}

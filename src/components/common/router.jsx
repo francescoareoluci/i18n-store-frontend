@@ -22,13 +22,20 @@ import CustomerProductInfo from "../customer/customer_product_info"
 import ShoppingCart from "../customer/shopping_cart"
 import ShoppingList from "../customer/shopping_list"
 
-import { setToken } from "../../js/actions/setToken";
+import { logout } from "../../js/actions/logout";
 
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: () => dispatch(logout())
+  };
+}
 
 const mapStateToProps = (state) => {
   return { 
       token: state.token,
-      role: state.role
+      role: state.role,
+      unauth: state.unauth
   };
 };
 
@@ -37,8 +44,14 @@ class App extends React.Component {
     super(props);
   }
 
+  componentDidUpdate(previousProps) {
+    if (previousProps.unauth !== this.props.unauth &&
+          this.props.unauth) {
+            this.props.logout();
+    }
+  }
+
   render() {
-    console.log("render");
     if (this.props.token == "") {
         return (
           <Login 
@@ -114,4 +127,4 @@ Router.propTypes = {
   role: PropTypes.string
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

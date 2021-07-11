@@ -12,13 +12,14 @@ import { getShoppingList } from "../../js/actions/getShoppingList";
 
 function mapDispatchToProps(dispatch) {
     return {
-        getShoppingList: () => dispatch(getShoppingList())
+        getShoppingList: (token) => dispatch(getShoppingList(token))
     };
 }
 
 const mapStateToProps = (state) => {
     return {
-        shoppingList: state.shoppingList
+        shoppingList: state.shoppingList,
+        token: state.token
     };
 };
 
@@ -28,7 +29,7 @@ class ShoppingList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getShoppingList();
+        this.props.getShoppingList(this.props.token);
     }
 
     render() {
@@ -45,13 +46,14 @@ class ShoppingList extends React.Component {
                 </div>
                 {isListEmpty &&
                     <div>
-                        Empty Cart
+                        Empty shopping list
                     </div>
                 }
                 {!isListEmpty && this.props.shoppingList.products.map((p, i) =>(
                     <ProductCard 
                         key={i}
                         linkTo="customer"
+                        prodId={p.id}
                         name={p.name}
                         manufacturer={p.manufacturer}
                         price={p.price}

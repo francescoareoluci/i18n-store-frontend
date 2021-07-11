@@ -12,14 +12,16 @@ import { removeProductFromCart } from "../../js/actions/removeProductFromCart";
 
 function mapDispatchToProps(dispatch) {
     return {
-        changeCustomerSelectedProduct: (prodId) => dispatch(changeCustomerSelectedProduct(prodId)),
-        changeAdminSelectedProduct: (prodId) => dispatch(changeAdminSelectedProduct(prodId)),
-        removeProductFromCart: (prodId) => dispatch(removeProductFromCart(prodId))
+        changeCustomerSelectedProduct: (prodId, token) => dispatch(changeCustomerSelectedProduct(prodId, token)),
+        changeAdminSelectedProduct: (prodId, token) => dispatch(changeAdminSelectedProduct(prodId, token)),
+        removeProductFromCart: (prodId, token) => dispatch(removeProductFromCart(prodId, token))
     };
 }
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        token: state.token
+    };
 };
 
 class ProductCard extends React.Component {
@@ -33,17 +35,17 @@ class ProductCard extends React.Component {
     selectProduct(e, id) {
         e.preventDefault();
         if (this.props.linkTo == "customer") {
-            this.props.changeCustomerSelectedProduct(id);
+            this.props.changeCustomerSelectedProduct(id, this.props.token);
         }
         else if (this.props.linkTo == "admin") {
-            this.props.changeAdminSelectedProduct(id);
+            this.props.changeAdminSelectedProduct(id, this.props.token);
         }
     }
 
     handleRemove(e, id) {
         e.preventDefault();
         if (this.props.linkTo == "customer") {
-            this.props.removeProductFromCart(id);
+            this.props.removeProductFromCart(id, this.props.token);
         }
     }
 
