@@ -59,6 +59,7 @@ a {
 .login-form {
     margin-top: 56px;
     margin-left: 32px;
+    margin-right: 32px;
 }
 
 .login-param {
@@ -75,6 +76,7 @@ a {
     border-style: solid;
     border-color: #565656;
     padding: 2px;
+    width: -webkit-fill-available;
 }
 
 .login-button-wrapper {
@@ -94,6 +96,11 @@ a {
     border-width: 1px;
     border-color: #83B0DE;
     cursor: pointer;
+}
+
+.login-invalid-credentials {
+    font-size: 14px;
+    color: red;
 }
 
 /* ======= Header styling ======= */

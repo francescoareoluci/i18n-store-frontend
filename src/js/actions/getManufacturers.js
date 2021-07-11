@@ -37,7 +37,7 @@ export function getManufacturers(token) {
         
         return axiosInstance.get(url)
             .then(result => {
-                result.map((m) => {
+                result.data.map((m) => {
                     let manufacturer = {
                         id: m.id,
                         manufacturer: m.name

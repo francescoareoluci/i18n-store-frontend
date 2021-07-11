@@ -7,7 +7,7 @@ import { getUsers } from "../../js/actions/getUsers"
 
 function mapDispatchToProps(dispatch) {
     return {
-        getUsers: () => dispatch(getUsers())
+        getUsers: (token) => dispatch(getUsers(token))
     };
 }
 

@@ -7,7 +7,7 @@ import { getCurrencies } from "../../js/actions/getCurrencies"
 
 function mapDispatchToProps(dispatch) {
     return {
-        getCurrencies: () => dispatch(getCurrencies())
+        getCurrencies: (token) => dispatch(getCurrencies(token))
     };
 }
 

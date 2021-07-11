@@ -38,7 +38,7 @@ export function getUsers(token) {
         
         return axiosInstance.get(url)
             .then(result => {
-                result.map((u) => {
+                result.data.map((u) => {
                     let user = {
                         id: u.id,
                         firstName: u.firstName,

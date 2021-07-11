@@ -1,9 +1,9 @@
 const adminEndpoint = '/admin';
 const customerEndpoint = '/customer';
 
-export const BASE_URL = 'http://localhost/api'
+export const BASE_URL = 'http://localhost:8080/i18n-store-1.0-SNAPSHOT/api';
 
-export const URL_LOGIN = '/login';
+export const URL_LOGIN = '/auth/login';
 
 export const URL_ADMIN_USERS = adminEndpoint + '/users';
 export const URL_ADMIN_CURRENCIES = adminEndpoint + '/currencies';

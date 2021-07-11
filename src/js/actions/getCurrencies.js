@@ -32,7 +32,7 @@ export function getCurrencies(token) {
         
         return axiosInstance.get(url)
             .then(result => {
-                result.map((c) => {
+                result.data.map((c) => {
                     let currency = {
                         id: c.id,
                         currency: c.currency,

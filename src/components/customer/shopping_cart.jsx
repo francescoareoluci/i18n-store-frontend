@@ -38,7 +38,6 @@ class ShoppingCart extends React.Component {
 
     render() {
         let isCartEmpty = true;
-        console.log(this.props.shoppingCart);
         if (Object.keys(this.props.shoppingCart).length != 0 &&
                 this.props.shoppingCart.products.length != 0) {
             isCartEmpty = false;

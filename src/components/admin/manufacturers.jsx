@@ -7,7 +7,7 @@ import { getManufacturers } from "../../js/actions/getManufacturers";
 
 function mapDispatchToProps(dispatch) {
     return {
-        getManufacturers: () => dispatch(getManufacturers())
+        getManufacturers: (token) => dispatch(getManufacturers(token))
     };
 }
 

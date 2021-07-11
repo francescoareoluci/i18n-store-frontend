@@ -38,9 +38,12 @@ class App extends React.Component {
   }
 
   render() {
+    console.log("render");
     if (this.props.token == "") {
         return (
-          <Login />
+          <Login 
+            role={this.props.role}
+          />
         );
     }
 
@@ -56,7 +59,9 @@ class App extends React.Component {
     }
     else {
       return (
-        <Login />
+        <Login 
+          role={this.props.role}
+        />
       );
     }
 

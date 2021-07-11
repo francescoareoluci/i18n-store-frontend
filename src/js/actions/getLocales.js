@@ -34,7 +34,7 @@ export function getLocales(token) {
         
         return axiosInstance.get(url)
             .then(result => {
-                result.map((l) => {
+                result.data.map((l) => {
                     let locale = {
                         id: l.id,
                         languageCode: l.languageCode,

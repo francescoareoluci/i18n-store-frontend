@@ -38,7 +38,8 @@ class Login extends React.Component {
         });
     }
 
-    handleLogin() {
+    handleLogin(e) {
+        e.preventDefault();
         this.props.login(this.state.username, this.state.password);
     }
 
@@ -49,7 +50,7 @@ class Login extends React.Component {
                     <div className="login-title">
                         I18N Store
                     </div>
-                    <form className="login-form" onSubmit={this.handleLogin}>
+                    <form className="login-form" onSubmit={(e) => {this.handleLogin(e)}}>
                         <div className="login-param">
                             <p>Username</p>
                             <input className="login-param-input" type="text" onChange={e => this.setUsername(e.target.value)}/>
@@ -58,6 +59,11 @@ class Login extends React.Component {
                             <p>Password</p>
                             <input className="login-param-input" type="password" onChange={e => this.setPassword(e.target.value)}/>
                         </div>
+                        {this.props.role == "UNAUTHORIZED" &&
+                            <div className="login-invalid-credentials">
+                                Invalid username or password
+                            </div>
+                        }
                         <div className="login-button-wrapper">
                             <button className="login-button" type="submit">Log In</button>
                         </div>

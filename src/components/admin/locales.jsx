@@ -7,7 +7,7 @@ import { getLocales } from "../../js/actions/getLocales";
 
 function mapDispatchToProps(dispatch) {
     return {
-        getLocales: () => dispatch(getLocales())
+        getLocales: (token) => dispatch(getLocales(token))
     };
 }
 
