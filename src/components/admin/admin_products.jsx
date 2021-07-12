@@ -79,6 +79,7 @@ class AdminProducts extends React.Component {
                         </Translation>
                     </div>
                     <div className="product-header__spacer"></div>
+                    {/* Functionality to be added
                     <div className="products-header__button">
                         <div className="products-header__button__text">
                             <Translation>
@@ -86,6 +87,7 @@ class AdminProducts extends React.Component {
                             </Translation>
                         </div>
                     </div>
+                    */}
                     <div className="products-header__button"
                          onClick={(e) => {this.handleShowAll(e)}}>
                         <div className="products-header__button__text">

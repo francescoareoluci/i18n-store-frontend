@@ -4,17 +4,20 @@ import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
 import { addProductToCart } from "../../js/actions/addProductToCart";
+import { setAddProductToCartLoading } from "../../js/actions/setAddProductToCartLoading";
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        addProductToCart: (prodId, token) => dispatch(addProductToCart(prodId, token))
+        addProductToCart: (prodId, token) => dispatch(addProductToCart(prodId, token)),
+        setAddProductToCartLoading: (isDone) => dispatch(setAddProductToCartLoading(isDone))
     };
 }
 
 const mapStateToProps = (state) => {
     return {
         customerSelectedProduct: state.customerSelectedProduct,
+        addedCartProductLoading: state.addedCartProductLoading,
         token: state.token
     };
 };
@@ -22,8 +25,29 @@ const mapStateToProps = (state) => {
 class CustomerProductInfo extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            showConfirm: false
+        }
 
         this.handleAddProduct = this.handleAddProduct.bind(this);
+        this.disableShowConfirm = this.disableShowConfirm.bind(this);
+    }
+
+    componentDidUpdate(previousProps) {
+        if (this.props.addedCartProductLoading !== previousProps.addedCartProductLoading &&
+                this.props.addedCartProductLoading) {      
+            this.props.setAddProductToCartLoading(false);
+            this.setState({
+                showConfirm: true
+            });
+            setTimeout(this.disableShowConfirm, 2000);
+        }
+    }
+
+    disableShowConfirm() {
+        this.setState({
+            showConfirm: false
+        });
     }
 
     handleAddProduct() {
@@ -44,7 +68,7 @@ class CustomerProductInfo extends React.Component {
                     </Translation>
                 </div>
                 {isProductEmtpy &&
-                    <div>
+                    <div className="products-not-available">
                         <Translation>
                             { t => <>{t('customer_prod_info_unavailable')}</> }
                         </Translation>
@@ -93,6 +117,13 @@ class CustomerProductInfo extends React.Component {
                         </div>
                     </div>
                 </div>
+                }
+                {this.state.showConfirm &&
+                    <div className="product-wrapper_alertbox">
+                        <Translation>
+                            { t => <>{t('customer_prod_info_added_cart')}</> }
+                        </Translation>
+                    </div>
                 }
             </div>
         );

@@ -32,8 +32,12 @@ const mapStateToProps = (state) => {
 class ShoppingCart extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            showConfirm: false
+        }
 
         this.handleCheckout = this.handleCheckout.bind(this);
+        this.disableShowConfirm = this.disableShowConfirm.bind(this);
     }
 
     componentDidMount() {
@@ -45,6 +49,10 @@ class ShoppingCart extends React.Component {
                 this.props.checkoutLoadingDone) {       
             this.props.getCart(this.props.token);
             this.props.setCheckoutLoading(false);
+            this.setState({
+                showConfirm: true
+            });
+            setTimeout(this.disableShowConfirm, 2000);
         }
 
         if (this.props.removeCartProductLoading !== previousProps.removeCartProductLoading &&
@@ -54,6 +62,12 @@ class ShoppingCart extends React.Component {
         }
       }
 
+    disableShowConfirm() {
+        this.setState({
+            showConfirm: false
+        });
+    }
+    
     handleCheckout() {
         this.props.setCheckoutLoading(false);
         this.props.performCheckout(this.props.token);
@@ -82,8 +96,8 @@ class ShoppingCart extends React.Component {
                     </div>
                     <div className="shopping-cart-checkout-spacer"></div>
                     <div 
-                        className="shopping-cart-checkout-button"
-                        onClick={() => {this.handleCheckout()}}>
+                        className={"shopping-cart-checkout-button" + (isCartEmpty ? "_disabled" : "")}
+                        onClick={() => {!isCartEmpty && this.handleCheckout()}}>
                         <Translation>
                             { t => <>{t('shopping_cart_checkout')}</> }
                         </Translation>
@@ -107,6 +121,13 @@ class ShoppingCart extends React.Component {
                         showRemove="true"
                     />
                 ))}
+                {this.state.showConfirm &&
+                    <div className="shopping-cart_alertbox">
+                        <Translation>
+                            { t => <>{t('shopping_cart_checkout_alert')}</> }
+                        </Translation>
+                    </div>
+                }
             </div>
         );
     }

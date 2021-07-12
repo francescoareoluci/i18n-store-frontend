@@ -18,7 +18,7 @@ export function addProductToCart(prodId, token) {
         return axiosInstance.post(url)
             .then(result => {
                 payload = {
-                    addedCartProduct: prodId
+                    addedCartProductLoading: true,
                 }
                 dispatch(dispatchAddProdToCart(payload))
             })
@@ -29,7 +29,7 @@ export function addProductToCart(prodId, token) {
                 }
 
                 payload = {
-                    addedCartProduct: -1
+                    addedCartProductLoading: true,
                 }
                 dispatch(dispatchAddProdToCart(payload))
             });

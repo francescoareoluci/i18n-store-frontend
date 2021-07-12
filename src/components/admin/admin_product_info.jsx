@@ -58,7 +58,7 @@ class AdminProductInfo extends React.Component {
                     </Translation>
                 </div>
                 {isProductEmtpy &&
-                    <div>
+                    <div className="products-not-available">
                         <Translation>
                             { t => <>{t('admin_prod_info_unavailable')}</> }
                         </Translation>
