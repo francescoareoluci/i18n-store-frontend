@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { Translation } from 'react-i18next';
 
 import { getManufacturers } from "../../js/actions/getManufacturers"; 
 
@@ -37,21 +38,31 @@ class Manufacturers extends React.Component {
         return (
             <div className="manufacturers-container">
                 <div className="manufacturers__title">
-                    Manufacturers
+                    <Translation>
+                        { t => <>{t('manufacturers_header')}</> }
+                    </Translation>
                 </div>
                 <div className="manufacturers-wrapper">
                     {isListEmpty &&
                         <div>
-                            No manufacturer found
+                            <Translation>
+                                { t => <>{t('manufacturers_unavailable')}</> }
+                            </Translation>
                         </div>
                     }
                     {!isListEmpty && this.props.manufacturerList.manufacturers.map((manufacturer) => (
                         <div className="manufacturers-card">
                             <div className="manufacturers-card__id">
-                                Manufacturer ID: {manufacturer.id}
+                                <Translation>
+                                    { t => <>{t('manufacturers_id')}</> }
+                                </Translation>
+                                : {manufacturer.id}
                             </div>
                             <div className="manufacturers-card__name">
-                                Manufacturer: {manufacturer.manufacturer}
+                                <Translation>
+                                    { t => <>{t('manufacturers_name')}</> }
+                                </Translation>
+                                : {manufacturer.manufacturer}
                             </div>
                         </div>
                     ))}

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { Translation } from 'react-i18next';
 
 import ProductCard from "../common/product_card";
 
@@ -68,22 +69,31 @@ class ShoppingCart extends React.Component {
         return (
             <div className="shopping-cart-container">
                 <div className="shopping-cart__title">
-                    Shopping Cart
+                    <Translation>
+                        { t => <>{t('shopping_cart_header')}</> }
+                    </Translation>
                 </div>
                 <div className="shopping-cart-checkout-wrapper">
                     <div className="shopping-cart-checkout-price">
-                        Total cost: {this.props.shoppingCart.totalCost}
+                        <Translation>
+                            { t => <>{t('shopping_cart_cost')}</> }
+                        </Translation>
+                        : {this.props.shoppingCart.totalCost}
                     </div>
                     <div className="shopping-cart-checkout-spacer"></div>
                     <div 
                         className="shopping-cart-checkout-button"
                         onClick={() => {this.handleCheckout()}}>
-                            Proceed to checkout
+                        <Translation>
+                            { t => <>{t('shopping_cart_checkout')}</> }
+                        </Translation>
                     </div>
                 </div>
                 {isCartEmpty &&
                     <div>
-                        Empty shopping cart
+                        <Translation>
+                            { t => <>{t('shopping_cart_empty')}</> }
+                        </Translation>
                     </div>
                 }
                 {!isCartEmpty && this.props.shoppingCart.products.map((p, i) =>(

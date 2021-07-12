@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { Translation } from 'react-i18next';
 
 import { addProductToCart } from "../../js/actions/addProductToCart";
 
@@ -33,7 +34,9 @@ class CustomerProductInfo extends React.Component {
         return (
             <div className="product-info-container">
                 <div className="product-info-container__text">
-                    Product Informations
+                    <Translation>
+                        { t => <>{t('customer_prod_info_header')}</> }
+                    </Translation>
                 </div>
                 <div className="product-wrapper">
                     <div className="product-wrapper__name">
@@ -44,15 +47,22 @@ class CustomerProductInfo extends React.Component {
                         </div>
                         <div className="product-wrapper__name__addproduct"
                              onClick={() => {this.handleAddProduct()}}>
-                            Add product to cart
+                            <Translation>
+                                { t => <>{t('customer_prod_info_add_cart')}</> }
+                            </Translation>
                         </div>
                     </div>
                     <div className="product-wrapper__manufacturer">
-                        Manufacturer: {this.props.customerSelectedProduct.manufacturer}
+                        <Translation>
+                            { t => <>{t('customer_prod_info_manufacturer')}</> }
+                        </Translation>
+                        : {this.props.customerSelectedProduct.manufacturer}
                     </div>
                     <div className="product-wrapper__price">
                         <div className="product-wrapper__price__title">
-                            Price
+                            <Translation>
+                                { t => <>{t('customer_prod_info_price')}</> }
+                            </Translation>
                         </div>
                         <div className="product-wrapper__price__spacer"></div>
                         <div className="product-wrapper__price__value">
@@ -61,7 +71,9 @@ class CustomerProductInfo extends React.Component {
                     </div>
                     <div className="product-wrapper__description">
                         <div className="product-wrapper__description__title">
-                            Description
+                            <Translation>
+                                { t => <>{t('customer_prod_info_descriprion')}</> }
+                            </Translation>
                         </div>
                         <div className="product-wrapper__description__text">
                             {this.props.customerSelectedProduct.description}

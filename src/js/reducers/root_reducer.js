@@ -21,6 +21,7 @@ import { UNAUTH } from "../constants/action_types";
 const initialState = {
     token: "",
     role: "",
+    language: "en",
     customerSelectedProduct: {},
     adminSelectedProduct: {},
     productList: [],
@@ -42,6 +43,7 @@ function rootReducer(state = initialState, action) {
             const newState = Object.assign({}, state, {
                 token: "",
                 role: "",
+                language: "en",
                 customerSelectedProduct: {},
                 adminSelectedProduct: {},
                 productList: [],
@@ -61,7 +63,8 @@ function rootReducer(state = initialState, action) {
 
         const newState = Object.assign({}, state, {
             token: action.payload.token,
-            role: action.payload.role
+            role: action.payload.role,
+            language: action.payload.language
         });
         return newState;
     }
@@ -69,6 +72,7 @@ function rootReducer(state = initialState, action) {
         const newState = Object.assign({}, state, {
             token: "",
             role: "",
+            language: "en",
             customerSelectedProduct: {},
             adminSelectedProduct: {},
             productList: [],

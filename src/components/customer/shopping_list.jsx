@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
     Link
 } from "react-router-dom";
+import { Translation } from 'react-i18next';
 
 import ProductCard from "../common/product_card";
 
@@ -42,11 +43,15 @@ class ShoppingList extends React.Component {
         return (
             <div className="shopping-list-container">
                 <div className="shopping-list__title">
-                    Shopping List
+                    <Translation>
+                        { t => <>{t('shopping_list_header')}</> }
+                    </Translation>
                 </div>
                 {isListEmpty &&
                     <div>
-                        Empty shopping list
+                        <Translation>
+                            { t => <>{t('shopping_list_empty')}</> }
+                        </Translation>
                     </div>
                 }
                 {!isListEmpty && this.props.shoppingList.products.map((p, i) =>(

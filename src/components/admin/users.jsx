@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { Translation } from 'react-i18next';
 
 import { getUsers } from "../../js/actions/getUsers"
 
@@ -37,30 +38,49 @@ class Users extends React.Component {
         return (
             <div className="users-container">
                 <div className="users__title">
-                    Users
+                    <Translation>
+                        { t => <>{t('users_header')}</> }
+                    </Translation>
                 </div>
                 <div className="users-wrapper">
                     {isListEmpty &&
                         <div>
-                            No users found
+                            <Translation>
+                                { t => <>{t('users_unavailable')}</> }
+                            </Translation>
                         </div>
                     }
                     {!isListEmpty && this.props.userList.users.map((user) => (
                         <div className="users-card">
                             <div className="users-card__id">
-                                User ID: {user.id}
+                                <Translation>
+                                    { t => <>{t('users_id')}</> }
+                                </Translation>
+                                : {user.id}
                             </div>
                             <div className="users-card__firstName">
-                                First Name: {user.firstName}
+                                <Translation>
+                                    { t => <>{t('users_first_name')}</> }
+                                </Translation>
+                                : {user.firstName}
                             </div>
                             <div className="users-card__lastName">
-                                Last Name: {user.lastName}
+                                <Translation>
+                                    { t => <>{t('users_last_name')}</> }
+                                </Translation>
+                                : {user.lastName}
                             </div>
                             <div className="users-card__mail">
-                                User mail: {user.mail}
+                                <Translation>
+                                    { t => <>{t('users_mail')}</> }
+                                </Translation>
+                                : {user.mail}
                             </div>
                             <div className="users-card__role">
-                                User role: {user.role}
+                                <Translation>
+                                    { t => <>{t('users_role')}</> }
+                                </Translation>
+                                : {user.role}
                             </div>
                         </div>
                     ))}

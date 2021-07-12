@@ -21,6 +21,7 @@ import CustomerProducts from "../customer/customer_products"
 import CustomerProductInfo from "../customer/customer_product_info"
 import ShoppingCart from "../customer/shopping_cart"
 import ShoppingList from "../customer/shopping_list"
+import i18n from "./i18n"
 
 import { logout } from "../../js/actions/logout";
 
@@ -35,6 +36,7 @@ const mapStateToProps = (state) => {
   return { 
       token: state.token,
       role: state.role,
+      language: state.language,
       unauth: state.unauth
   };
 };
@@ -48,6 +50,16 @@ class App extends React.Component {
     if (previousProps.unauth !== this.props.unauth &&
           this.props.unauth) {
             this.props.logout();
+    }
+
+    if (previousProps.language !== this.props.language) {
+      if (i18n.languages.includes(this.props.language)) {
+        i18n.changeLanguage(this.props.language);
+      }
+      else {
+        // Fallback to en
+        i18n.changeLanguage("en");
+      }
     }
   }
 

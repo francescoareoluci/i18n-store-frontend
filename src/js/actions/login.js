@@ -24,17 +24,22 @@ export function login(username, password) {
         let payload = {};
         let token = "";
         let role = "";
+        let language = "";
+        let decToken = "";
         const url = URL_LOGIN;
         const axiosInstance = buildLoginAxios(username, password);
 
         return axiosInstance.get(url)
             .then((result) => {
                 token = result.data;
-                role = jwt_decode(result.data).userRole;
-                
+                decToken = jwt_decode(result.data);
+                role = decToken.userRole;
+                language = decToken.lang;
+
                 payload = {
                     token: token,
-                    role: role
+                    role: role,
+                    language: language
                 }
                 dispatch(dispatchAuthentication(payload))
             })
@@ -42,7 +47,8 @@ export function login(username, password) {
                 console.log(error);
                 payload = {
                     token: "",
-                    role: "UNAUTHORIZED"
+                    role: "UNAUTHORIZED",
+                    langauge: "en"
                 }
                 dispatch(dispatchAuthentication(payload))
             });

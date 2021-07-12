@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { Translation } from 'react-i18next';
 
 import { getLocales } from "../../js/actions/getLocales";
 
@@ -37,24 +38,37 @@ class Locales extends React.Component {
         return (
             <div className="locales-container">
                 <div className="locales__title">
-                    Locales
+                    <Translation>
+                        { t => <>{t('locales_header')}</> }
+                    </Translation>
                 </div>
                 <div className="locales-wrapper">
                     {isListEmpty &&
                         <div>
-                            No locales found
+                            <Translation>
+                                { t => <>{t('locales_unavailable')}</> }
+                            </Translation>
                         </div>
                     }
                     {!isListEmpty && this.props.localeList.locales.map((locale) => (
                         <div className="locales-card">
                             <div className="locales-card__id">
-                                Locale ID: {locale.id}
+                                <Translation>
+                                    { t => <>{t('locales_id')}</> }
+                                </Translation>
+                                : {locale.id}
                             </div>
                             <div className="locales-card__languageCode">
-                                Language code: {locale.languageCode}
+                                <Translation>
+                                    { t => <>{t('locales_language_code')}</> }
+                                </Translation>
+                                : {locale.languageCode}
                             </div>
                             <div className="locales-card__countryCode">
-                                Country code: {locale.countryCode}
+                                <Translation>
+                                    { t => <>{t('locales_country_code')}</> }
+                                </Translation>
+                                : {locale.countryCode}
                             </div>
                         </div>
                     ))}

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { Translation } from 'react-i18next';
 
 import ProductInfoCard from "./product_info_card"
 
@@ -29,27 +30,39 @@ class AdminProductInfo extends React.Component {
         return (
             <div className="product-info-container">
                 <div className="product-info-container__text">
-                    Product Informations
+                    <Translation>
+                        { t => <>{t('admin_prod_info_header')}</> }
+                    </Translation>
                 </div>
                 {isProductEmtpy &&
                     <div>
-                        Product not found;
+                        <Translation>
+                            { t => <>{t('admin_prod_info_unavailable')}</> }
+                        </Translation>
                     </div>
                 }
                 {!isProductEmtpy &&
                 <div className="product-wrapper">
                     <div className="product-wrapper__name">
                         <div className="product-wrapper__name__text">
-                            Product ID {this.props.adminSelectedProduct.id}
+                            <Translation>
+                                { t => <>{t('admin_prod_info_prod_id')}</> }
+                            </Translation> 
+                            : {this.props.adminSelectedProduct.id}
                         </div>
                         <div className="product-wrapper__name__removespacer">
                         </div>
                         <div className="product-wrapper__name__removeproduct">
-                            Remove product
+                            <Translation>
+                                { t => <>{t('admin_prod_info_remove_prod')}</> }
+                            </Translation> 
                         </div>
                     </div>
                     <div className="product-wrapper__manufacturer">
-                        Manufacturer: {this.props.adminSelectedProduct.manufacturer}
+                        <Translation>
+                            { t => <>{t('admin_prod_info_manufacturer')}</> }
+                        </Translation> 
+                        : {this.props.adminSelectedProduct.manufacturer}
                     </div>
                     {this.props.adminSelectedProduct.translations.map((tr, i) => (
                        <ProductInfoCard 

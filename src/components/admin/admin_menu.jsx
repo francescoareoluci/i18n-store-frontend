@@ -5,6 +5,7 @@ import {
     Link
 } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import { Translation } from 'react-i18next';
 
 import { logout } from "../../js/actions/logout"
 
@@ -36,7 +37,9 @@ class AdminMenu extends React.Component {
             <div className="left-menu">
                 <div className="left-menu__title">
                     <div className="left-menu__title__text">
-                        Administration
+                        <Translation>
+                            { t => <>{t('admin_label')}</> }
+                        </Translation>
                     </div>
                 </div>
                 <nav>
@@ -44,35 +47,45 @@ class AdminMenu extends React.Component {
                 <Link to="/admin/products">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
-                            Products
+                            <Translation>
+                                { t => <>{t('menu_product_label')}</> }
+                            </Translation>
                         </div>
                     </div>
                 </Link>
                 <Link to="/admin/users">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
-                            Users
+                            <Translation>
+                                { t => <>{t('menu_users_label')}</> }
+                            </Translation>
                         </div>
                     </div>
                 </Link>
                 <Link to="/admin/manufacturers">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
-                            Manufacturers
+                            <Translation>
+                                { t => <>{t('menu_manufacturers_label')}</> }
+                            </Translation>
                         </div>
                     </div>
                 </Link>
                 <Link to="/admin/locales">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
-                            Locales
+                            <Translation>
+                                { t => <>{t('menu_locales_label')}</> }
+                            </Translation>
                         </div>
                     </div>
                 </Link>
                 <Link to="/admin/currencies">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
-                            Currencies
+                            <Translation>
+                                { t => <>{t('menu_currencies_label')}</> }
+                            </Translation>
                         </div>
                     </div>
                 </Link>

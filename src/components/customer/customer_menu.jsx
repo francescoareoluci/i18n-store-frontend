@@ -5,6 +5,7 @@ import {
     Link
 } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import { Translation } from 'react-i18next';
 
 import { logout } from "../../js/actions/logout"
 
@@ -36,27 +37,35 @@ class CustomerMenu extends React.Component {
             <div className="left-menu">
                 <div className="left-menu__title">
                     <div className="left-menu__title__text">
-                        Shop
+                        <Translation>
+                            { t => <>{t('customer_label')}</> }
+                        </Translation>
                     </div>
                 </div>
                 <Link to="/customer/products">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
-                            Products
+                            <Translation>
+                                { t => <>{t('menu_product_label')}</> }
+                            </Translation>
                         </div>
                     </div>
                 </Link>
                 <Link to="/customer/shopping-cart">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
-                            Shopping Cart
+                            <Translation>
+                                { t => <>{t('menu_sh_cart_label')}</> }
+                            </Translation>
                         </div>
                     </div>
                 </Link>
                 <Link to="/customer/shopping-list">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
-                            Shopping List
+                            <Translation>
+                                { t => <>{t('menu_sh_list_label')}</> }
+                            </Translation>
                         </div>
                     </div>
                 </Link>

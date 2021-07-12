@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import { Translation } from 'react-i18next';
 
 import ProductCard from "../common/product_card"
 
@@ -73,18 +74,24 @@ class AdminProducts extends React.Component {
             <div className="products-container">
                 <div className="products-header">
                     <div className="products-header__title">
-                        Products
+                        <Translation>
+                            { t => <>{t('product_page_header')}</> }
+                        </Translation>
                     </div>
                     <div className="product-header__spacer"></div>
                     <div className="products-header__button">
                         <div className="products-header__button__text">
-                            Add a product
+                            <Translation>
+                                { t => <>{t('product_page_add')}</> }
+                            </Translation>
                         </div>
                     </div>
                     <div className="products-header__button"
                          onClick={(e) => {this.handleShowAll(e)}}>
                         <div className="products-header__button__text">
-                            Show all products
+                            <Translation>
+                                { t => <>{t('product_page_show_all')}</> }
+                            </Translation>
                         </div>
                     </div>
                     <div className="products-header__searchbar">
@@ -101,15 +108,26 @@ class AdminProducts extends React.Component {
                 </div>
                 <div className="display-type">
                     {this.state.showAllProducts &&
-                        <label>All products</label>
+                        <label>
+                            <Translation>
+                                { t => <>{t('product_page_display_all')}</> }
+                            </Translation>
+                        </label>
                     }
                     {!this.state.showAllProducts &&
-                        <label>Result of search</label>
+                        <label>
+                            <Translation>
+                                { t => <>{t('product_page_display_search')}</> }
+                            </Translation>
+                            : {this.state.inputText}
+                        </label>
                     }
                 </div>
                 {isListEmpty &&
                     <div className="products-not-available">
-                        No products available
+                        <Translation>
+                            { t => <>{t('product_page_unavailable')}</> }
+                        </Translation>
                     </div>
                 }
                 {!isListEmpty && this.props.productList.map((prod, i) =>(
