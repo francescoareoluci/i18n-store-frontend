@@ -50,8 +50,9 @@ class Users extends React.Component {
                             </Translation>
                         </div>
                     }
-                    {!isListEmpty && this.props.userList.users.map((user) => (
-                        <div className="users-card">
+                    {!isListEmpty && this.props.userList.users.map((user, i) => (
+                        <div className="users-card"
+                             key={i}>
                             <div className="users-card__id">
                                 <Translation>
                                     { t => <>{t('users_id')}</> }

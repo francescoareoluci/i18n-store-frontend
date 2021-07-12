@@ -31,6 +31,11 @@ class CustomerProductInfo extends React.Component {
     }
 
     render() {
+        let isProductEmtpy = true;
+        if (Object.keys(this.props.customerSelectedProduct).length != 0) {
+                    isProductEmtpy = false;
+        }
+
         return (
             <div className="product-info-container">
                 <div className="product-info-container__text">
@@ -38,6 +43,14 @@ class CustomerProductInfo extends React.Component {
                         { t => <>{t('customer_prod_info_header')}</> }
                     </Translation>
                 </div>
+                {isProductEmtpy &&
+                    <div>
+                        <Translation>
+                            { t => <>{t('customer_prod_info_unavailable')}</> }
+                        </Translation>
+                    </div>
+                }
+                {!isProductEmtpy &&
                 <div className="product-wrapper">
                     <div className="product-wrapper__name">
                         <div className="product-wrapper__name__text">
@@ -80,6 +93,7 @@ class CustomerProductInfo extends React.Component {
                         </div>
                     </div>
                 </div>
+                }
             </div>
         );
     }

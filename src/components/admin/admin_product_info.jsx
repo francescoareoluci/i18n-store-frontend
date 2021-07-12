@@ -5,20 +5,43 @@ import { Translation } from 'react-i18next';
 
 import ProductInfoCard from "./product_info_card"
 
+import { removeProduct } from "../../js/actions/removeProduct";
+import { setRemoveProdLoading } from "../../js/actions/setRemoveProductLoading";
+
 
 function mapDispatchToProps(dispatch) {
-    return {};
+    return {
+        removeProduct: (prodId, token) => dispatch(removeProduct(prodId, token)),
+        setRemoveProdLoading: (isDone) => dispatch(setRemoveProdLoading(isDone))
+    };
 }
 
 const mapStateToProps = (state) => {
     return {
-        adminSelectedProduct: state.adminSelectedProduct
+        adminSelectedProduct: state.adminSelectedProduct,
+        removeProductLoading: state.removeProductLoading,
+        token: state.token
     };
 };
 
 class AdminProductInfo extends React.Component {
     constructor(props) {
         super(props);
+
+        this.handleProductRemove = this.handleProductRemove.bind(this);
+    }
+
+    componentDidUpdate(previousProps) {
+        if (this.props.removeProductLoading !== previousProps.removeProductLoading &&
+                this.props.removeProductLoading) {       
+            this.props.setRemoveProdLoading(false);
+            this.props.history.push("/admin/products");
+        }
+    }
+
+    handleProductRemove(e) {
+        e.preventDefault();
+        this.props.removeProduct(this.props.adminSelectedProduct.id, this.props.token);
     }
 
     render() {
@@ -52,7 +75,8 @@ class AdminProductInfo extends React.Component {
                         </div>
                         <div className="product-wrapper__name__removespacer">
                         </div>
-                        <div className="product-wrapper__name__removeproduct">
+                        <div className="product-wrapper__name__removeproduct"
+                             onClick={(e) => {this.handleProductRemove(e)}}>
                             <Translation>
                                 { t => <>{t('admin_prod_info_remove_prod')}</> }
                             </Translation> 

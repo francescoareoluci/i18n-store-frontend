@@ -50,8 +50,9 @@ class Locales extends React.Component {
                             </Translation>
                         </div>
                     }
-                    {!isListEmpty && this.props.localeList.locales.map((locale) => (
-                        <div className="locales-card">
+                    {!isListEmpty && this.props.localeList.locales.map((locale, i) => (
+                        <div className="locales-card"
+                             key={i}>
                             <div className="locales-card__id">
                                 <Translation>
                                     { t => <>{t('locales_id')}</> }

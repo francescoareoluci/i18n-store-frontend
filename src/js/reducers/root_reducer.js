@@ -16,6 +16,8 @@ import { URL_CUSTOMER_REMOVE_PROD_FROM_CART } from "../constants/rest_api";
 import { PERFORM_CHECKOUT } from "../constants/action_types";
 import { SET_CHECKOUT_LOADING } from "../constants/action_types";
 import { UNAUTH } from "../constants/action_types";
+import { REMOVE_PRODUCT } from "../constants/action_types";
+import { SET_REMOVED_PROD_LOADING } from "../constants/action_types";
 
 
 const initialState = {
@@ -33,6 +35,7 @@ const initialState = {
     localeList: {},
     addedCartProduct: -1,
     removeCartProductLoading: false,
+    removeProductLoading: false,
     checkoutLoadingDone: false,
     unauth: false
 };
@@ -54,7 +57,8 @@ function rootReducer(state = initialState, action) {
                 manufacturerList: {},
                 localeList: {},
                 addedCartProduct: -1,
-                removedCartProduct: -1,
+                removeCartProductLoading: false,
+                removeProductLoading: false,
                 checkoutLoadingDone: false,
                 unauth: false
             });
@@ -83,7 +87,8 @@ function rootReducer(state = initialState, action) {
             manufacturerList: {},
             localeList: {},
             addedCartProduct: -1,
-            removedCartProduct: -1,
+            removeCartProductLoading: false,
+            removeProductLoading: false,
             checkoutLoadingDone: false,
             unauth: false
         });
@@ -168,9 +173,14 @@ function rootReducer(state = initialState, action) {
         return newState;
     }
     else if (action.type == UNAUTH) {
-        console.log(action);
         const newState = Object.assign({}, state, {
             unauth: action.payload.unauth
+        });
+        return newState;
+    }
+    else if (action.type == REMOVE_PRODUCT || action.type == SET_REMOVED_PROD_LOADING) {
+        const newState = Object.assign({}, state, {
+            removeProductLoading: action.payload.removeProductLoading
         });
         return newState;
     }
