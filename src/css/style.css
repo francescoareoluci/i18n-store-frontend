@@ -469,11 +469,14 @@ a {
     top: 80%;
     left: 35%;
     border-radius: 8px;
-    background-color: #83B0DE;
-    color: #EBEBEB;
+    background-color: #83b0de38;
+    border-style: solid;
+    color: #5989bb;
     font-size: 18px;
     padding: 8px;
     font-family: "montserrat-regular";
+    border-width: 1px;
+    border-color: #5989bb;
 }
 
 .products-not-available {
@@ -635,11 +638,14 @@ a {
     top: 80%;
     left: 35%;
     border-radius: 8px;
-    background-color: #83B0DE;
-    color: #EBEBEB;
+    background-color: #83b0de38;
+    border-style: solid;
+    color: #5989bb;
     font-size: 18px;
     padding: 8px;
     font-family: "montserrat-regular";
+    border-width: 1px;
+    border-color: #5989bb;
 }
 
 /* ====== Shopping List ======== */

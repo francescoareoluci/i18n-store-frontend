@@ -26,7 +26,7 @@ class CustomerProductInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showConfirm: false
+            showConfirm: true
         }
 
         this.handleAddProduct = this.handleAddProduct.bind(this);

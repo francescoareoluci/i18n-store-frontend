@@ -29,7 +29,8 @@ class AdminProducts extends React.Component {
 
         this.state = {
             inputText: "",
-            showAllProducts: true
+            showAllProducts: true,
+            searchResultLabel: ""
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -59,7 +60,8 @@ class AdminProducts extends React.Component {
     handleSearch(e) {
         this.props.performSearch(this.state.inputText, this.props.token);
         this.setState({
-            showAllProducts: false
+            showAllProducts: false,
+            searchResultLabel: this.state.inputText
         })
     }
 
@@ -121,7 +123,7 @@ class AdminProducts extends React.Component {
                             <Translation>
                                 { t => <>{t('product_page_display_search')}</> }
                             </Translation>
-                            : {this.state.inputText}
+                            : {this.state.searchResultLabel}
                         </label>
                     }
                 </div>

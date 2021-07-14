@@ -51,16 +51,6 @@ class App extends React.Component {
           this.props.unauth) {
             this.props.logout();
     }
-
-    if (previousProps.language !== this.props.language) {
-      if (i18n.languages.includes(this.props.language)) {
-        i18n.changeLanguage(this.props.language);
-      }
-      else {
-        // Fallback to en
-        i18n.changeLanguage("en");
-      }
-    }
   }
 
   render() {
@@ -88,6 +78,16 @@ class App extends React.Component {
           role={this.props.role}
         />
       );
+    }
+
+    // Manage language
+    if (i18n.language !== this.props.language) {
+      if (i18n.languages.includes(this.props.language)) {
+        i18n.changeLanguage(this.props.language);
+      }
+      else {
+        console.log("Unsupport language requested");
+      }
     }
 
     return (
