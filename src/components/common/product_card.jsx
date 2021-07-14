@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
     Link
 } from "react-router-dom";
+import { Translation } from 'react-i18next';
 
 import { changeCustomerSelectedProduct } from "../../js/actions/changeCustomerSelectedProduct";
 import { changeAdminSelectedProduct } from "../../js/actions/changeAdminSelectedProduct";
@@ -60,13 +61,22 @@ class ProductCard extends React.Component {
                  onClick={(e) => {this.selectProduct(e, this.props.prodId)}}>
                 <Link to={"/" + this.props.linkTo + "/products/info"}>
                     <div className="product-card__name">
-                        Product: {this.props.name}
+                        <Translation>
+                            { t => <>{t('product_card_name')}</> }
+                        </Translation>
+                        : {this.props.name}
                     </div>
                     <div className="product-card__manufacturer">
-                        Manufacturer: {this.props.manufacturer}
+                        <Translation>
+                            { t => <>{t('product_card_manufacturer')}</> }
+                        </Translation>
+                        : {this.props.manufacturer}
                     </div>
                     <div className="product-card__price">
-                        Price: {this.props.price}
+                        <Translation>
+                            { t => <>{t('product_card_price')}</> }
+                        </Translation>
+                        : {this.props.price}
                     </div>
                 </Link>
                 {showRemoveBtn &&
