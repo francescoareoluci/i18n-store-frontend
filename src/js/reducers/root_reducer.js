@@ -19,6 +19,8 @@ import { UNAUTH } from "../constants/action_types";
 import { REMOVE_PRODUCT } from "../constants/action_types";
 import { SET_REMOVED_PROD_LOADING } from "../constants/action_types";
 import { SET_ADD_PROD_TO_CART_LOADING } from "../constants/action_types";
+import { ADD_PRODUCT } from "../constants/action_types";
+import { SET_ADD_PRODUCT_LOADING } from "../constants/action_types";
 
 
 const initialState = {
@@ -34,6 +36,7 @@ const initialState = {
     currencyList: {},
     manufacturerList: {},
     localeList: {},
+    addedProductLoading: false,
     addedCartProductLoading: false,
     removeCartProductLoading: false,
     removeProductLoading: false,
@@ -57,6 +60,7 @@ function rootReducer(state = initialState, action) {
                 currencyList: {},
                 manufacturerList: {},
                 localeList: {},
+                addedProductLoading: false,
                 addedCartProductLoading: false,
                 removeCartProductLoading: false,
                 removeProductLoading: false,
@@ -87,6 +91,7 @@ function rootReducer(state = initialState, action) {
             currencyList: {},
             manufacturerList: {},
             localeList: {},
+            addedProductLoading: false,
             addedCartProductLoading: false,
             removeCartProductLoading: false,
             removeProductLoading: false,
@@ -182,6 +187,12 @@ function rootReducer(state = initialState, action) {
     else if (action.type == REMOVE_PRODUCT || action.type == SET_REMOVED_PROD_LOADING) {
         const newState = Object.assign({}, state, {
             removeProductLoading: action.payload.removeProductLoading
+        });
+        return newState;
+    }
+    else if (action.type == ADD_PRODUCT || action.type == SET_ADD_PRODUCT_LOADING) {
+        const newState = Object.assign({}, state, {
+            addedProductLoading: action.payload.addedProductLoading
         });
         return newState;
     }

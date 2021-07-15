@@ -21,6 +21,7 @@ import CustomerProducts from "../customer/customer_products"
 import CustomerProductInfo from "../customer/customer_product_info"
 import ShoppingCart from "../customer/shopping_cart"
 import ShoppingList from "../customer/shopping_list"
+import AdminAddProduct from "../admin/admin_add_product"
 import i18n from "./i18n"
 
 import { logout } from "../../js/actions/logout";
@@ -111,6 +112,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/admin/products" component={AdminProducts} />
               <Route exact path="/admin/products/info" component={AdminProductInfo} />
+              <Route exact path="/admin/products/add" component={AdminAddProduct} />
               <Route exact path="/admin/users" component={Users} />
               <Route exact path="/admin/locales" component={Locales} />
               <Route exact path="/admin/manufacturers" component={Manufacturers} />

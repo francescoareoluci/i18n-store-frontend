@@ -11,6 +11,7 @@ export const URL_ADMIN_CURRENCIES = adminEndpoint + '/currencies';
 export const URL_ADMIN_MANUFACTURERS = adminEndpoint + '/manufacturers';
 export const URL_ADMIN_LOCALES = adminEndpoint + '/locales';
 export const URL_ADMIN_PRODUCTS = adminEndpoint + '/products';
+export const URL_ADMIN_ADD_PRODUCT = adminEndpoint + "/products/add";
 export const URL_ADMIN_REMOVE_PRODUCT = adminEndpoint + "/products/remove";
 
 export const URL_CUSTOMER_PRODUCTS = customerEndpoint + '/products';

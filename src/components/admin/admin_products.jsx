@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import {
+    Link
+} from "react-router-dom";
 import { Translation } from 'react-i18next';
 
 import ProductCard from "../common/product_card"
@@ -81,7 +84,7 @@ class AdminProducts extends React.Component {
                         </Translation>
                     </div>
                     <div className="product-header__spacer"></div>
-                    {/* Functionality to be added
+                    <Link to="/admin/products/add">
                     <div className="products-header__button">
                         <div className="products-header__button__text">
                             <Translation>
@@ -89,7 +92,7 @@ class AdminProducts extends React.Component {
                             </Translation>
                         </div>
                     </div>
-                    */}
+                    </Link>
                     <div className="products-header__button"
                          onClick={(e) => {this.handleShowAll(e)}}>
                         <div className="products-header__button__text">
