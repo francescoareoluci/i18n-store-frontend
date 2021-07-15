@@ -5,8 +5,11 @@ import { Translation } from 'react-i18next';
 
 import { getCurrencies } from "../../js/actions/getCurrencies"
 import { getLocales } from "../../js/actions/getLocales";
-import { addProduct } from "../../js/actions/addProduct";
-import { setAddProductLoading } from "../../js/actions/setAddProductLoading";
+import { 
+    addProduct, 
+    disableAddProductNotification,
+    disableAddProductNotificationError 
+} from "../../js/actions/addProduct";
 
 
 function mapDispatchToProps(dispatch) {
@@ -14,7 +17,8 @@ function mapDispatchToProps(dispatch) {
         getLocales: (token) => dispatch(getLocales(token)),
         getCurrencies: (token) => dispatch(getCurrencies(token)),
         addProduct: (token, product) => dispatch(addProduct(token, product)),
-        setAddProductLoading: (isDone) => dispatch(setAddProductLoading(isDone))
+        disableAddProductNotification: () => dispatch(disableAddProductNotification()),
+        disableAddProductNotificationError: () => dispatch(disableAddProductNotificationError())
     };
 }
 
@@ -22,7 +26,8 @@ const mapStateToProps = (state) => {
     return {
         localeList: state.localeList,
         currencyList: state.currencyList,
-        addedProductLoading: state.addedProductLoading,
+        addProductNotification: state.addProductNotification,
+        addProductNotificationError: state.addProductNotificationError,
         token: state.token
     };
 };
@@ -66,13 +71,23 @@ class AdminAddProduct extends React.Component {
     }
 
     componentDidUpdate(previousProps) {
-        if (this.props.addedProductLoading !== previousProps.addedProductLoading &&
-                this.props.addedProductLoading) {       
-            this.props.setAddProductLoading(false);
+        if (this.props.addProductNotification !== previousProps.addProductNotification &&
+                this.props.addProductNotification) {       
+            this.props.disableAddProductNotification();
             this.setState({
                 showConfirm: true
             });
             setTimeout(this.disableShowConfirm, 2000);
+        }
+
+        if (this.props.addProductNotificationError !== previousProps.addProductNotificationError &&
+                this.props.addProductNotificationError) {       
+            this.props.disableAddProductNotificationError();
+            this.setState({
+                showError: true,
+                errorLabel: "unable to add product"
+            });
+            setTimeout(this.disableShowError, 2000);
         }
     }
 
@@ -84,7 +99,8 @@ class AdminAddProduct extends React.Component {
 
     disableShowError() {
         this.setState({
-            showError: false
+            showError: false,
+            errorLabel: ""
         });
     }
 
@@ -114,6 +130,10 @@ class AdminAddProduct extends React.Component {
 
     handleLocalizationChoice(e, idx, value) {
         e.preventDefault();
+
+        if (value == "0") {
+            return;
+        }
         
         let resArray = this.state.selectedLocales;
         if (idx > this.state.selectedLocales.length) {

@@ -13,15 +13,15 @@ import { GET_LOCALES } from "../constants/action_types"
 import { PERFORM_SEARCH } from "../constants/action_types"
 import { ADD_PROD_TO_CART } from "../constants/action_types";
 import { URL_CUSTOMER_REMOVE_PROD_FROM_CART } from "../constants/rest_api";
-import { PERFORM_CHECKOUT } from "../constants/action_types";
-import { SET_CHECKOUT_LOADING } from "../constants/action_types";
+import { PERFORM_CHECKOUT_NOTIFICATION } from "../constants/action_types";
+import { PERFORM_CHECKOUT_NOTIFICATION_ERROR } from "../constants/action_types";
 import { UNAUTH } from "../constants/action_types";
 import { REMOVE_PRODUCT } from "../constants/action_types";
 import { SET_REMOVED_PROD_LOADING } from "../constants/action_types";
-import { SET_ADD_PROD_TO_CART_LOADING } from "../constants/action_types";
-import { ADD_PRODUCT } from "../constants/action_types";
-import { SET_ADD_PRODUCT_LOADING } from "../constants/action_types";
-
+import { ADD_PROD_TO_CART_NOTIFICATION } from "../constants/action_types";
+import { ADD_PROD_TO_CART_NOTIFICATION_ERROR } from "../constants/action_types";
+import { ADD_PRODUCT_NOTIFICATION } from "../constants/action_types";
+import { ADD_PRODUCT_NOTIFICATION_ERROR } from "../constants/action_types";
 
 const initialState = {
     token: "",
@@ -36,15 +36,19 @@ const initialState = {
     currencyList: {},
     manufacturerList: {},
     localeList: {},
-    addedProductLoading: false,
-    addedCartProductLoading: false,
+    addProductNotification: false,
+    addProductNotificationError: false,
+    addCartProductNotification: false,
+    addCartProductNotificationError: false,
     removeCartProductLoading: false,
     removeProductLoading: false,
-    checkoutLoadingDone: false,
+    checkoutNotification: false,
+    checkoutNotificationError: false,
     unauth: false
 };
 
 function rootReducer(state = initialState, action) {
+    console.log(action);
     if (action.type == LOGIN || action.type == SET_TOKEN) {
         if (Object.keys(action.payload).length == 0) {
             const newState = Object.assign({}, state, {
@@ -60,11 +64,14 @@ function rootReducer(state = initialState, action) {
                 currencyList: {},
                 manufacturerList: {},
                 localeList: {},
-                addedProductLoading: false,
-                addedCartProductLoading: false,
+                addProductNotification: false,
+                addProductNotificationError: false,
+                addCartProductNotification: false,
+                addCartProductNotificationError: false,
                 removeCartProductLoading: false,
                 removeProductLoading: false,
-                checkoutLoadingDone: false,
+                checkoutNotification: false,
+                checkoutNotificationError: false,
                 unauth: false
             });
             return newState;
@@ -91,11 +98,13 @@ function rootReducer(state = initialState, action) {
             currencyList: {},
             manufacturerList: {},
             localeList: {},
-            addedProductLoading: false,
-            addedCartProductLoading: false,
+            addProductNotification: false,
+            addProductNotificationError: false,
+            addCartProductNotification: false,
+            addCartProductNotificationError: false,
             removeCartProductLoading: false,
-            removeProductLoading: false,
-            checkoutLoadingDone: false,
+            checkoutNotification: false,
+            checkoutNotificationError: false,
             unauth: false
         });
         return newState;
@@ -160,9 +169,15 @@ function rootReducer(state = initialState, action) {
         });
         return newState;
     }
-    else if (action.type == ADD_PROD_TO_CART || action.type == SET_ADD_PROD_TO_CART_LOADING) {
+    else if (action.type == ADD_PROD_TO_CART_NOTIFICATION) {
         const newState = Object.assign({}, state, {
-            addedCartProductLoading: action.payload.addedCartProductLoading
+            addCartProductNotification: action.payload.addCartProductNotification
+        });
+        return newState;
+    }
+    else if (action.type == ADD_PROD_TO_CART_NOTIFICATION_ERROR) {
+        const newState = Object.assign({}, state, {
+            addCartProductNotificationError: action.payload.addCartProductNotificationError
         });
         return newState;
     }
@@ -172,9 +187,15 @@ function rootReducer(state = initialState, action) {
         });
         return newState;
     }
-    else if (action.type == PERFORM_CHECKOUT || action.type == SET_CHECKOUT_LOADING) {
+    else if (action.type == PERFORM_CHECKOUT_NOTIFICATION ) {
         const newState = Object.assign({}, state, {
-            checkoutLoadingDone: action.payload.checkoutLoadingDone
+            checkoutNotification: action.payload.checkoutNotification
+        });
+        return newState;
+    }
+    else if (action.type == PERFORM_CHECKOUT_NOTIFICATION_ERROR ) {
+        const newState = Object.assign({}, state, {
+            checkoutNotificationError: action.payload.checkoutNotificationError
         });
         return newState;
     }
@@ -190,9 +211,15 @@ function rootReducer(state = initialState, action) {
         });
         return newState;
     }
-    else if (action.type == ADD_PRODUCT || action.type == SET_ADD_PRODUCT_LOADING) {
+    else if (action.type == ADD_PRODUCT_NOTIFICATION) {
         const newState = Object.assign({}, state, {
-            addedProductLoading: action.payload.addedProductLoading
+            addProductNotification: action.payload.addProductNotification
+        });
+        return newState;
+    }
+    else if (action.type == ADD_PRODUCT_NOTIFICATION_ERROR) {
+        const newState = Object.assign({}, state, {
+            addProductNotificationError: action.payload.addProductNotificationError
         });
         return newState;
     }

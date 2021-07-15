@@ -1,11 +1,26 @@
 import buildCustomAxios from "../constants/token_axios";
 import dispatchUnauth from "./handleUnauth";
-import { ADD_PROD_TO_CART } from "../constants/action_types";
+import { ADD_PROD_TO_CART_NOTIFICATION } from "../constants/action_types";
+import { ADD_PROD_TO_CART_NOTIFICATION_ERROR } from "../constants/action_types";
 import { URL_CUSTOMER_ADD_PROD_TO_CART } from "../constants/rest_api";
 
 
-const dispatchAddProdToCart = payload => (
-    { type: ADD_PROD_TO_CART, payload }
+const setAddProductToCartNotification = notify => (
+    { 
+        type: ADD_PROD_TO_CART_NOTIFICATION, 
+        payload: {
+            addCartProductNotification: notify 
+        }
+    }
+);
+
+const setAddProductToCartNotificationError = notify => (
+    { 
+        type: ADD_PROD_TO_CART_NOTIFICATION_ERROR, 
+        payload: {
+            addCartProductNotificationError: notify 
+        }
+    }
 );
 
 export function addProductToCart(prodId, token) {
@@ -17,10 +32,7 @@ export function addProductToCart(prodId, token) {
         
         return axiosInstance.post(url)
             .then(result => {
-                payload = {
-                    addedCartProductLoading: true,
-                }
-                dispatch(dispatchAddProdToCart(payload))
+                dispatch(setAddProductToCartNotification(true));
             })
             .catch(error => {
                 console.log(error);
@@ -28,10 +40,15 @@ export function addProductToCart(prodId, token) {
                     dispatch(dispatchUnauth());
                 }
 
-                payload = {
-                    addedCartProductLoading: true,
-                }
-                dispatch(dispatchAddProdToCart(payload))
+                dispatch(setAddProductToCartNotificationError(true));
             });
     }
+}
+
+export function disableAddProductToCartNotification() {
+    return setAddProductToCartNotification(false);
+}
+
+export function disableAddProductToCartNotificationError() {
+    return setAddProductToCartNotificationError(false);
 }

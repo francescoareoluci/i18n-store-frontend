@@ -6,24 +6,27 @@ import { Translation } from 'react-i18next';
 import ProductCard from "../common/product_card";
 
 import { getCart } from "../../js/actions/getCart";
-import { performCheckout } from "../../js/actions/performCheckout";
-import { setCheckoutLoading } from "../../js/actions/setCheckoutLoading";
-import { setRemoveCartProdLoading } from "../../js/actions/setRemoveCartProdLoading";
+import { 
+    performCheckout,
+    disablePerformCheckoutNotification,
+    disablePerformCheckoutNotificationError 
+} from "../../js/actions/performCheckout";
 
 
 function mapDispatchToProps(dispatch) {
     return {
         getCart: (token) => dispatch(getCart(token)),
         performCheckout: (token) => dispatch(performCheckout(token)),
-        setCheckoutLoading: (isDone) => dispatch(setCheckoutLoading(isDone)),
-        setRemoveCartProdLoading: (isDone) => dispatch(setRemoveCartProdLoading(isDone))
+        disablePerformCheckoutNotification: () => dispatch(disablePerformCheckoutNotification()),
+        disablePerformCheckoutNotificationError: () => dispatch(disablePerformCheckoutNotificationError())
     };
 }
 
 const mapStateToProps = (state) => {
     return {
         shoppingCart: state.shoppingCart,
-        checkoutLoadingDone: state.checkoutLoadingDone,
+        checkoutNotification: state.checkoutNotification,
+        checkoutNotificationError: state.checkoutNotificationError,
         removeCartProductLoading: state.removeCartProductLoading,
         token: state.token        
     };
@@ -33,11 +36,14 @@ class ShoppingCart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showConfirm: false
+            showConfirm: false,
+            showError: false,
+            errorLabel: ""
         }
 
         this.handleCheckout = this.handleCheckout.bind(this);
         this.disableShowConfirm = this.disableShowConfirm.bind(this);
+        this.disableShowError = this.disableShowError.bind(this);
     }
 
     componentDidMount() {
@@ -45,10 +51,10 @@ class ShoppingCart extends React.Component {
     }
 
     componentDidUpdate(previousProps) {
-        if (this.props.checkoutLoadingDone !== previousProps.checkoutLoadingDone &&
-                this.props.checkoutLoadingDone) {       
+        if (this.props.checkoutNotification !== previousProps.checkoutNotification &&
+                this.props.checkoutNotification) {       
             this.props.getCart(this.props.token);
-            this.props.setCheckoutLoading(false);
+            this.props.disablePerformCheckoutNotification();
             this.setState({
                 showConfirm: true
             });
@@ -60,16 +66,32 @@ class ShoppingCart extends React.Component {
             this.props.getCart(this.props.token);
             this.props.setRemoveCartProdLoading(false);
         }
-      }
+
+        if (this.props.checkoutNotificationError !== previousProps.checkoutNotificationError &&
+                this.props.checkoutNotificationError) {       
+            this.props.disablePerformCheckoutNotificationError();
+            this.setState({
+                showError: true,
+                errorLabel: "unable to perform checkout"
+            });
+            setTimeout(this.disableShowError, 2000);
+        }
+    }
 
     disableShowConfirm() {
         this.setState({
             showConfirm: false
         });
     }
+
+    disableShowError() {
+        this.setState({
+            showError: false,
+            errorLabel: ""
+        });
+    }
     
     handleCheckout() {
-        this.props.setCheckoutLoading(false);
         this.props.performCheckout(this.props.token);
     }
 
@@ -126,6 +148,11 @@ class ShoppingCart extends React.Component {
                         <Translation>
                             { t => <>{t('shopping_cart_checkout_alert')}</> }
                         </Translation>
+                    </div>
+                }
+                {this.state.showError &&
+                    <div className="shopping-cart_alertbox">
+                        Error: {this.state.errorLabel}
                     </div>
                 }
             </div>

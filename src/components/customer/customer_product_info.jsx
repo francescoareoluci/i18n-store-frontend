@@ -3,21 +3,26 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
-import { addProductToCart } from "../../js/actions/addProductToCart";
-import { setAddProductToCartLoading } from "../../js/actions/setAddProductToCartLoading";
+import { 
+    addProductToCart,
+    disableAddProductToCartNotification,
+    disableAddProductToCartNotificationError 
+} from "../../js/actions/addProductToCart";
 
 
 function mapDispatchToProps(dispatch) {
     return {
         addProductToCart: (prodId, token) => dispatch(addProductToCart(prodId, token)),
-        setAddProductToCartLoading: (isDone) => dispatch(setAddProductToCartLoading(isDone))
+        disableAddProductToCartNotification: () => dispatch(disableAddProductToCartNotification()),
+        disableAddProductToCartNotificationError: () => dispatch(disableAddProductToCartNotificationError()),
     };
 }
 
 const mapStateToProps = (state) => {
     return {
         customerSelectedProduct: state.customerSelectedProduct,
-        addedCartProductLoading: state.addedCartProductLoading,
+        addCartProductNotification: state.addCartProductNotification,
+        addCartProductNotificationError: state.addCartProductNotificationError,
         token: state.token
     };
 };
@@ -26,27 +31,47 @@ class CustomerProductInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showConfirm: true
+            showConfirm: false,
+            showError: false,
+            errorLabel: ""
         }
 
         this.handleAddProduct = this.handleAddProduct.bind(this);
         this.disableShowConfirm = this.disableShowConfirm.bind(this);
+        this.disableShowError = this.disableShowError.bind(this);
     }
 
     componentDidUpdate(previousProps) {
-        if (this.props.addedCartProductLoading !== previousProps.addedCartProductLoading &&
-                this.props.addedCartProductLoading) {      
-            this.props.setAddProductToCartLoading(false);
+        if (this.props.addCartProductNotification !== previousProps.addCartProductNotification &&
+                this.props.addCartProductNotification) {     
+            this.props.disableAddProductToCartNotification();
             this.setState({
                 showConfirm: true
             });
             setTimeout(this.disableShowConfirm, 2000);
+        }
+
+        if (this.props.addCartProductNotificationError !== previousProps.addCartProductNotificationError &&
+                this.props.addCartProductNotificationError) {      
+            this.props.disableAddProductToCartNotificationError();
+            this.setState({
+                showError: true,
+                errorLabel: "unable to add product"
+            });
+            setTimeout(this.disableShowError, 2000);
         }
     }
 
     disableShowConfirm() {
         this.setState({
             showConfirm: false
+        });
+    }
+
+    disableShowError() {
+        this.setState({
+            showError: false,
+            errorLabel: ""
         });
     }
 
@@ -123,6 +148,11 @@ class CustomerProductInfo extends React.Component {
                         <Translation>
                             { t => <>{t('customer_prod_info_added_cart')}</> }
                         </Translation>
+                    </div>
+                }
+                {this.state.showError &&
+                    <div className="product-wrapper_alertbox">
+                        Error: {this.state.errorLabel}
                     </div>
                 }
             </div>
