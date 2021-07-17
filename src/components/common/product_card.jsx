@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        token: state.token
+        token: state.auth.token
     };
 };
 
@@ -35,17 +35,19 @@ class ProductCard extends React.Component {
 
     selectProduct(e, id) {
         e.preventDefault();
-        if (this.props.linkTo == "customer") {
+        if (this.props.owner == "customer") {
             this.props.changeCustomerSelectedProduct(id, this.props.token);
         }
-        else if (this.props.linkTo == "admin") {
+        else if (this.props.owner == "admin") {
             this.props.changeAdminSelectedProduct(id, this.props.token);
         }
     }
 
     handleRemove(e, id) {
         e.preventDefault();
-        if (this.props.linkTo == "customer") {
+        console.log("prova");
+        console.log(this.props.owner);
+        if (this.props.owner == "customer") {
             this.props.removeProductFromCart(id, this.props.token);
         }
     }
@@ -59,7 +61,7 @@ class ProductCard extends React.Component {
         return (
             <div className="product-card"
                  onClick={(e) => {this.selectProduct(e, this.props.prodId)}}>
-                <Link to={"/" + this.props.linkTo + "/products/info"}>
+                <Link to={"/" + this.props.owner + "/products/info"}>
                     <div className="product-card__name">
                         <Translation>
                             { t => <>{t('product_card_name')}</> }

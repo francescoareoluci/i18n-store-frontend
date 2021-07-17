@@ -19,8 +19,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        shoppingList: state.shoppingList,
-        token: state.token
+        shoppingList: state.getters.customer.shoppingList,
+        token: state.auth.token
     };
 };
 

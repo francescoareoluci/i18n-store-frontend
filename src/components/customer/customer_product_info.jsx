@@ -20,10 +20,10 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        customerSelectedProduct: state.customerSelectedProduct,
-        addCartProductNotification: state.addCartProductNotification,
-        addCartProductNotificationError: state.addCartProductNotificationError,
-        token: state.token
+        customerSelectedProduct: state.getters.customer.customerSelectedProduct,
+        addCartProductNotification: state.notifications.cart.addCartProductNotification,
+        addCartProductNotificationError: state.notifications.cart.addCartProductNotificationError,
+        token: state.auth.token
     };
 };
 

@@ -35,10 +35,10 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
   return { 
-      token: state.token,
-      role: state.role,
-      language: state.language,
-      unauth: state.unauth
+      token: state.auth.token,
+      role: state.auth.role,
+      language: state.auth.language,
+      unauth: state.auth.unauth
   };
 };
 

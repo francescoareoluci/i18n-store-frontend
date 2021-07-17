@@ -14,8 +14,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        currencyList: state.currencyList,
-        token: state.token
+        currencyList: state.getters.admin.currencyList,
+        token: state.auth.token
     };
 };
 

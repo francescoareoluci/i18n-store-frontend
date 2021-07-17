@@ -23,11 +23,11 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        localeList: state.localeList,
-        currencyList: state.currencyList,
-        addProductNotification: state.addProductNotification,
-        addProductNotificationError: state.addProductNotificationError,
-        token: state.token
+        localeList: state.getters.admin.localeList,
+        currencyList: state.getters.admin.currencyList,
+        addProductNotification: state.notifications.products.addProductNotification,
+        addProductNotificationError: state.notifications.products.addProductNotificationError,
+        token: state.auth.token
     };
 };
 

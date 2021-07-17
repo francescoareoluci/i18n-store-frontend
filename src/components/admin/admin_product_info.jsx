@@ -22,10 +22,10 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        adminSelectedProduct: state.adminSelectedProduct,
-        removeProductNotification: state.removeProductNotification,
-        removeProductNotificationError: state.removeProductNotificationError,
-        token: state.token
+        adminSelectedProduct: state.getters.admin.adminSelectedProduct,
+        removeProductNotification: state.notifications.products.removeProductNotification,
+        removeProductNotificationError: state.notifications.products.removeProductNotificationError,
+        token: state.auth.token
     };
 };
 

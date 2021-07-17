@@ -30,12 +30,12 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        shoppingCart: state.shoppingCart,
-        checkoutNotification: state.checkoutNotification,
-        checkoutNotificationError: state.checkoutNotificationError,
-        removeProductFromCartNotification: state.removeProductFromCartNotification,
-        removeProductFromCartNotificationError: state.removeProductFromCartNotificationError,
-        token: state.token        
+        shoppingCart: state.getters.customer.shoppingCart,
+        checkoutNotification: state.notifications.cart.checkoutNotification,
+        checkoutNotificationError: state.notifications.cart.checkoutNotificationError,
+        removeProductFromCartNotification: state.notifications.cart.removeProductFromCartNotification,
+        removeProductFromCartNotificationError: state.notifications.cart.removeProductFromCartNotificationError,
+        token: state.auth.token        
     };
 };
 
@@ -152,7 +152,7 @@ class ShoppingCart extends React.Component {
                 {!isCartEmpty && this.props.shoppingCart.products.map((p, i) =>(
                     <ProductCard 
                         key={i}
-                        linkTo="customer"
+                        owner="customer"
                         prodId={p.id}
                         name={p.name}
                         manufacturer={p.manufacturer}

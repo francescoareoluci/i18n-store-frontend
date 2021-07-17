@@ -14,8 +14,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        localeList: state.localeList,
-        token: state.token
+        localeList: state.getters.admin.localeList,
+        token: state.auth.token
     };
 };
 

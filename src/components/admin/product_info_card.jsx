@@ -9,14 +9,6 @@ import { Translation } from 'react-i18next';
 import product_card from "../common/product_card";
 
 
-function mapDispatchToProps(dispatch) {
-    return {};
-}
-
-const mapStateToProps = (state) => {
-    return {};
-};
-
 class ProductInfoCard extends React.Component {
     constructor(props) {
         super(props);
@@ -66,4 +58,4 @@ class ProductInfoCard extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductInfoCard)
+export default ProductInfoCard;

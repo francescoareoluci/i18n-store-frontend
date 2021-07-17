@@ -18,8 +18,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        productList: state.productList,
-        token: state.token
+        productList: state.getters.common.productList,
+        token: state.auth.token
     };
 };
 
@@ -128,7 +128,7 @@ class CustomerProducts extends React.Component {
                 {!isListEmpty && this.props.productList.map((prod, i) => (
                     <ProductCard 
                         key={i}
-                        linkTo="customer"
+                        owner="customer"
                         prodId={prod.id}
                         name={prod.name}
                         manufacturer={prod.manufacturer}

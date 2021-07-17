@@ -14,8 +14,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = (state) => {
     return {
-        manufacturerList: state.manufacturerList,
-        token: state.token
+        manufacturerList: state.getters.admin.manufacturerList,
+        token: state.auth.token
     };
 };
 
