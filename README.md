@@ -6,6 +6,7 @@ It allows to:
 * Log in the user, both with an administrator and customer accounts;
 * Show available products, users, manufacturers, locales and currencies;
 * Purchase products through the use of the shopping cart;
+* Add and remove localized products
 * Search for products
 
 Moreover, the application is internationalized through the use of **i18next** library. The UI labels will be translated in the logged user locale.
