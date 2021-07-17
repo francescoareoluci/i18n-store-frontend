@@ -401,6 +401,7 @@ a {
     min-width: 220px;
     cursor: pointer;
     text-align: center;
+    align-self: self-start;
 }
 
 .product-wrapper__name__removeproduct {
@@ -417,8 +418,9 @@ a {
     color: #EBEBEB;
     font-size: 14px;
     margin-right: 20px;
-    min-width: 130px;
+    min-width: 140px;
     cursor: pointer;
+    text-align: center;
 }
  
 .product-wrapper__manufacturer {
