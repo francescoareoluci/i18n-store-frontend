@@ -45,17 +45,22 @@ export function changeAdminSelectedProduct(prodId, token) {
                 let locales = [];
                 let names = [];
                 let descriptions = [];
+                let categories = [];
                 let prices = [];
                 let found = false;
 
                 let name = {};
                 let description = {};
+                let category = {};
                 for (let i = 0; i < p.localizedTextualItemList.length; i++) {
                     found = false;
+                    let locale = p.localizedTextualItemList[i].languageCode + "-" + 
+                                    p.localizedTextualItemList[i].countryCode
                     if (p.localizedTextualItemList[i].fieldType == "product_name") {
                         name = {
                             name: p.localizedTextualItemList[i].text,
-                            locale: p.localizedTextualItemList[i].languageCode
+                            nameId: p.localizedTextualItemList[i].id,
+                            locale: locale
                         }
                         names.push(name);
                         found = true;
@@ -63,58 +68,90 @@ export function changeAdminSelectedProduct(prodId, token) {
                     if (p.localizedTextualItemList[i].fieldType == "product_description") {
                         description = {
                             descr: p.localizedTextualItemList[i].text,
-                            locale: p.localizedTextualItemList[i].languageCode
+                            descrId: p.localizedTextualItemList[i].id,
+                            locale: locale
                         }
                         descriptions.push(description);
                         found = true;
-                    }    
-                    if (found && !locales.includes(p.localizedTextualItemList[i].languageCode))
-                        locales.push(p.localizedTextualItemList[i].languageCode);
+                    }
+                    if (p.localizedTextualItemList[i].fieldType == "product_category") {
+                        category = {
+                            category: p.localizedTextualItemList[i].text,
+                            categoryId: p.localizedTextualItemList[i].id,
+                            locale: locale
+                        }
+                        categories.push(category);
+                        found = true;
+                    }
+                    if (found && !locales.includes(locale))
+                        locales.push(locale);
                 }
 
                 let price = {};
                 for (let i = 0; i < p.localizedCurrencyItemList.length; i++) {
                     found = false;
+                    let locale = p.localizedCurrencyItemList[i].languageCode + "-" + 
+                                    p.localizedCurrencyItemList[i].countryCode
                     if (p.localizedCurrencyItemList[i].fieldType == "product_price") {
                         price = {
                             price: p.localizedCurrencyItemList[i].price,
                             currency: p.localizedCurrencyItemList[i].currency,
-                            locale: p.localizedCurrencyItemList[i].languageCode
+                            priceId: p.localizedCurrencyItemList[i].id,
+                            locale: locale
                         }
                         found = true
                         prices.push(price);  
                     }
-                    if (found && !locales.includes(p.localizedTextualItemList[i].languageCode)) 
-                        locales.push(p.localizedCurrencyItemList[i].languageCode);  
+                    if (found && !locales.includes(locale)) 
+                        locales.push(locale);  
                 }
 
                 let translation = {};
                 let trName = "";
+                let trNameId = "";
                 let trDescr = "";
+                let trDescrId = "";
                 let trPrice = "";
+                let trCategory = "";
+                let trPriceId = "";
+                let trCategoryId = "";
                 let locale = "";
                 for (let i = 0; i < locales.length; i++) {
                     locale = locales[i];
                     for (let j = 0; j < names.length; j++) {
                         if (names[j].locale == locale) {
                             trName = names[j].name;
+                            trNameId = names[j].nameId;
                         }
                     }
                     for (let j = 0; j < descriptions.length; j++) {
                         if (descriptions[j].locale == locale) {
                             trDescr = descriptions[j].descr;
+                            trDescrId = descriptions[j].descrId;
+                        }
+                    }
+                    for (let j = 0; j < categories.length; j++) {
+                        if (categories[j].locale == locale) {
+                            trCategory = categories[j].category;
+                            trCategoryId = categories[j].categoryId;
                         }
                     }
                     for (let j = 0; j < prices.length; j++) {
                         if (prices[j].locale == locale) {
                             trPrice = prices[j].price + " " + prices[j].currency;
+                            trPriceId = prices[j].priceId;
                         }
                     }
                     translation = {
                         locale: locale,
                         name: trName,
+                        nameId: trNameId,
                         price: trPrice,
-                        description: trDescr
+                        priceId: trPriceId,
+                        description: trDescr,
+                        descriptionId: trDescrId,
+                        category: trCategory,
+                        categoryId: trCategoryId
                     };
                     translations.push(translation);
                 }
@@ -124,6 +161,7 @@ export function changeAdminSelectedProduct(prodId, token) {
                     manufacturer: p.manufacturer,
                     translations: translations
                 }
+                console.log(product);
                 dispatch(dispatchProductInfo(product))
             })
             .catch(error => {

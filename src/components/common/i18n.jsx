@@ -76,6 +76,9 @@ const resources = {
       "admin_add_product_add_locale": "Add product localization",
       "admin_add_product_button": "Add product",
       "admin_add_product_confirm": "Product Added",
+      "admin_edit_product_header": "Edit product",
+      "admin_edit_product_button": "Edit product",
+      "admin_edit_product_confirm": "Product edited",
       "error_alertbox": "Error"
     }
   },
@@ -153,6 +156,9 @@ const resources = {
       "admin_add_product_add_locale": "Aggiungi localizzazione prodotto",
       "admin_add_product_button": "Aggiungi prodotto",
       "admin_add_product_confirm": "Prodotto aggiunto",
+      "admin_edit_product_header": "Modifica prodotto",
+      "admin_edit_product_button": "Modifica prodotto",
+      "admin_edit_product_confirm": "Prodotto modificato",
       "error_alertbox": "Errore"
     }
   }

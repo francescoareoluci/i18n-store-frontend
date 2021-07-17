@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import {
+    Link
+} from "react-router-dom";
 import { Translation } from 'react-i18next';
 
 import ProductInfoCard from "./product_info_card"
@@ -102,6 +105,11 @@ class AdminProductInfo extends React.Component {
                         </div>
                         <div className="product-wrapper__name__removespacer">
                         </div>
+                        <Link to="/admin/products/edit">
+                        <div className="product-wrapper__name__removeproduct">
+                            Edit Product 
+                        </div>
+                        </Link>
                         <div className="product-wrapper__name__removeproduct"
                              onClick={(e) => {this.handleProductRemove(e)}}>
                             <Translation>
