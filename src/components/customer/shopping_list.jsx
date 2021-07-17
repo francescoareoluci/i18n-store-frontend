@@ -57,7 +57,7 @@ class ShoppingList extends React.Component {
                 {!isListEmpty && this.props.shoppingList.products.map((p, i) =>(
                     <ProductCard 
                         key={i}
-                        linkTo="customer"
+                        owner="customer"
                         prodId={p.id}
                         name={p.name}
                         manufacturer={p.manufacturer}

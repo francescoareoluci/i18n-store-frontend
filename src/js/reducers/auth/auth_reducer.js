@@ -2,7 +2,6 @@ import { updateStateObject } from "../state_utils";
 import { 
     LOGIN, 
     SET_TOKEN, 
-    LOGOUT, 
     UNAUTH 
 } from "../../constants/action_types";
 
@@ -25,9 +24,6 @@ export function authReducer(state = initialState, action) {
             role: action.payload.role,
             language: action.payload.language
         });
-    }
-    else if (action.type == LOGOUT) {
-        return initialState;
     }
     else if (action.type == UNAUTH) {
         return updateStateObject(state, {unauth: action.payload.unauth})

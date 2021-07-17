@@ -45,8 +45,6 @@ class ProductCard extends React.Component {
 
     handleRemove(e, id) {
         e.preventDefault();
-        console.log("prova");
-        console.log(this.props.owner);
         if (this.props.owner == "customer") {
             this.props.removeProductFromCart(id, this.props.token);
         }

@@ -31,6 +31,7 @@ class CustomerProductInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isMounted: true,
             showConfirm: false,
             showError: false,
             errorLabel: ""
@@ -45,21 +46,31 @@ class CustomerProductInfo extends React.Component {
         if (this.props.addCartProductNotification !== previousProps.addCartProductNotification &&
                 this.props.addCartProductNotification) {     
             this.props.disableAddProductToCartNotification();
-            this.setState({
-                showConfirm: true
-            });
-            setTimeout(this.disableShowConfirm, 2000);
+            if (this.state.isMounted) {
+                this.setState({
+                    showConfirm: true
+                });
+                setTimeout(this.disableShowConfirm, 2000);
+            }
         }
 
         if (this.props.addCartProductNotificationError !== previousProps.addCartProductNotificationError &&
                 this.props.addCartProductNotificationError) {      
             this.props.disableAddProductToCartNotificationError();
-            this.setState({
-                showError: true,
-                errorLabel: "unable to add product"
-            });
-            setTimeout(this.disableShowError, 2000);
+            if (this.state.isMounted) {
+                this.setState({
+                    showError: true,
+                    errorLabel: "unable to add product"
+                });
+                setTimeout(this.disableShowError, 2000);
+            }
         }
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        });
     }
 
     disableShowConfirm() {

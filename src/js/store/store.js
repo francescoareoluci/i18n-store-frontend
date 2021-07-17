@@ -10,6 +10,8 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
+import { LOGOUT } from "../constants/action_types";
+
 import { authReducer } from "../reducers/auth/auth_reducer";
 import { gettersReducer } from "../reducers/getters/getters_reducer";
 import { notificationsReducer } from "../reducers/notifications/notifications_reducer";
@@ -20,11 +22,19 @@ const persistConfig = {
   storage,
 }
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   auth: authReducer,
   getters: gettersReducer,
   notifications: notificationsReducer
-});
+})
+
+const rootReducer = (state, action) => {
+  if (action.type == LOGOUT) {
+    return appReducer(undefined, action);
+  }
+
+  return appReducer(state, action)
+}
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

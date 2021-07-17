@@ -43,6 +43,7 @@ class ShoppingCart extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            isMounted: true,
             showConfirm: false,
             showError: false,
             errorLabel: ""
@@ -62,20 +63,24 @@ class ShoppingCart extends React.Component {
                 this.props.checkoutNotification) {       
             this.props.getCart(this.props.token);
             this.props.disablePerformCheckoutNotification();
-            this.setState({
-                showConfirm: true
-            });
-            setTimeout(this.disableShowConfirm, 2000);
+            if (this.state.isMounted) {
+                this.setState({
+                    showConfirm: true
+                });
+                setTimeout(this.disableShowConfirm, 2000);
+            }
         }
 
         if (this.props.checkoutNotificationError !== previousProps.checkoutNotificationError &&
                 this.props.checkoutNotificationError) {       
             this.props.disablePerformCheckoutNotificationError();
-            this.setState({
-                showError: true,
-                errorLabel: "unable to perform checkout"
-            });
-            setTimeout(this.disableShowError, 2000);
+            if (this.state.isMounted) {
+                this.setState({
+                    showError: true,
+                    errorLabel: "unable to perform checkout"
+                });
+                setTimeout(this.disableShowError, 2000);
+            }
         }
 
         if (this.props.removeProductFromCartNotification !== previousProps.removeProductFromCartNotification &&
@@ -87,12 +92,20 @@ class ShoppingCart extends React.Component {
         if (this.props.removeProductFromCartNotificationError !== previousProps.removeProductFromCartNotificationError &&
                 this.props.removeProductFromCartNotificationError) {       
             this.props.disableRemoveProdFromCartNotificationError();
-            this.setState({
-                showError: true,
-                errorLabel: "unable to remove product"
-            });
-            setTimeout(this.disableShowError, 2000);
+            if (this.state.isMounted) {
+                this.setState({
+                    showError: true,
+                    errorLabel: "unable to remove product"
+                });
+                setTimeout(this.disableShowError, 2000);
+            }
         }
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        });
     }
 
     disableShowConfirm() {
