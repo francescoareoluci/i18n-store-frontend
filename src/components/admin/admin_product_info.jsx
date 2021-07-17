@@ -5,21 +5,26 @@ import { Translation } from 'react-i18next';
 
 import ProductInfoCard from "./product_info_card"
 
-import { removeProduct } from "../../js/actions/removeProduct";
-import { setRemoveProdLoading } from "../../js/actions/setRemoveProductLoading";
+import { 
+    removeProduct,
+    disableRemoveProductNotification,
+    disableRemoveProductNotificationError 
+} from "../../js/actions/removeProduct";
 
 
 function mapDispatchToProps(dispatch) {
     return {
         removeProduct: (prodId, token) => dispatch(removeProduct(prodId, token)),
-        setRemoveProdLoading: (isDone) => dispatch(setRemoveProdLoading(isDone))
+        disableRemoveProductNotification: () => dispatch(disableRemoveProductNotification()),
+        disableRemoveProductNotificationError: () => dispatch(disableRemoveProductNotificationError())
     };
 }
 
 const mapStateToProps = (state) => {
     return {
         adminSelectedProduct: state.adminSelectedProduct,
-        removeProductLoading: state.removeProductLoading,
+        removeProductNotification: state.removeProductNotification,
+        removeProductNotificationError: state.removeProductNotificationError,
         token: state.token
     };
 };
@@ -27,16 +32,38 @@ const mapStateToProps = (state) => {
 class AdminProductInfo extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            showError: false,
+            errorLabel: ""
+        }
 
+        this.disableShowError = this.disableShowError.bind(this);
         this.handleProductRemove = this.handleProductRemove.bind(this);
     }
 
     componentDidUpdate(previousProps) {
-        if (this.props.removeProductLoading !== previousProps.removeProductLoading &&
-                this.props.removeProductLoading) {       
-            this.props.setRemoveProdLoading(false);
+        if (this.props.removeProductNotification !== previousProps.removeProductNotification &&
+                this.props.removeProductNotification) {       
+            this.props.disableRemoveProductNotification(false);
             this.props.history.push("/admin/products");
         }
+
+        if (this.props.removeProductNotificationError !== previousProps.removeProductNotificationError &&
+                this.props.removeProductNotificationError) {       
+            this.props.disableRemoveProductNotificationError();
+            this.setState({
+                showError: true,
+                errorLabel: "unable to remove product"
+            });
+            setTimeout(this.disableShowError, 2000);
+        }
+    }
+
+    disableShowError() {
+        this.setState({
+            showError: false,
+            errorLabel: ""
+        });
     }
 
     handleProductRemove(e) {
@@ -98,6 +125,13 @@ class AdminProductInfo extends React.Component {
                        /> 
                     ))}
                 </div>
+                }
+                {this.state.showError &&
+                    <div className="remove-product-confirm_alertbox-error">
+                        <Translation>
+                            { t => <>{t('error_alertbox')}</> }
+                        </Translation>: {this.state.errorLabel}
+                    </div>
                 }
             </div>
         );

@@ -1,11 +1,13 @@
 import buildCustomAxios from "../constants/token_axios";
 import dispatchUnauth from "./handleUnauth";
-import { ADD_PRODUCT_NOTIFICATION } from "../constants/action_types";
-import { ADD_PRODUCT_NOTIFICATION_ERROR } from "../constants/action_types";
+import { 
+    ADD_PRODUCT_NOTIFICATION, 
+    ADD_PRODUCT_NOTIFICATION_ERROR 
+} from "../constants/action_types";
 import { URL_ADMIN_ADD_PRODUCT } from "../constants/rest_api";
 
 
-const setAddProductNotification = notify => (
+const dispatchAddProductNotification = notify => (
     { 
         type: ADD_PRODUCT_NOTIFICATION, 
         payload: {
@@ -14,7 +16,7 @@ const setAddProductNotification = notify => (
     }
 );
 
-const setAddProductNotificationError = notify => (
+const dispatchAddProductNotificationError = notify => (
     { 
         type: ADD_PRODUCT_NOTIFICATION_ERROR, 
         payload: {
@@ -32,7 +34,7 @@ export function addProduct(token, product) {
 
         return axiosInstance.post(url, product)
             .then(result => {
-                dispatch(setAddProductNotification(true));
+                dispatch(dispatchAddProductNotification(true));
             })
             .catch(error => {
                 console.log(error);
@@ -40,15 +42,15 @@ export function addProduct(token, product) {
                     dispatch(dispatchUnauth());
                 }
 
-                dispatch(setAddProductNotificationError(true));
+                dispatch(dispatchAddProductNotificationError(true));
             });
     }
 }
 
 export function disableAddProductNotification() {
-    return setAddProductNotification(false);
+    return dispatchAddProductNotification(false);
 }
 
 export function disableAddProductNotificationError() {
-    return setAddProductNotificationError(false);
+    return dispatchAddProductNotificationError(false);
 }

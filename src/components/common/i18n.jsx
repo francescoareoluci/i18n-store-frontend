@@ -65,7 +65,18 @@ const resources = {
       "users_first_name": "First Name",
       "users_last_name": "Last Name",
       "users_mail": "User mail",
-      "users_role": "User role"
+      "users_role": "User role",
+      "admin_add_product_header": "Add a product",
+      "admin_add_product_manufacturer": "Manufacturer",
+      "admin_add_product_name": "Product name",
+      "admin_add_product_category": "Product category",
+      "admin_add_product_description": "Product description",
+      "admin_add_product_price": "Product price",
+      "admin_add_product_currency": "Currency",
+      "admin_add_product_add_locale": "Add product localization",
+      "admin_add_product_button": "Add product",
+      "admin_add_product_confirm": "Product Added",
+      "error_alertbox": "Error"
     }
   },
   it: {
@@ -131,7 +142,18 @@ const resources = {
       "users_first_name": "Nome",
       "users_last_name": "Cognome",
       "users_mail": "Mail utente",
-      "users_role": "Ruolo utente"
+      "users_role": "Ruolo utente",
+      "admin_add_product_header": "Aggiungi prodotto",
+      "admin_add_product_manufacturer": "Produttore",
+      "admin_add_product_name": "Nome prodotto",
+      "admin_add_product_category": "Categoria prodotto",
+      "admin_add_product_description": "Descrizione prodotto",
+      "admin_add_product_price": "Prezzo prodotto",
+      "admin_add_product_currency": "Valuta",
+      "admin_add_product_add_locale": "Aggiungi localizzazione prodotto",
+      "admin_add_product_button": "Aggiungi prodotto",
+      "admin_add_product_confirm": "Prodotto aggiunto",
+      "error_alertbox": "Errore"
     }
   }
 };

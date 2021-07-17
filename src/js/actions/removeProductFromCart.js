@@ -1,13 +1,29 @@
 import buildCustomAxios from "../constants/token_axios";
 import dispatchUnauth from "./handleUnauth";
-import { REMOVE_PROD_FROM_CART } from "../constants/action_types";
+import { 
+    REMOVE_PRODUCT_FROM_CART_NOTIFICATION,
+    REMOVE_PRODUCT_FROM_CART_NOTIFICATION_ERROR 
+} from "../constants/action_types";
 import { URL_CUSTOMER_REMOVE_PROD_FROM_CART } from "../constants/rest_api";
 
 
-const dispatchRemoveProductFromCart = payload => (
-    { type: REMOVE_PROD_FROM_CART, payload }
+const dispatchRemoveProdFromCartNotification = notify => (
+    { 
+        type: REMOVE_PRODUCT_FROM_CART_NOTIFICATION, 
+        payload: {
+            removeProductFromCartNotification: notify
+        } 
+    }
 );
 
+const dispatchRemoveProdFromCartNotificationError = notify => (
+    { 
+        type: REMOVE_PRODUCT_FROM_CART_NOTIFICATION_ERROR, 
+        payload: {
+            removeProductFromCartNotificationError: notify 
+        }
+    }
+);
 
 export function removeProductFromCart(prodId, token) {
     return function (dispatch) {
@@ -17,10 +33,7 @@ export function removeProductFromCart(prodId, token) {
         
         return axiosInstance.post(url)
             .then(result => {
-                payload = {
-                    removeCartProductLoading: true
-                }
-                dispatch(dispatchRemoveProductFromCart(payload))
+                dispatch(dispatchRemoveProdFromCartNotification(true));
             })
             .catch(error => {
                 console.log(error);
@@ -28,10 +41,15 @@ export function removeProductFromCart(prodId, token) {
                     dispatch(dispatchUnauth());
                 }
 
-                payload = {
-                    removeCartProductLoading: true
-                }
-                dispatch(dispatchRemoveProductFromCart(payload))
+                dispatch(dispatchRemoveProdFromCartNotificationError(true));
             });
     }
+}
+
+export function disableRemoveProdFromCartNotification() {
+    return dispatchRemoveProdFromCartNotification(false);
+}
+
+export function disableRemoveProdFromCartNotificationError() {
+    return dispatchRemoveProdFromCartNotificationError(false);
 }

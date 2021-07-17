@@ -11,6 +11,10 @@ import {
     disablePerformCheckoutNotification,
     disablePerformCheckoutNotificationError 
 } from "../../js/actions/performCheckout";
+import {
+    disableRemoveProdFromCartNotification,
+    disableRemoveProdFromCartNotificationError
+} from "../../js/actions/removeProductFromCart";
 
 
 function mapDispatchToProps(dispatch) {
@@ -18,7 +22,9 @@ function mapDispatchToProps(dispatch) {
         getCart: (token) => dispatch(getCart(token)),
         performCheckout: (token) => dispatch(performCheckout(token)),
         disablePerformCheckoutNotification: () => dispatch(disablePerformCheckoutNotification()),
-        disablePerformCheckoutNotificationError: () => dispatch(disablePerformCheckoutNotificationError())
+        disablePerformCheckoutNotificationError: () => dispatch(disablePerformCheckoutNotificationError()),
+        disableRemoveProdFromCartNotification: () => dispatch(disableRemoveProdFromCartNotification()),
+        disableRemoveProdFromCartNotificationError: () => dispatch(disableRemoveProdFromCartNotificationError())
     };
 }
 
@@ -27,7 +33,8 @@ const mapStateToProps = (state) => {
         shoppingCart: state.shoppingCart,
         checkoutNotification: state.checkoutNotification,
         checkoutNotificationError: state.checkoutNotificationError,
-        removeCartProductLoading: state.removeCartProductLoading,
+        removeProductFromCartNotification: state.removeProductFromCartNotification,
+        removeProductFromCartNotificationError: state.removeProductFromCartNotificationError,
         token: state.token        
     };
 };
@@ -61,18 +68,28 @@ class ShoppingCart extends React.Component {
             setTimeout(this.disableShowConfirm, 2000);
         }
 
-        if (this.props.removeCartProductLoading !== previousProps.removeCartProductLoading &&
-                this.props.removeCartProductLoading) {       
-            this.props.getCart(this.props.token);
-            this.props.setRemoveCartProdLoading(false);
-        }
-
         if (this.props.checkoutNotificationError !== previousProps.checkoutNotificationError &&
                 this.props.checkoutNotificationError) {       
             this.props.disablePerformCheckoutNotificationError();
             this.setState({
                 showError: true,
                 errorLabel: "unable to perform checkout"
+            });
+            setTimeout(this.disableShowError, 2000);
+        }
+
+        if (this.props.removeProductFromCartNotification !== previousProps.removeProductFromCartNotification &&
+                this.props.removeProductFromCartNotification) {       
+            this.props.getCart(this.props.token);
+            this.props.disableRemoveProdFromCartNotification(false);
+        }
+
+        if (this.props.removeProductFromCartNotificationError !== previousProps.removeProductFromCartNotificationError &&
+                this.props.removeProductFromCartNotificationError) {       
+            this.props.disableRemoveProdFromCartNotificationError();
+            this.setState({
+                showError: true,
+                errorLabel: "unable to remove product"
             });
             setTimeout(this.disableShowError, 2000);
         }
@@ -151,8 +168,10 @@ class ShoppingCart extends React.Component {
                     </div>
                 }
                 {this.state.showError &&
-                    <div className="shopping-cart_alertbox">
-                        Error: {this.state.errorLabel}
+                    <div className="shopping-cart_alertbox-error">
+                        <Translation>
+                            { t => <>{t('error_alertbox')}</> }
+                        </Translation>: {this.state.errorLabel}
                     </div>
                 }
             </div>

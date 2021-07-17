@@ -260,6 +260,7 @@ a {
     background-color: #f3f2f2;
     font-family: "montserrat-regular";
     color: rgb(157, 157, 157);
+    width: -webkit-fill-available;
 }
 
 /* @Override */
@@ -479,10 +480,40 @@ a {
     border-color: #5989bb;
 }
 
+.product-wrapper_alertbox-error {
+    position: absolute;
+    top: 80%;
+    left: 35%;
+    border-radius: 8px;
+    background-color: #de656538;
+    border-style: solid;
+    color: #444444;
+    font-size: 18px;
+    padding: 8px;
+    font-family: "montserrat-regular";
+    border-width: 1px;
+    border-color: #ec2121;
+}
+
 .products-not-available {
     font-family: "montserrat-regular";
     color: #2B2B2B;
     font-size: 16px;
+}
+
+.remove-product-confirm_alertbox-error {
+    position: absolute;
+    top: 80%;
+    left: 35%;
+    border-radius: 8px;
+    background-color: #de656538;
+    border-style: solid;
+    color: #444444;
+    font-size: 18px;
+    padding: 8px;
+    font-family: "montserrat-regular";
+    border-width: 1px;
+    border-color: #ec2121;
 }
 
 /* =========== Product Info Card ========= */
@@ -646,6 +677,21 @@ a {
     font-family: "montserrat-regular";
     border-width: 1px;
     border-color: #5989bb;
+}
+
+.shopping-cart_alertbox-error {
+    position: absolute;
+    top: 80%;
+    left: 35%;
+    border-radius: 8px;
+    background-color: #de656538;
+    border-style: solid;
+    color: #444444;
+    font-size: 18px;
+    padding: 8px;
+    font-family: "montserrat-regular";
+    border-width: 1px;
+    border-color: #ec2121;
 }
 
 /* ====== Shopping List ======== */
@@ -1076,4 +1122,19 @@ a {
     font-family: "montserrat-regular";
     border-width: 1px;
     border-color: #5989bb;
+}
+
+.add-product-confirm_alertbox-error {
+    position: absolute;
+    top: 96%;
+    left: 35%;
+    border-radius: 8px;
+    background-color: #de656538;
+    border-style: solid;
+    color: #444444;
+    font-size: 18px;
+    padding: 8px;
+    font-family: "montserrat-regular";
+    border-width: 1px;
+    border-color: #ec2121;
 }

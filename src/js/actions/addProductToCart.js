@@ -1,11 +1,13 @@
 import buildCustomAxios from "../constants/token_axios";
 import dispatchUnauth from "./handleUnauth";
-import { ADD_PROD_TO_CART_NOTIFICATION } from "../constants/action_types";
-import { ADD_PROD_TO_CART_NOTIFICATION_ERROR } from "../constants/action_types";
+import { 
+    ADD_PROD_TO_CART_NOTIFICATION, 
+    ADD_PROD_TO_CART_NOTIFICATION_ERROR 
+} from "../constants/action_types";
 import { URL_CUSTOMER_ADD_PROD_TO_CART } from "../constants/rest_api";
 
 
-const setAddProductToCartNotification = notify => (
+const dipatchAddProductToCartNotification = notify => (
     { 
         type: ADD_PROD_TO_CART_NOTIFICATION, 
         payload: {
@@ -14,7 +16,7 @@ const setAddProductToCartNotification = notify => (
     }
 );
 
-const setAddProductToCartNotificationError = notify => (
+const dipatchAddProductToCartNotificationError = notify => (
     { 
         type: ADD_PROD_TO_CART_NOTIFICATION_ERROR, 
         payload: {
@@ -32,7 +34,7 @@ export function addProductToCart(prodId, token) {
         
         return axiosInstance.post(url)
             .then(result => {
-                dispatch(setAddProductToCartNotification(true));
+                dispatch(dipatchAddProductToCartNotification(true));
             })
             .catch(error => {
                 console.log(error);
@@ -40,15 +42,15 @@ export function addProductToCart(prodId, token) {
                     dispatch(dispatchUnauth());
                 }
 
-                dispatch(setAddProductToCartNotificationError(true));
+                dispatch(dipatchAddProductToCartNotificationError(true));
             });
     }
 }
 
 export function disableAddProductToCartNotification() {
-    return setAddProductToCartNotification(false);
+    return dipatchAddProductToCartNotification(false);
 }
 
 export function disableAddProductToCartNotificationError() {
-    return setAddProductToCartNotificationError(false);
+    return dipatchAddProductToCartNotificationError(false);
 }

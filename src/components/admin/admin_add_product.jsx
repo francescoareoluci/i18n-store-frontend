@@ -11,7 +11,6 @@ import {
     disableAddProductNotificationError 
 } from "../../js/actions/addProduct";
 
-
 function mapDispatchToProps(dispatch) {
     return {
         getLocales: (token) => dispatch(getLocales(token)),
@@ -31,6 +30,10 @@ const mapStateToProps = (state) => {
         token: state.token
     };
 };
+
+function hasDuplicates(array) {
+    return (new Set(array)).size !== array.length;
+}
 
 class AdminAddProduct extends React.Component {
     constructor(props) {
@@ -63,6 +66,7 @@ class AdminAddProduct extends React.Component {
         this.handlePriceChoice = this.handlePriceChoice.bind(this);
         this.handleCurrencyChoice = this.handleCurrencyChoice.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateInput = this.validateInput.bind(this);
     }
 
     componentDidMount() {
@@ -199,6 +203,10 @@ class AdminAddProduct extends React.Component {
     handlePriceChoice(e, idx, value) {
         e.preventDefault();
 
+        if (value == "0") {
+            return;
+        }
+
         let resArray = this.state.selectedPrices;
         if (idx > this.state.selectedPrices.length) {
             resArray.push(value);
@@ -228,39 +236,72 @@ class AdminAddProduct extends React.Component {
         });
     }
 
+    validateInput() {
+        if (this.state.manufacturer === "") {
+            return "Empty manufacturer";
+        } 
+
+        if (this.state.locs.length !== this.state.selectedLocales.length) {
+            return "Not all locales have been selected";
+        }
+
+        if (this.state.locs.length !== this.state.selectedNames.length) {
+            return "Not all names have been set";
+        }
+
+        if (this.state.locs.length !== this.state.selectedCategories.length) {
+            return "Not all categories have been set";
+        }
+
+        if (this.state.locs.length !== this.state.selectedDescriptions.length) {
+            return "Not all descriptions have been set";
+        }
+
+        if (this.state.locs.length !== this.state.selectedPrices.length) {
+            return "Not all prices have been set";
+        }
+
+        if (this.state.locs.length !== this.state.selectedCurrencies.length) {
+            return "Not all currencies have been set";
+        }
+
+        this.state.selectedLocales.forEach(element => {
+            if (element == "" || element == "0")
+                return "Invalid locale selected";
+        });
+
+        if (hasDuplicates(this.state.selectedLocales))
+            return "invalid locale selected";
+        
+        this.state.selectedNames.forEach(element => {
+            if (element == "")
+                return "Invalid input name";
+        });
+
+        this.state.selectedCategories.forEach(element => {
+            if (element == "")
+                return "Invalid input category";
+        });
+
+        this.state.selectedPrices.forEach(element => {
+            if (element == "" || element <= 0)
+                return "Invalid input price";
+        });
+
+        this.state.selectedCurrencies.forEach(element => {
+            if (element == "" || element == "0")
+                return "Invalid currency selected";
+        });
+
+        return "";
+    }
+
 
     handleSubmit(e) {
         e.preventDefault();
 
         // Validation
-        let errorLabel = "";
-        if (this.state.manufacturer === "") {
-            errorLabel = "Empty manufacturer";
-        } 
-
-        if (this.state.locs.length !== this.state.selectedLocales.length) {
-            errorLabel = "Not all locales have been selected";
-        }
-
-        if (this.state.locs.length !== this.state.selectedNames.length) {
-            errorLabel = "Not all names have been set";
-        }
-
-        if (this.state.locs.length !== this.state.selectedCategories.length) {
-            errorLabel = "Not all categories have been set";
-        }
-
-        if (this.state.locs.length !== this.state.selectedDescriptions.length) {
-            errorLabel = "Not all descriptions have been set";
-        }
-
-        if (this.state.locs.length !== this.state.selectedPrices.length) {
-            errorLabel = "Not all prices have been set";
-        }
-
-        if (this.state.locs.length !== this.state.selectedCurrencies.length) {
-            errorLabel = "Not all currencies have been set";
-        }
+        let errorLabel = this.validateInput();
 
         if (errorLabel !== "") {
             this.setState({
@@ -332,11 +373,15 @@ class AdminAddProduct extends React.Component {
         return (
             <div className="add-product-container">
                 <div className="add-product-container__text">
-                    Add a product
+                    <Translation>
+                        { t => <>{t('admin_add_product_header')}</> }
+                    </Translation>
                 </div>
                 <div className="add-product-wrapper">
                     <div className="add-product-manufacturer">
-                        Manufacturer:
+                        <Translation>
+                            { t => <>{t('admin_add_product_manufacturer')}</> }
+                        </Translation> :
                         <input className="add-product-manufacturer-input"
                                onChange={e => this.handleManufacturerChoice(e, e.target.value)}>
                         </input>
@@ -356,19 +401,25 @@ class AdminAddProduct extends React.Component {
                             </select>
                         </div>
                         <div className="add-product-loc-name">
-                            Product name:
+                            <Translation>
+                                { t => <>{t('admin_add_product_name')}</> }
+                            </Translation>
                             <input className="add-product-loc-name-input"
                                    onChange={e => this.handleNameChoice(e, i, e.target.value)}>
                             </input>
                         </div>
                         <div className="add-product-loc-name">
-                            Product category:
+                            <Translation>
+                                { t => <>{t('admin_add_product_category')}</> }
+                            </Translation>
                             <input className="add-product-loc-name-input"
                                    onChange={e => this.handleCategoryChoice(e, i, e.target.value)}>
                             </input>
                         </div>
                         <div className="add-product-loc-description">
-                            Product description:
+                            <Translation>
+                                { t => <>{t('admin_add_product_description')}</> }
+                            </Translation>
                             <div>
                                 <textarea className="add-product-loc-description-input"
                                           onChange={e => this.handleDescriptionChoice(e, i, e.target.value)}>
@@ -376,11 +427,16 @@ class AdminAddProduct extends React.Component {
                             </div>
                         </div>
                         <div className="add-product-loc-price">
-                            Product price:
+                            <Translation>
+                                { t => <>{t('admin_add_product_price')}</> }
+                            </Translation>
                             <input className="add-product-loc-price-input"
+                                   type="number"
                                    onChange={e => this.handlePriceChoice(e, i, e.target.value)}>
                             </input>
-                            Currency:
+                            <Translation>
+                                { t => <>{t('admin_add_product_currency')}</> }
+                            </Translation>
                             <select className="add-product-loc-currency-select"
                                     onChange={e => this.handleCurrencyChoice(e, i, e.target.value)}>
                                 <option value="0">Select currency:</option>
@@ -394,22 +450,30 @@ class AdminAddProduct extends React.Component {
                     {showAddLocalization &&
                         <div className="add-product-loc-button"
                              onClick={(e) => {this.handleAddProdLocalization(e)}}>
-                            Add product localization
+                            <Translation>
+                                { t => <>{t('admin_add_product_add_locale')}</> }
+                            </Translation>
                         </div>
                     }
                 </div>
                 <div className="add-product-confirm-button"
                      onClick={(e) => {this.handleSubmit(e)}}>
-                    Add product
+                    <Translation>
+                        { t => <>{t('admin_add_product_button')}</> }
+                    </Translation>
                 </div>
                 {this.state.showConfirm &&
                     <div className="add-product-confirm_alertbox">
-                        Product Added
+                        <Translation>
+                            { t => <>{t('admin_add_product_confirm')}</> }
+                        </Translation>
                     </div>
                 }
                 {this.state.showError &&
-                    <div className="add-product-confirm_alertbox">
-                        Error: {this.state.errorLabel}
+                    <div className="add-product-confirm_alertbox-error">
+                        <Translation>
+                            { t => <>{t('error_alertbox')}</> }
+                        </Translation>: {this.state.errorLabel}
                     </div>
                 }
             </div>

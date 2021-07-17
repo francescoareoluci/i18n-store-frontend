@@ -1,27 +1,39 @@
-import { LOGIN, REMOVE_PROD_FROM_CART, SET_REMOVED_CART_PROD_LOADING } from "../constants/action_types"
-import { SET_TOKEN } from "../constants/action_types"
-import { LOGOUT } from "../constants/action_types"  
-import { GET_PRODUCT_LIST } from "../constants/action_types"
-import { CHANGE_CUSTOMER_SELECTED_PRODUCT } from "../constants/action_types"
-import { CHANGE_ADMIN_SELECTED_PRODUCT } from "../constants/action_types"
-import { GET_CART } from "../constants/action_types"
-import { GET_SHOPPING_LIST } from "../constants/action_types"
-import { GET_USERS } from "../constants/action_types"
-import { GET_CURRENCIES } from "../constants/action_types"
-import { GET_MANUFACTURERS } from "../constants/action_types"
-import { GET_LOCALES } from "../constants/action_types"
-import { PERFORM_SEARCH } from "../constants/action_types"
-import { ADD_PROD_TO_CART } from "../constants/action_types";
-import { URL_CUSTOMER_REMOVE_PROD_FROM_CART } from "../constants/rest_api";
-import { PERFORM_CHECKOUT_NOTIFICATION } from "../constants/action_types";
-import { PERFORM_CHECKOUT_NOTIFICATION_ERROR } from "../constants/action_types";
-import { UNAUTH } from "../constants/action_types";
-import { REMOVE_PRODUCT } from "../constants/action_types";
-import { SET_REMOVED_PROD_LOADING } from "../constants/action_types";
-import { ADD_PROD_TO_CART_NOTIFICATION } from "../constants/action_types";
-import { ADD_PROD_TO_CART_NOTIFICATION_ERROR } from "../constants/action_types";
-import { ADD_PRODUCT_NOTIFICATION } from "../constants/action_types";
-import { ADD_PRODUCT_NOTIFICATION_ERROR } from "../constants/action_types";
+/* Authentication */
+import { 
+    LOGIN, 
+    SET_TOKEN, 
+    LOGOUT, 
+    UNAUTH 
+} from "../constants/action_types";
+
+/* Getters */
+import { 
+    GET_PRODUCT_LIST, 
+    CHANGE_CUSTOMER_SELECTED_PRODUCT, 
+    CHANGE_ADMIN_SELECTED_PRODUCT,
+    GET_CART,
+    GET_SHOPPING_LIST,
+    GET_USERS,
+    GET_CURRENCIES,
+    GET_MANUFACTURERS,
+    GET_LOCALES,
+    PERFORM_SEARCH 
+} from "../constants/action_types";
+
+/* Notifications */
+import { 
+    ADD_PRODUCT_NOTIFICATION,
+    ADD_PRODUCT_NOTIFICATION_ERROR,
+    REMOVE_PRODUCT_NOTIFICATION,
+    REMOVE_PRODUCT_NOTIFICATION_ERROR,
+    ADD_PROD_TO_CART_NOTIFICATION,
+    ADD_PROD_TO_CART_NOTIFICATION_ERROR,
+    REMOVE_PRODUCT_FROM_CART_NOTIFICATION,
+    REMOVE_PRODUCT_FROM_CART_NOTIFICATION_ERROR,
+    PERFORM_CHECKOUT_NOTIFICATION,
+    PERFORM_CHECKOUT_NOTIFICATION_ERROR
+} from "../constants/action_types";
+
 
 const initialState = {
     token: "",
@@ -40,8 +52,10 @@ const initialState = {
     addProductNotificationError: false,
     addCartProductNotification: false,
     addCartProductNotificationError: false,
-    removeCartProductLoading: false,
-    removeProductLoading: false,
+    removeProductFromCartNotification: false,
+    removeProductFromCartNotificationError: false,
+    removeProductNotification: false,
+    removeProductNotificationError: false,
     checkoutNotification: false,
     checkoutNotificationError: false,
     unauth: false
@@ -51,30 +65,7 @@ function rootReducer(state = initialState, action) {
     console.log(action);
     if (action.type == LOGIN || action.type == SET_TOKEN) {
         if (Object.keys(action.payload).length == 0) {
-            const newState = Object.assign({}, state, {
-                token: "",
-                role: "",
-                language: "en",
-                customerSelectedProduct: {},
-                adminSelectedProduct: {},
-                productList: [],
-                shoppingCart: {},
-                shoppingList: {},
-                userList: {},
-                currencyList: {},
-                manufacturerList: {},
-                localeList: {},
-                addProductNotification: false,
-                addProductNotificationError: false,
-                addCartProductNotification: false,
-                addCartProductNotificationError: false,
-                removeCartProductLoading: false,
-                removeProductLoading: false,
-                checkoutNotification: false,
-                checkoutNotificationError: false,
-                unauth: false
-            });
-            return newState;
+            return initialState;
         }
 
         const newState = Object.assign({}, state, {
@@ -85,27 +76,11 @@ function rootReducer(state = initialState, action) {
         return newState;
     }
     else if (action.type == LOGOUT) {
+        return initialState;
+    }
+    else if (action.type == UNAUTH) {
         const newState = Object.assign({}, state, {
-            token: "",
-            role: "",
-            language: "en",
-            customerSelectedProduct: {},
-            adminSelectedProduct: {},
-            productList: [],
-            shoppingCart: {},
-            shoppingList: {},
-            userList: {},
-            currencyList: {},
-            manufacturerList: {},
-            localeList: {},
-            addProductNotification: false,
-            addProductNotificationError: false,
-            addCartProductNotification: false,
-            addCartProductNotificationError: false,
-            removeCartProductLoading: false,
-            checkoutNotification: false,
-            checkoutNotificationError: false,
-            unauth: false
+            unauth: action.payload.unauth
         });
         return newState;
     }
@@ -169,6 +144,30 @@ function rootReducer(state = initialState, action) {
         });
         return newState;
     }
+    else if (action.type == ADD_PRODUCT_NOTIFICATION) {
+        const newState = Object.assign({}, state, {
+            addProductNotification: action.payload.addProductNotification
+        });
+        return newState;
+    }
+    else if (action.type == ADD_PRODUCT_NOTIFICATION_ERROR) {
+        const newState = Object.assign({}, state, {
+            addProductNotificationError: action.payload.addProductNotificationError
+        });
+        return newState;
+    }
+    else if (action.type == REMOVE_PRODUCT_NOTIFICATION) {
+        const newState = Object.assign({}, state, {
+            removeProductNotification: action.payload.removeProductNotification
+        });
+        return newState;
+    }
+    else if (action.type == REMOVE_PRODUCT_NOTIFICATION_ERROR) {
+        const newState = Object.assign({}, state, {
+            removeProductNotificationError: action.payload.removeProductNotificationError
+        });
+        return newState;
+    }
     else if (action.type == ADD_PROD_TO_CART_NOTIFICATION) {
         const newState = Object.assign({}, state, {
             addCartProductNotification: action.payload.addCartProductNotification
@@ -181,9 +180,15 @@ function rootReducer(state = initialState, action) {
         });
         return newState;
     }
-    else if (action.type == REMOVE_PROD_FROM_CART || action.type == SET_REMOVED_CART_PROD_LOADING) {
+    else if (action.type == REMOVE_PRODUCT_FROM_CART_NOTIFICATION) {
         const newState = Object.assign({}, state, {
-            removeCartProductLoading: action.payload.removeCartProductLoading
+            removeProductFromCartNotification: action.payload.removeProductFromCartNotification
+        });
+        return newState;
+    }
+    else if (action.type == REMOVE_PRODUCT_FROM_CART_NOTIFICATION_ERROR) {
+        const newState = Object.assign({}, state, {
+            removeProductFromCartNotificationError: action.payload.removeProductFromCartNotificationnError
         });
         return newState;
     }
@@ -196,30 +201,6 @@ function rootReducer(state = initialState, action) {
     else if (action.type == PERFORM_CHECKOUT_NOTIFICATION_ERROR ) {
         const newState = Object.assign({}, state, {
             checkoutNotificationError: action.payload.checkoutNotificationError
-        });
-        return newState;
-    }
-    else if (action.type == UNAUTH) {
-        const newState = Object.assign({}, state, {
-            unauth: action.payload.unauth
-        });
-        return newState;
-    }
-    else if (action.type == REMOVE_PRODUCT || action.type == SET_REMOVED_PROD_LOADING) {
-        const newState = Object.assign({}, state, {
-            removeProductLoading: action.payload.removeProductLoading
-        });
-        return newState;
-    }
-    else if (action.type == ADD_PRODUCT_NOTIFICATION) {
-        const newState = Object.assign({}, state, {
-            addProductNotification: action.payload.addProductNotification
-        });
-        return newState;
-    }
-    else if (action.type == ADD_PRODUCT_NOTIFICATION_ERROR) {
-        const newState = Object.assign({}, state, {
-            addProductNotificationError: action.payload.addProductNotificationError
         });
         return newState;
     }

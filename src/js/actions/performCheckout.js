@@ -1,11 +1,13 @@
 import buildCustomAxios from "../constants/token_axios";
 import dispatchUnauth from "./handleUnauth";
-import { PERFORM_CHECKOUT_NOTIFICATION } from "../constants/action_types";
-import { PERFORM_CHECKOUT_NOTIFICATION_ERROR } from "../constants/action_types";
+import { 
+    PERFORM_CHECKOUT_NOTIFICATION, 
+    PERFORM_CHECKOUT_NOTIFICATION_ERROR 
+} from "../constants/action_types";
 import { URL_CUSTOMER_CHECKOUT } from "../constants/rest_api";
 
 
-const setPerformCheckoutNotification = notify => (
+const dispatchPerformCheckoutNotification = notify => (
     { 
         type: PERFORM_CHECKOUT_NOTIFICATION, 
         payload: {
@@ -14,7 +16,7 @@ const setPerformCheckoutNotification = notify => (
     }
 );
 
-const setPerformCheckoutNotificationError = notify => (
+const dispatchPerformCheckoutNotificationError = notify => (
     { 
         type: PERFORM_CHECKOUT_NOTIFICATION_ERROR, 
         payload: {
@@ -32,7 +34,7 @@ export function performCheckout(token) {
         
         return axiosInstance.post(url)
             .then(result => {
-                dispatch(setPerformCheckoutNotification(true))
+                dispatch(dispatchPerformCheckoutNotification(true))
             })
             .catch(error => {
                 console.log(error);
@@ -40,15 +42,15 @@ export function performCheckout(token) {
                     dispatch(dispatchUnauth());
                 }
 
-                dispatch(setPerformCheckoutNotificationError(false))
+                dispatch(dispatchPerformCheckoutNotificationError(false))
             });
     }
 }
 
 export function disablePerformCheckoutNotification() {
-    return setPerformCheckoutNotification(false);
+    return dispatchPerformCheckoutNotification(false);
 }
 
 export function disablePerformCheckoutNotificationError() {
-    return setPerformCheckoutNotificationError(false);
+    return dispatchPerformCheckoutNotificationError(false);
 }

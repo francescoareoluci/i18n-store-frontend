@@ -151,8 +151,10 @@ class CustomerProductInfo extends React.Component {
                     </div>
                 }
                 {this.state.showError &&
-                    <div className="product-wrapper_alertbox">
-                        Error: {this.state.errorLabel}
+                    <div className="product-wrapper_alertbox-error">
+                        <Translation>
+                            { t => <>{t('error_alertbox')}</> }
+                        </Translation>: {this.state.errorLabel}
                     </div>
                 }
             </div>
