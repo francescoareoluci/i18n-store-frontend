@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
+import ProductMgmtCard from "./product_mgmt_card";
+
 import { getCurrencies } from "../../js/actions/getCurrencies"
 import { getLocales } from "../../js/actions/getLocales";
 import { 
@@ -371,6 +373,16 @@ class AdminAddProduct extends React.Component {
             showAddLocalization = true;
         }
 
+        let areLocalesEmtpy = true;
+        if (Object.keys(this.props.localeList).length != 0) {
+            areLocalesEmtpy = false;
+        }
+
+        let areCurrenciesEmpty = true;
+        if (Object.keys(this.props.currencyList).length != 0) {
+            areCurrenciesEmpty = false;
+        }
+
         return (
             <div className="add-product-container">
                 <div className="add-product-container__text">
@@ -378,85 +390,35 @@ class AdminAddProduct extends React.Component {
                         { t => <>{t('admin_add_product_header')}</> }
                     </Translation>
                 </div>
-                <div className="add-product-wrapper">
-                    <div className="add-product-manufacturer">
-                        <Translation>
-                            { t => <>{t('admin_add_product_manufacturer')}</> }
-                        </Translation> :
-                        <input className="add-product-manufacturer-input"
-                               onChange={e => this.handleManufacturerChoice(e, e.target.value)}>
-                        </input>
+                {areLocalesEmtpy || areCurrenciesEmpty &&
+                    <div>
+                        Product informations not loaded
                     </div>
-                    {this.state.locs.map((n, i) => (
-                    <div className="add-product-loc-wrapper"
-                         key={i}>
-                        <div className="add-product-loc-locale">
-                            <select className="add-product-loc-locale-select"
-                                    onChange={e => this.handleLocalizationChoice(e, i, e.target.value)}>
-                                <option value="0">Select locale:</option>
-                                {this.props.localeList.locales.map((l, id) => (
-                                    <option key={id} value={l.languageCode + "-" + l.countryCode}>
-                                        {l.languageCode + "-" + l.countryCode}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="add-product-loc-name">
-                            <Translation>
-                                { t => <>{t('admin_add_product_name')}</> }
-                            </Translation>
-                            <input className="add-product-loc-name-input"
-                                   onChange={e => this.handleNameChoice(e, i, e.target.value)}>
-                            </input>
-                        </div>
-                        <div className="add-product-loc-name">
-                            <Translation>
-                                { t => <>{t('admin_add_product_category')}</> }
-                            </Translation>
-                            <input className="add-product-loc-name-input"
-                                   onChange={e => this.handleCategoryChoice(e, i, e.target.value)}>
-                            </input>
-                        </div>
-                        <div className="add-product-loc-description">
-                            <Translation>
-                                { t => <>{t('admin_add_product_description')}</> }
-                            </Translation>
-                            <div>
-                                <textarea className="add-product-loc-description-input"
-                                          onChange={e => this.handleDescriptionChoice(e, i, e.target.value)}>
-                                </textarea>
-                            </div>
-                        </div>
-                        <div className="add-product-loc-price">
-                            <Translation>
-                                { t => <>{t('admin_add_product_price')}</> }
-                            </Translation>
-                            <input className="add-product-loc-price-input"
-                                   type="number"
-                                   onChange={e => this.handlePriceChoice(e, i, e.target.value)}>
-                            </input>
-                            <Translation>
-                                { t => <>{t('admin_add_product_currency')}</> }
-                            </Translation>
-                            <select className="add-product-loc-currency-select"
-                                    onChange={e => this.handleCurrencyChoice(e, i, e.target.value)}>
-                                <option value="0">Select currency:</option>
-                                {this.props.currencyList.currencies.map((c, id) => (
-                                    <option key={id} value={c.currency}>{c.currency}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-                    ))}
-                    {showAddLocalization &&
-                        <div className="add-product-loc-button"
-                             onClick={(e) => {this.handleAddProdLocalization(e)}}>
-                            <Translation>
-                                { t => <>{t('admin_add_product_add_locale')}</> }
-                            </Translation>
-                        </div>
-                    }
-                </div>
+                }
+                {!areLocalesEmtpy && !areCurrenciesEmpty &&
+                <ProductMgmtCard
+                    showSelectLabel={true}
+                    showAddLocalization={showAddLocalization}
+                    handleManufacturerChoice={this.handleManufacturerChoice}
+                    manufacturer={this.state.manufacturer}
+                    locs={this.state.locs}
+                    handleLocalizationChoice={this.handleLocalizationChoice}
+                    selectedLocales={this.state.selectedLocales}
+                    localeList={this.props.localeList}
+                    handleNameChoice={this.handleNameChoice}
+                    selectedNames={this.state.selectedNames}
+                    handleCategoryChoice={this.handleCategoryChoice}
+                    selectedCategories={this.state.selectedCategories}
+                    handleDescriptionChoice={this.handleDescriptionChoice}
+                    selectedDescriptions={this.state.selectedDescriptions}
+                    handlePriceChoice={this.handlePriceChoice}
+                    selectedPrices={this.state.selectedPrices}
+                    handleCurrencyChoice={this.handleCurrencyChoice}
+                    selectedCurrencies={this.state.selectedCurrencies}
+                    currencyList={this.props.currencyList}
+                    handleAddProdLocalization={this.handleAddProdLocalization}
+                />
+                }
                 <div className="add-product-confirm-button"
                      onClick={(e) => {this.handleSubmit(e)}}>
                     <Translation>
@@ -480,6 +442,19 @@ class AdminAddProduct extends React.Component {
             </div>
         );
     }
+}
+
+AdminAddProduct.propTypes = {
+    getLocales: PropTypes.func,
+    getCurrencies: PropTypes.func,
+    addProduct: PropTypes.func,
+    disableAddProductNotification: PropTypes.func,
+    disableAddProductNotificationError: PropTypes.func,
+    localeList: PropTypes.object,
+    currencyList: PropTypes.object,
+    addProductNotification: PropTypes.bool,
+    addProductNotificationError: PropTypes.bool,
+    token: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminAddProduct)

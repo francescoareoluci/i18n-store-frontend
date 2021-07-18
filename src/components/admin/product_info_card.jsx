@@ -6,8 +6,6 @@ import {
 } from "react-router-dom";
 import { Translation } from 'react-i18next';
 
-import product_card from "../common/product_card";
-
 
 class ProductInfoCard extends React.Component {
     constructor(props) {

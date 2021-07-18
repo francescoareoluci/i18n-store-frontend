@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
+import ProductMgmtCard from "./product_mgmt_card";
+
 import { getCurrencies } from "../../js/actions/getCurrencies"
 import { getLocales } from "../../js/actions/getLocales";
 import { 
@@ -420,8 +422,8 @@ class AdminEditProduct extends React.Component {
         }
 
         return (
-            <div className="add-product-container">
-                <div className="add-product-container__text">
+            <div className="edit-product-container">
+                <div className="edit-product-container__text">
                     <Translation>
                         { t => <>{t('admin_edit_product_header')}</> }
                     </Translation>: {this.state.errorLabel}
@@ -432,98 +434,44 @@ class AdminEditProduct extends React.Component {
                     </div>
                 }
                 {!areLocalesEmtpy && !areCurrenciesEmpty && !areLocsEmpty &&
-                <div className="add-product-wrapper">
-                    <div className="add-product-manufacturer">
-                        <Translation>
-                            { t => <>{t('admin_add_product_manufacturer')}</> }
-                        </Translation> :
-                        <input className="add-product-manufacturer-input"
-                               onChange={e => this.handleManufacturerChoice(e, e.target.value)}
-                               value={this.state.manufacturer}>
-                        </input>
-                    </div>
-                    {this.state.locs.map((n, i) => (
-                    <div className="add-product-loc-wrapper"
-                         key={i}>
-                        <div className="add-product-loc-locale">
-                            <select className="add-product-loc-locale-select"
-                                    onChange={e => this.handleLocalizationChoice(e, i, e.target.value)}
-                                    value={this.state.selectedLocales[i]}>
-                                {this.props.localeList.locales.map((l, id) => (
-                                    <option key={id} value={l.languageCode + "-" + l.countryCode}>
-                                        {l.languageCode + "-" + l.countryCode}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="add-product-loc-name">
-                            <Translation>
-                                { t => <>{t('admin_add_product_name')}</> }
-                            </Translation>
-                            <input className="add-product-loc-name-input"
-                                   onChange={e => this.handleNameChoice(e, i, e.target.value)}
-                                   value={this.state.selectedNames[i]}>
-                            </input>
-                        </div>
-                        <div className="add-product-loc-name">
-                            <Translation>
-                                { t => <>{t('admin_add_product_category')}</> }
-                            </Translation>
-                            <input className="add-product-loc-name-input"
-                                   onChange={e => this.handleCategoryChoice(e, i, e.target.value)}
-                                   value={this.state.selectedCategories[i]}>
-                            </input>
-                        </div>
-                        <div className="add-product-loc-description">
-                            <Translation>
-                                { t => <>{t('admin_add_product_description')}</> }
-                            </Translation>
-                            <div>
-                                <textarea className="add-product-loc-description-input"
-                                          onChange={e => this.handleDescriptionChoice(e, i, e.target.value)}
-                                          value={this.state.selectedDescriptions[i]}>
-                                </textarea>
-                            </div>
-                        </div>
-                        <div className="add-product-loc-price">
-                            <Translation>
-                                { t => <>{t('admin_add_product_price')}</> }
-                            </Translation>
-                            <input className="add-product-loc-price-input"
-                                   type="number"
-                                   onChange={e => this.handlePriceChoice(e, i, e.target.value)}
-                                   value={this.state.selectedPrices[i]}>
-                            </input>
-                            <Translation>
-                                { t => <>{t('admin_add_product_currency')}</> }
-                            </Translation>
-                            <select className="add-product-loc-currency-select"
-                                    onChange={e => this.handleCurrencyChoice(e, i, e.target.value)}
-                                    value={this.state.selectedCurrencies[i]}>
-                                {this.props.currencyList.currencies.map((c, id) => (
-                                    <option key={id} value={c.currency}>{c.currency}</option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-                    ))}
-                </div>
+                    <ProductMgmtCard
+                        showSelectLabel={false}
+                        showAddLocalization={false}
+                        handleManufacturerChoice={this.handleManufacturerChoice}
+                        manufacturer={this.state.manufacturer}
+                        locs={this.state.locs}
+                        handleLocalizationChoice={this.handleLocalizationChoice}
+                        selectedLocales={this.state.selectedLocales}
+                        localeList={this.props.localeList}
+                        handleNameChoice={this.handleNameChoice}
+                        selectedNames={this.state.selectedNames}
+                        handleCategoryChoice={this.handleCategoryChoice}
+                        selectedCategories={this.state.selectedCategories}
+                        handleDescriptionChoice={this.handleDescriptionChoice}
+                        selectedDescriptions={this.state.selectedDescriptions}
+                        handlePriceChoice={this.handlePriceChoice}
+                        selectedPrices={this.state.selectedPrices}
+                        handleCurrencyChoice={this.handleCurrencyChoice}
+                        selectedCurrencies={this.state.selectedCurrencies}
+                        currencyList={this.props.currencyList}
+                        handleAddProdLocalization={this.handleAddProdLocalization}
+                    />
                 }
-                <div className="add-product-confirm-button"
+                <div className="edit-product-confirm-button"
                      onClick={(e) => {this.handleSubmit(e)}}>
                     <Translation>
                         { t => <>{t('admin_edit_product_button')}</> }
-                    </Translation>: {this.state.errorLabel}
+                    </Translation>
                 </div>
                 {this.state.showConfirm &&
-                    <div className="add-product-confirm_alertbox">
+                    <div className="edit-product-confirm_alertbox">
                         <Translation>
                             { t => <>{t('admin_edit_product_confirm')}</> }
-                        </Translation>: {this.state.errorLabel}
+                        </Translation>
                     </div>
                 }
                 {this.state.showError &&
-                    <div className="add-product-confirm_alertbox-error">
+                    <div className="edit-product-confirm_alertbox-error">
                         <Translation>
                             { t => <>{t('error_alertbox')}</> }
                         </Translation>: {this.state.errorLabel}
@@ -532,6 +480,20 @@ class AdminEditProduct extends React.Component {
             </div>
         );
     }
+}
+
+AdminEditProduct.propTypes = {
+    getLocales: PropTypes.func,
+    getCurrencies: PropTypes.func,
+    editProduct: PropTypes.func,
+    disableEditProductNotification: PropTypes.func,
+    disableEditProductNotificationError: PropTypes.func,
+    adminSelectedProduct: PropTypes.object,
+    localeList: PropTypes.object,
+    currencyList: PropTypes.object,
+    editProductNotification: PropTypes.bool,
+    editroductNotificationError: PropTypes.bool,
+    token: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminEditProduct)

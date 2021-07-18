@@ -923,176 +923,6 @@ a {
     font-size: 24px;
 }
 
-.add-product-wrapper {
-    min-width: 500px;
-    max-width: 700px;
-    margin-top: 24px;
-    margin-bottom: 24px;
-    margin-right: 12px;
-    padding: 16px;
-    font-size: 20px;
-    color: #2B2B2B;
-    border-radius: 8px;
-    border-width: 1px;
-    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, .25);
-}
-
-.add-product-manufacturer {
-    font-size: 16px;
-    margin-top: 16px;
-    color: #2B2B2B;
-}
-
-.add-product-manufacturer-input {
-    margin-left: 8px;
-    border-color: #565656;
-    border-radius: 8px;
-    border-style: solid;
-    border-width: 1px;
-    width: 300px;
-    font-family: "montserrat-regular";
-    font-size: 14px;
-    color: #2B2B2B;
-}
-
-.add-product-manufacturer-input:focus {
-    outline: 0;
-}
-
-.add-product-loc-button {
-    margin-top: 24px;
-    margin-bottom: 24px;
-    display: inline-block;
-    border-color: #565656;
-    border-radius: 8px;
-    background-color: #83B0DE;
-    border-style: solid;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    color: #EBEBEB;
-    font-size: 14px;
-    min-width: 164px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.add-product-loc-wrapper {
-    position: relative;
-    min-width: 500px;
-    max-width: 700px;
-    margin-top: 24px;
-    margin-bottom: 24px;
-    margin-right: 12px;
-    padding: 16px;
-    font-size: 16px;
-    color: #2B2B2B;
-    border-radius: 8px;
-    border-width: 1px;
-    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, .25);
-}
-
-.add-product-loc-locale {
-    margin-top: 8px;
-}
-
-.add-product-loc-locale-select {
-    font-family: "montserrat-regular";
-    font-size: 14px;
-    color: #2B2B2B;
-    border-color: #565656;
-    border-radius: 8px;
-    border-style: solid;
-    border-width: 1px;
-}
-
-.add-product-loc-locale-select:focus {
-    outline: 0;
-}
-
-.add-product-loc-name {
-    margin-top: 24px;
-    margin-right: 8px;
-}
-
-.add-product-loc-name-input {
-    margin-left: 8px;
-    border-color: #565656;
-    border-radius: 8px;
-    border-style: solid;
-    border-width: 1px;
-    font-family: "montserrat-regular";
-    font-size: 14px;
-    color: #2B2B2B;
-    width: 300px;
-}
-
-.add-product-loc-name-input:focus {
-    outline: 0;
-}
-
-.add-product-loc-description {
-    margin-top: 24px;
-    margin-right: 8px;
-}
-
-.add-product-loc-description-input {
-    width: -webkit-fill-available;
-    height: 140px;
-    border-color: #565656;
-    border-radius: 8px;
-    border-style: solid;
-    border-width: 1px;
-    margin-top: 8px;
-    margin-left: 4px;
-    font-family: "montserrat-regular";
-    font-size: 14px;
-    color: #2B2B2B;
-}
-
-.add-product-loc-description-input:focus {
-    outline: 0;
-}
-
-.add-product-loc-price {
-    margin-top: 24px;
-    margin-bottom: 8px;
-    margin-right: 8px;
-}
-
-.add-product-loc-price-input {
-    margin-left: 8px;
-    margin-right: 16px;
-    border-color: #565656;
-    border-radius: 8px;
-    border-style: solid;
-    border-width: 1px;
-    font-family: "montserrat-regular";
-    font-size: 14px;
-    color: #2B2B2B;
-    width: 80px;
-}
-
-.add-product-loc-price-input:focus {
-    outline: 0;
-}
-
-.add-product-loc-currency-select {
-    font-family: "montserrat-regular";
-    font-size: 14px;
-    color: #2B2B2B;
-    border-color: #565656;
-    border-radius: 8px;
-    border-style: solid;
-    border-width: 1px;
-    margin-left: 8px;
-}
-
-.add-product-loc-currency-select:focus {
-    outline: 0;
-}
-
 .add-product-confirm-button {
     margin-top: 8px;
     display: inline-block;
@@ -1113,7 +943,7 @@ a {
 
 .add-product-confirm_alertbox {
     position: absolute;
-    top: 96%;
+    top: 98%;
     left: 35%;
     border-radius: 8px;
     background-color: #83b0de38;
@@ -1128,7 +958,7 @@ a {
 
 .add-product-confirm_alertbox-error {
     position: absolute;
-    top: 96%;
+    top: 98%;
     left: 35%;
     border-radius: 8px;
     background-color: #de656538;
@@ -1139,4 +969,240 @@ a {
     font-family: "montserrat-regular";
     border-width: 1px;
     border-color: #ec2121;
+}
+
+/* ======== Edit product page ======== */
+
+.edit-product-container {
+    margin-left: 220px;
+    font-family: "montserrat-regular";
+    color: #2B2B2B;
+    position: relative;
+}
+
+.edit-product-container__text {
+    margin-top: 50px;
+    margin-bottom: 40px;
+    display: inline-block;
+    font-size: 24px;
+}
+
+.edit-product-confirm-button {
+    margin-top: 8px;
+    display: inline-block;
+    border-color: #565656;
+    border-radius: 8px;
+    background-color: #83B0DE;
+    border-style: solid;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    color: #EBEBEB;
+    font-size: 14px;
+    min-width: 164px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.edit-product-confirm_alertbox {
+    position: absolute;
+    top: 97%;
+    left: 35%;
+    border-radius: 8px;
+    background-color: #83b0de38;
+    border-style: solid;
+    color: #5989bb;
+    font-size: 18px;
+    padding: 8px;
+    font-family: "montserrat-regular";
+    border-width: 1px;
+    border-color: #5989bb;
+}
+
+.edit-product-confirm_alertbox-error {
+    position: absolute;
+    top: 97%;
+    left: 35%;
+    border-radius: 8px;
+    background-color: #de656538;
+    border-style: solid;
+    color: #444444;
+    font-size: 18px;
+    padding: 8px;
+    font-family: "montserrat-regular";
+    border-width: 1px;
+    border-color: #ec2121;
+}
+
+/* ======= Product management card ======= */
+
+.product-mgmt-wrapper {
+    min-width: 500px;
+    max-width: 700px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    margin-right: 12px;
+    padding: 16px;
+    font-size: 20px;
+    color: #2B2B2B;
+    border-radius: 8px;
+    border-width: 1px;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, .25);
+}
+
+.product-mgmt-manufacturer {
+    font-size: 16px;
+    margin-top: 16px;
+    color: #2B2B2B;
+}
+
+.product-mgmt-manufacturer-input {
+    margin-left: 8px;
+    border-color: #565656;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    width: 300px;
+    font-family: "montserrat-regular";
+    font-size: 14px;
+    color: #2B2B2B;
+}
+
+.product-mgmt-manufacturer-input:focus {
+    outline: 0;
+}
+
+.product-mgmt-loc-button {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    display: inline-block;
+    border-color: #565656;
+    border-radius: 8px;
+    background-color: #83B0DE;
+    border-style: solid;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #EBEBEB;
+    font-size: 14px;
+    min-width: 164px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.product-mgmt-loc-wrapper {
+    position: relative;
+    min-width: 500px;
+    max-width: 700px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    margin-right: 12px;
+    padding: 16px;
+    font-size: 16px;
+    color: #2B2B2B;
+    border-radius: 8px;
+    border-width: 1px;
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, .25);
+}
+
+.product-mgmt-loc-locale {
+    margin-top: 8px;
+}
+
+.product-mgmt-loc-locale-select {
+    font-family: "montserrat-regular";
+    font-size: 14px;
+    color: #2B2B2B;
+    border-color: #565656;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.product-mgmt-loc-locale-select:focus {
+    outline: 0;
+}
+
+.product-mgmt-loc-name {
+    margin-top: 24px;
+    margin-right: 8px;
+}
+
+.product-mgmt-loc-name-input {
+    margin-left: 8px;
+    border-color: #565656;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "montserrat-regular";
+    font-size: 14px;
+    color: #2B2B2B;
+    width: 300px;
+}
+
+.product-mgmt-loc-name-input:focus {
+    outline: 0;
+}
+
+.product-mgmt-loc-description {
+    margin-top: 24px;
+    margin-right: 8px;
+}
+
+.product-mgmt-loc-description-input {
+    width: -webkit-fill-available;
+    height: 140px;
+    border-color: #565656;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    margin-top: 8px;
+    margin-left: 4px;
+    font-family: "montserrat-regular";
+    font-size: 14px;
+    color: #2B2B2B;
+}
+
+.product-mgmt-loc-description-input:focus {
+    outline: 0;
+}
+
+.product-mgmt-loc-price {
+    margin-top: 24px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+}
+
+.product-mgmt-loc-price-input {
+    margin-left: 8px;
+    margin-right: 16px;
+    border-color: #565656;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "montserrat-regular";
+    font-size: 14px;
+    color: #2B2B2B;
+    width: 80px;
+}
+
+.product-mgmt-loc-price-input:focus {
+    outline: 0;
+}
+
+.product-mgmt-loc-currency-select {
+    font-family: "montserrat-regular";
+    font-size: 14px;
+    color: #2B2B2B;
+    border-color: #565656;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 8px;
+}
+
+.product-mgmt-loc-currency-select:focus {
+    outline: 0;
 }
