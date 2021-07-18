@@ -92,7 +92,12 @@ class ProductCard extends React.Component {
 
 ProductCard.propTypes = {
     changeCustomerSelectedProduct: PropTypes.func,
-    changeAdminSelectedProduct: PropTypes.func
+    changeAdminSelectedProduct: PropTypes.func,
+    removeProductFromCart: PropTypes.func,
+    token: PropTypes.string,
+    name: PropTypes.string,
+    manufacturer: PropTypes.string,
+    price: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)

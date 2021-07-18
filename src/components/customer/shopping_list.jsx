@@ -70,4 +70,10 @@ class ShoppingList extends React.Component {
     }
 }
 
+ShoppingList.propTypes = {
+    getShoppingList: PropTypes.func,
+    shoppingList: PropTypes.object,
+    token: PropTypes.string
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList)

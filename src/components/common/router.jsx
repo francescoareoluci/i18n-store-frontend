@@ -139,8 +139,11 @@ class App extends React.Component {
 }
 
 Router.propTypes = {
+  logout: PropTypes.func,
   token: PropTypes.string,
-  role: PropTypes.string
+  role: PropTypes.string,
+  language: PropTypes.string,
+  unauth: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

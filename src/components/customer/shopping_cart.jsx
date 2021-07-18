@@ -192,4 +192,19 @@ class ShoppingCart extends React.Component {
     }
 }
 
+ShoppingCart.propTypes = {
+    getCart: PropTypes.func,
+    performCheckout: PropTypes.func,
+    disablePerformCheckoutNotification: PropTypes.func,
+    disablePerformCheckoutNotificationError: PropTypes.func,
+    disableRemoveProdFromCartNotification: PropTypes.func,
+    disableRemoveProdFromCartNotificationError: PropTypes.func,
+    shoppingCart: PropTypes.object,
+    checkoutNotification: PropTypes.bool,
+    checkoutNotificationError: PropTypes.bool,
+    removeProductFromCartNotification: PropTypes.bool,
+    removeProductFromCartNotificationError: PropTypes.bool,
+    token: PropTypes.string
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart)

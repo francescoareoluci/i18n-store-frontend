@@ -404,6 +404,21 @@ class AdminEditProduct extends React.Component {
     }
 
     render() {
+        let areLocalesEmtpy = true;
+        if (Object.keys(this.props.localeList).length != 0) {
+            areLocalesEmtpy = false;
+        }
+
+        let areCurrenciesEmpty = true;
+        if (Object.keys(this.props.currencyList).length != 0) {
+            areCurrenciesEmpty = false;
+        }
+
+        let areLocsEmpty = true;
+        if (Object.keys(this.state.locs).length != 0) {
+            areLocsEmpty = false;
+        }
+
         return (
             <div className="add-product-container">
                 <div className="add-product-container__text">
@@ -411,6 +426,12 @@ class AdminEditProduct extends React.Component {
                         { t => <>{t('admin_edit_product_header')}</> }
                     </Translation>: {this.state.errorLabel}
                 </div>
+                {areLocalesEmtpy || areCurrenciesEmpty || areLocsEmpty &&
+                    <div>
+                        Product informations not loaded
+                    </div>
+                }
+                {!areLocalesEmtpy && !areCurrenciesEmpty && !areLocsEmpty &&
                 <div className="add-product-wrapper">
                     <div className="add-product-manufacturer">
                         <Translation>
@@ -487,6 +508,7 @@ class AdminEditProduct extends React.Component {
                     </div>
                     ))}
                 </div>
+                }
                 <div className="add-product-confirm-button"
                      onClick={(e) => {this.handleSubmit(e)}}>
                     <Translation>

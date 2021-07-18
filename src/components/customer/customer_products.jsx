@@ -143,7 +143,9 @@ class CustomerProducts extends React.Component {
 
 CustomerProducts.propTypes = {
     getProductList: PropTypes.func,
-    productList: PropTypes.array
+    performSearch: PropTypes.func,
+    productList: PropTypes.array,
+    token: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerProducts)

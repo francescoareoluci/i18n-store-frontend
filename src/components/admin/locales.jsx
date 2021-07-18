@@ -79,4 +79,10 @@ class Locales extends React.Component {
     }
 }
 
+Locales.propTypes = {
+    getLocales: PropTypes.func,
+    localeList: PropTypes.object,
+    token: PropTypes.string
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Locales)

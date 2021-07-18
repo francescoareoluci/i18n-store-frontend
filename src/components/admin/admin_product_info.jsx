@@ -147,7 +147,13 @@ class AdminProductInfo extends React.Component {
 }
 
 AdminProductInfo.propTypes = {
-    adminSelectedProduct: PropTypes.object
+    removeProduct: PropTypes.func,
+    disableRemoveProductNotification: PropTypes.func,
+    disableRemoveProductNotificationError: PropTypes.func,
+    adminSelectedProduct: PropTypes.object,
+    removeProductNotification: PropTypes.bool,
+    removeProductNotificationError: PropTypes.bool,
+    token: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminProductInfo)

@@ -58,4 +58,11 @@ class ProductInfoCard extends React.Component {
     }
 }
 
+ProductInfoCard.propTypes = {
+    locale: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    price: PropTypes.string,
+}
+
 export default ProductInfoCard;

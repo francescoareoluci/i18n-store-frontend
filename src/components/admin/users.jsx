@@ -91,4 +91,10 @@ class Users extends React.Component {
     }
 }
 
+Users.propTypes = {
+    getUsers: PropTypes.func,
+    userList: PropTypes.object,
+    token: PropTypes.string
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Users)

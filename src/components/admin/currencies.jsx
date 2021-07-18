@@ -74,4 +74,10 @@ class Currencies extends React.Component {
     }
 }
 
+Currencies.propTypes = {
+    getCurrencies: PropTypes.func,
+    currencyList: PropTypes.object,
+    token: PropTypes.string
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Currencies)

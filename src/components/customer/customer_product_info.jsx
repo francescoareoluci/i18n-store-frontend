@@ -174,7 +174,13 @@ class CustomerProductInfo extends React.Component {
 }
 
 CustomerProductInfo.propTypes = {
-    customerSelectedProduct: PropTypes.object
+    addProductToCart: PropTypes.func,
+    disableAddProductToCartNotification: PropTypes.func,
+    disableAddProductToCartNotificationError: PropTypes.func,
+    customerSelectedProduct: PropTypes.object,
+    addCartProductNotification: PropTypes.bool,
+    addCartProductNotificationError: PropTypes.bool,
+    token: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomerProductInfo)

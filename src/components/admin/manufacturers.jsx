@@ -73,4 +73,10 @@ class Manufacturers extends React.Component {
     }
 }
 
+Manufacturers.propTypes = {
+    getManufacturers: PropTypes.func,
+    manufacturerList: PropTypes.object,
+    token: PropTypes.string
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Manufacturers)
