@@ -161,7 +161,6 @@ export function changeAdminSelectedProduct(prodId, token) {
                     manufacturer: p.manufacturer,
                     translations: translations
                 }
-                console.log(product);
                 dispatch(dispatchProductInfo(product))
             })
             .catch(error => {

@@ -105,9 +105,6 @@ class AdminEditProduct extends React.Component {
                 locs.push(1);
             });
 
-            console.log(nameIds);
-            console.log(categoryIds);
-
             this.setState({
                 productId: this.props.adminSelectedProduct.id,
                 manufacturer: this.props.adminSelectedProduct.manufacturer,
@@ -201,8 +198,6 @@ class AdminEditProduct extends React.Component {
         this.setState({
             selectedNames: resArray
         });
-
-        console.log(this.state.selectedNames);
     }
 
     handleCategoryChoice(e, idx, value) {
@@ -219,8 +214,6 @@ class AdminEditProduct extends React.Component {
         this.setState({
             selectedCategories: resArray
         }); 
-
-        console.log(this.state.selectedCategories);
     }
 
     handleDescriptionChoice(e, idx, value) {
@@ -237,8 +230,6 @@ class AdminEditProduct extends React.Component {
         this.setState({
             selectedDescriptions: resArray
         });
-
-        console.log(this.state.selectedDescriptions);
     }
 
     handlePriceChoice(e, idx, value) {
