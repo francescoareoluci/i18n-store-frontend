@@ -98,6 +98,10 @@ a {
     cursor: pointer;
 }
 
+.login-button:hover {
+    background-color: #418bd6;
+}
+
 .login-invalid-credentials {
     font-size: 14px;
     color: red;
@@ -124,7 +128,6 @@ a {
     padding-left: 40px;
     padding-top: 12px;
     padding-bottom: 12px;
-    cursor: pointer;
     flex: 1 1 auto;
 }
 
@@ -167,6 +170,10 @@ a {
     padding-top: 6px;
     padding-bottom: 6px;
     cursor: pointer;
+}
+
+.left-menu__button:hover {
+    background-color: #418bd6;
 }
 
 .left-menu__button__text {
@@ -224,6 +231,10 @@ a {
     text-align: center;
     min-width: 212px;
     cursor: pointer;
+}
+
+.products-header__button:hover {
+    background-color: #418bd6;
 }
 
 .products-header__button__text {
@@ -328,6 +339,10 @@ a {
     font-weight: 900;
 }
 
+.product-card-remove-button:hover {
+    background-color: #418bd6;
+}
+
 
 /* ========== Product Info ====== */
 
@@ -404,6 +419,10 @@ a {
     align-self: self-start;
 }
 
+.product-wrapper__name__addproduct:hover {
+    background-color: #418bd6;
+}
+
 .product-wrapper__name__removeproduct {
     border-color: #565656;
     border-radius: 8px;
@@ -421,6 +440,10 @@ a {
     min-width: 140px;
     cursor: pointer;
     text-align: center;
+}
+
+.product-wrapper__name__removeproduct:hover {
+    background-color: #418bd6;
 }
  
 .product-wrapper__manufacturer {
@@ -646,6 +669,10 @@ a {
     min-width: 164px;
     cursor: pointer;
     text-align: center;
+}
+
+.shopping-cart-checkout-button:hover {
+    background-color: #418bd6;
 }
 
 .shopping-cart-checkout-button_disabled {
@@ -941,6 +968,10 @@ a {
     text-align: center;
 }
 
+.add-product-confirm-button:hover {
+    background-color: #418bd6;
+}
+
 .add-product-confirm_alertbox {
     position: absolute;
     top: 98%;
@@ -1003,6 +1034,10 @@ a {
     min-width: 164px;
     cursor: pointer;
     text-align: center;
+}
+
+.edit-product-confirm-button:hover {
+    background-color: #418bd6;
 }
 
 .edit-product-confirm_alertbox {
@@ -1090,6 +1125,10 @@ a {
     min-width: 164px;
     cursor: pointer;
     text-align: center;
+}
+
+.product-mgmt-loc-button:hover {
+    background-color: #418bd6;
 }
 
 .product-mgmt-loc-wrapper {
