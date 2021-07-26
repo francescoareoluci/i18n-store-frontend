@@ -1,7 +1,10 @@
 import buildCustomAxios from "../constants/token_axios";
 import dispatchUnauth from "./handleUnauth";
 import { GET_CART } from "../constants/action_types";
-import { URL_CUSTOMER_CART } from "../constants/rest_api";
+import { 
+    CUSTOMER_BASE_URL,
+    URL_CUSTOMER_CART 
+} from "../constants/rest_api";
 
 /**
  * shoppingCart = {
@@ -27,13 +30,13 @@ const dispatchShoppingCart = payload => (
     { type: GET_CART, payload }
 );
 
-export function getCart(token) {
+export function getCart(userId, token) {
 
     return function (dispatch) {
         let payload = {};
         let cartProducts = [];
         let totalCost = "";
-        const url = URL_CUSTOMER_CART;
+        const url = CUSTOMER_BASE_URL + "/" + userId  + URL_CUSTOMER_CART;
         const axiosInstance = buildCustomAxios(token);          
         
         return axiosInstance.get(url)

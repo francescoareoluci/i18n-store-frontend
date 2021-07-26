@@ -4,7 +4,10 @@ import {
     REMOVE_PRODUCT_FROM_CART_NOTIFICATION,
     REMOVE_PRODUCT_FROM_CART_NOTIFICATION_ERROR 
 } from "../constants/action_types";
-import { URL_CUSTOMER_REMOVE_PROD_FROM_CART } from "../constants/rest_api";
+import { 
+    CUSTOMER_BASE_URL,
+    URL_CUSTOMER_REMOVE_PROD_FROM_CART 
+} from "../constants/rest_api";
 
 
 const dispatchRemoveProdFromCartNotification = notify => (
@@ -25,13 +28,14 @@ const dispatchRemoveProdFromCartNotificationError = notify => (
     }
 );
 
-export function removeProductFromCart(prodId, token) {
+export function removeProductFromCart(prodId, userId, token) {
     return function (dispatch) {
         let payload = {};
-        const url = URL_CUSTOMER_REMOVE_PROD_FROM_CART + "/" + prodId;
+        const url = CUSTOMER_BASE_URL + "/" + userId +
+                    URL_CUSTOMER_REMOVE_PROD_FROM_CART + "/" + prodId;
         const axiosInstance = buildCustomAxios(token);          
         
-        return axiosInstance.post(url)
+        return axiosInstance.delete(url)
             .then(result => {
                 dispatch(dispatchRemoveProdFromCartNotification(true));
             })

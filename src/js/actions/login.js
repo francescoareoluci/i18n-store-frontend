@@ -9,22 +9,13 @@ const dispatchAuthentication = payload => (
 );
 
 export function login(username, password) {
-    /*
-    let userRole = "CUSTOMER";
-    if (username == "admin") {
-        userRole = "ADMIN"
-    }
-    const token = "123";
-    const payload = { token: "123", role: userRole};
-
-    return { type: LOGIN, payload };
-    */
 
     return function (dispatch) {
         let payload = {};
         let token = "";
         let role = "";
         let language = "";
+        let userId = -1;
         let decToken = "";
         const url = URL_LOGIN;
         const axiosInstance = buildLoginAxios(username, password);
@@ -35,11 +26,13 @@ export function login(username, password) {
                 decToken = jwt_decode(result.data);
                 role = decToken.userRole;
                 language = decToken.lang;
+                userId = decToken.userId;
 
                 payload = {
                     token: token,
                     role: role,
-                    language: language
+                    language: language,
+                    userId: userId
                 }
                 dispatch(dispatchAuthentication(payload))
             })

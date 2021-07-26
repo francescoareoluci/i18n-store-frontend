@@ -15,12 +15,13 @@ function mapDispatchToProps(dispatch) {
     return {
         changeCustomerSelectedProduct: (prodId, token) => dispatch(changeCustomerSelectedProduct(prodId, token)),
         changeAdminSelectedProduct: (prodId, token) => dispatch(changeAdminSelectedProduct(prodId, token)),
-        removeProductFromCart: (prodId, token) => dispatch(removeProductFromCart(prodId, token))
+        removeProductFromCart: (prodId, userId, token) => dispatch(removeProductFromCart(prodId, userId, token))
     };
 }
 
 const mapStateToProps = (state) => {
     return {
+        userId: state.auth.userId,
         token: state.auth.token
     };
 };
@@ -46,7 +47,7 @@ class ProductCard extends React.Component {
     handleRemove(e, id) {
         e.preventDefault();
         if (this.props.owner == "customer") {
-            this.props.removeProductFromCart(id, this.props.token);
+            this.props.removeProductFromCart(id, this.props.userId, this.props.token);
         }
     }
 

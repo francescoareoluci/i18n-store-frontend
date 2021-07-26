@@ -4,7 +4,10 @@ import {
     PERFORM_CHECKOUT_NOTIFICATION, 
     PERFORM_CHECKOUT_NOTIFICATION_ERROR 
 } from "../constants/action_types";
-import { URL_CUSTOMER_CHECKOUT } from "../constants/rest_api";
+import { 
+    CUSTOMER_BASE_URL,
+    URL_CUSTOMER_CHECKOUT 
+} from "../constants/rest_api";
 
 
 const dispatchPerformCheckoutNotification = notify => (
@@ -25,11 +28,11 @@ const dispatchPerformCheckoutNotificationError = notify => (
     }
 );
 
-export function performCheckout(token) {
+export function performCheckout(userId, token) {
     
     return function (dispatch) {
         let payload = {};
-        const url = URL_CUSTOMER_CHECKOUT;
+        const url = CUSTOMER_BASE_URL + "/" + userId + URL_CUSTOMER_CHECKOUT;
         const axiosInstance = buildCustomAxios(token);          
         
         return axiosInstance.post(url)

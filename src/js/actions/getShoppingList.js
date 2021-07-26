@@ -1,7 +1,10 @@
 import buildCustomAxios from "../constants/token_axios";
 import dispatchUnauth from "./handleUnauth";
 import { GET_SHOPPING_LIST } from "../constants/action_types";
-import { URL_CUSTOMER_SHOPPING_LIST } from "../constants/rest_api";
+import { 
+    CUSTOMER_BASE_URL,
+    URL_CUSTOMER_SHOPPING_LIST 
+} from "../constants/rest_api";
 
 
 /**
@@ -27,12 +30,12 @@ const dispatchShoppingList = payload => (
     { type: GET_SHOPPING_LIST, payload }
 );
 
-export function getShoppingList(token) {
+export function getShoppingList(userId, token) {
 
     return function (dispatch) {
         let payload = {};
         let purchasedProducts = [];
-        const url = URL_CUSTOMER_SHOPPING_LIST;
+        const url = CUSTOMER_BASE_URL + "/" + userId + URL_CUSTOMER_SHOPPING_LIST;
         const axiosInstance = buildCustomAxios(token);          
         
         return axiosInstance.get(url)

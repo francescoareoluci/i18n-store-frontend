@@ -12,7 +12,7 @@ import {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addProductToCart: (prodId, token) => dispatch(addProductToCart(prodId, token)),
+        addProductToCart: (prodId, userId, token) => dispatch(addProductToCart(prodId, userId, token)),
         disableAddProductToCartNotification: () => dispatch(disableAddProductToCartNotification()),
         disableAddProductToCartNotificationError: () => dispatch(disableAddProductToCartNotificationError()),
     };
@@ -23,6 +23,7 @@ const mapStateToProps = (state) => {
         customerSelectedProduct: state.getters.customer.customerSelectedProduct,
         addCartProductNotification: state.notifications.cart.addCartProductNotification,
         addCartProductNotificationError: state.notifications.cart.addCartProductNotificationError,
+        userId: state.auth.userId,
         token: state.auth.token
     };
 };
@@ -87,7 +88,8 @@ class CustomerProductInfo extends React.Component {
     }
 
     handleAddProduct() {
-        this.props.addProductToCart(this.props.customerSelectedProduct.id, this.props.token);    
+        this.props.addProductToCart(this.props.customerSelectedProduct.id, 
+                                    this.props.userId, this.props.token);    
     }
 
     render() {

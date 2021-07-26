@@ -10,6 +10,7 @@ const initialState = {
     token: "",
     role: "",
     language: "en",
+    userId: -1,
     unauth: false
 }
 
@@ -22,7 +23,8 @@ export function authReducer(state = initialState, action) {
         return updateStateObject(state, {
             token: action.payload.token,
             role: action.payload.role,
-            language: action.payload.language
+            language: action.payload.language,
+            userId: action.payload.userId
         });
     }
     else if (action.type == UNAUTH) {

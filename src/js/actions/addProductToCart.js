@@ -4,7 +4,10 @@ import {
     ADD_PROD_TO_CART_NOTIFICATION, 
     ADD_PROD_TO_CART_NOTIFICATION_ERROR 
 } from "../constants/action_types";
-import { URL_CUSTOMER_ADD_PROD_TO_CART } from "../constants/rest_api";
+import { 
+    CUSTOMER_BASE_URL, 
+    URL_CUSTOMER_ADD_PROD_TO_CART 
+} from "../constants/rest_api";
 
 
 const dipatchAddProductToCartNotification = notify => (
@@ -25,11 +28,12 @@ const dipatchAddProductToCartNotificationError = notify => (
     }
 );
 
-export function addProductToCart(prodId, token) {
+export function addProductToCart(prodId, userId, token) {
     
     return function (dispatch) {
         let payload = {};
-        const url = URL_CUSTOMER_ADD_PROD_TO_CART + "/" + prodId;
+        const url = CUSTOMER_BASE_URL + "/" + userId  + 
+                    URL_CUSTOMER_ADD_PROD_TO_CART + "/" + prodId;
         const axiosInstance = buildCustomAxios(token);          
         
         return axiosInstance.post(url)

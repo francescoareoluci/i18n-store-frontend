@@ -19,8 +19,8 @@ import {
 
 function mapDispatchToProps(dispatch) {
     return {
-        getCart: (token) => dispatch(getCart(token)),
-        performCheckout: (token) => dispatch(performCheckout(token)),
+        getCart: (userId, token) => dispatch(getCart(userId, token)),
+        performCheckout: (userId, token) => dispatch(performCheckout(userId, token)),
         disablePerformCheckoutNotification: () => dispatch(disablePerformCheckoutNotification()),
         disablePerformCheckoutNotificationError: () => dispatch(disablePerformCheckoutNotificationError()),
         disableRemoveProdFromCartNotification: () => dispatch(disableRemoveProdFromCartNotification()),
@@ -35,6 +35,7 @@ const mapStateToProps = (state) => {
         checkoutNotificationError: state.notifications.cart.checkoutNotificationError,
         removeProductFromCartNotification: state.notifications.cart.removeProductFromCartNotification,
         removeProductFromCartNotificationError: state.notifications.cart.removeProductFromCartNotificationError,
+        userId: state.auth.userId,
         token: state.auth.token        
     };
 };
@@ -55,13 +56,13 @@ class ShoppingCart extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getCart(this.props.token);
+        this.props.getCart(this.props.userId, this.props.token);
     }
 
     componentDidUpdate(previousProps) {
         if (this.props.checkoutNotification !== previousProps.checkoutNotification &&
                 this.props.checkoutNotification) {       
-            this.props.getCart(this.props.token);
+            this.props.getCart(this.props.userId, this.props.token);
             this.props.disablePerformCheckoutNotification();
             if (this.state.isMounted) {
                 this.setState({
@@ -85,7 +86,7 @@ class ShoppingCart extends React.Component {
 
         if (this.props.removeProductFromCartNotification !== previousProps.removeProductFromCartNotification &&
                 this.props.removeProductFromCartNotification) {       
-            this.props.getCart(this.props.token);
+            this.props.getCart(this.props.userId, this.props.token);
             this.props.disableRemoveProdFromCartNotification(false);
         }
 
@@ -122,7 +123,7 @@ class ShoppingCart extends React.Component {
     }
     
     handleCheckout() {
-        this.props.performCheckout(this.props.token);
+        this.props.performCheckout(this.props.userId, this.props.token);
     }
 
     render() {

@@ -28,7 +28,6 @@ const dispatchEditProductNotificationError = notify => (
 export function editProduct(token, product) {
     
     return function (dispatch) {
-        console.log(product);
         let payload = {};
         const url = URL_ADMIN_EDIT_PRODUCT;
         const axiosInstance = buildCustomAxios(token);          

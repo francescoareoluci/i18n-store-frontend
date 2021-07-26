@@ -13,13 +13,14 @@ import { getShoppingList } from "../../js/actions/getShoppingList";
 
 function mapDispatchToProps(dispatch) {
     return {
-        getShoppingList: (token) => dispatch(getShoppingList(token))
+        getShoppingList: (userId, token) => dispatch(getShoppingList(userId, token))
     };
 }
 
 const mapStateToProps = (state) => {
     return {
         shoppingList: state.getters.customer.shoppingList,
+        userId: state.auth.userId,
         token: state.auth.token
     };
 };
@@ -30,7 +31,7 @@ class ShoppingList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getShoppingList(this.props.token);
+        this.props.getShoppingList(this.props.userId, this.props.token);
     }
 
     render() {
