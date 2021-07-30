@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 import { Translation } from 'react-i18next';
 
-import ProductInfoCard from "./product_info_card"
+import ProductInfoCard from "../product_info_card/product_info_card"
 
 import { 
     removeProduct,
     disableRemoveProductNotification,
     disableRemoveProductNotificationError 
-} from "../../js/actions/removeProduct";
+} from "../../../js/actions/removeProduct";
 
 
 function mapDispatchToProps(dispatch) {

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
-import { getManufacturers } from "../../js/actions/getManufacturers"; 
+import { getManufacturers } from "../../../js/actions/getManufacturers"; 
 
 
 function mapDispatchToProps(dispatch) {

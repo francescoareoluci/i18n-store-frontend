@@ -1,15 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import {
-    Link
-} from "react-router-dom";
 import { Translation } from 'react-i18next';
 
-import ProductCard from "../common/product_card"
+import ProductCard from "../../common/product_card/product_card"
 
-import { getProductList } from "../../js/actions/getProductList"
-import { performSearch } from "../../js/actions/performSearch"
+import { getProductList } from "../../../js/actions/getProductList"
+import { performSearch } from "../../../js/actions/performSearch"
 
 
 function mapDispatchToProps(dispatch) {
@@ -26,7 +23,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-class AdminProducts extends React.Component {
+class CustomerProducts extends React.Component {
     constructor(props) {
         super(props);
 
@@ -40,14 +37,14 @@ class AdminProducts extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.handleShowAll = this.handleShowAll.bind(this);
     }
-
+    
     componentDidMount() {
-        this.props.getProductList(true, this.props.token);
+        this.props.getProductList(false, this.props.token);
     }
 
     handleShowAll(e) {
         e.preventDefault();
-        this.props.getProductList(true, this.props.token);
+        this.props.getProductList(false, this.props.token);
         this.setState({
             showAllProducts: true
         })
@@ -84,15 +81,6 @@ class AdminProducts extends React.Component {
                         </Translation>
                     </div>
                     <div className="product-header__spacer"></div>
-                    <Link to="/admin/products/add">
-                    <div className="products-header__button">
-                        <div className="products-header__button__text">
-                            <Translation>
-                                { t => <>{t('product_page_add')}</> }
-                            </Translation>
-                        </div>
-                    </div>
-                    </Link>
                     <div className="products-header__button"
                          onClick={(e) => {this.handleShowAll(e)}}>
                         <div className="products-header__button__text">
@@ -137,10 +125,10 @@ class AdminProducts extends React.Component {
                         </Translation>
                     </div>
                 }
-                {!isListEmpty && this.props.productList.map((prod, i) =>(
+                {!isListEmpty && this.props.productList.map((prod, i) => (
                     <ProductCard 
                         key={i}
-                        owner="admin"
+                        owner="customer"
                         prodId={prod.id}
                         name={prod.name}
                         manufacturer={prod.manufacturer}
@@ -153,11 +141,11 @@ class AdminProducts extends React.Component {
     }
 }
 
-AdminProducts.propTypes = {
+CustomerProducts.propTypes = {
     getProductList: PropTypes.func,
     performSearch: PropTypes.func,
     productList: PropTypes.array,
     token: PropTypes.string
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminProducts)
+export default connect(mapStateToProps, mapDispatchToProps)(CustomerProducts)

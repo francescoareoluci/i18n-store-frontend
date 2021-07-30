@@ -7,7 +7,7 @@ import {
 import { withRouter } from "react-router-dom";
 import { Translation } from 'react-i18next';
 
-import { logout } from "../../js/actions/logout"
+import { logout } from "../../../js/actions/logout"
 
 
 function mapDispatchToProps(dispatch) {
@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
     return {};
 };
 
-class CustomerMenu extends React.Component {
+class AdminMenu extends React.Component {
     constructor(props) {
         super(props);
 
@@ -38,11 +38,13 @@ class CustomerMenu extends React.Component {
                 <div className="left-menu__title">
                     <div className="left-menu__title__text">
                         <Translation>
-                            { t => <>{t('customer_label')}</> }
+                            { t => <>{t('admin_label')}</> }
                         </Translation>
                     </div>
                 </div>
-                <Link to="/customer/products">
+                <nav>
+                <ul>
+                <Link to="/admin/products">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
                             <Translation>
@@ -51,20 +53,38 @@ class CustomerMenu extends React.Component {
                         </div>
                     </div>
                 </Link>
-                <Link to="/customer/shopping-cart">
+                <Link to="/admin/users">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
                             <Translation>
-                                { t => <>{t('menu_sh_cart_label')}</> }
+                                { t => <>{t('menu_users_label')}</> }
                             </Translation>
                         </div>
                     </div>
                 </Link>
-                <Link to="/customer/shopping-list">
+                <Link to="/admin/manufacturers">
                     <div className="left-menu__button">
                         <div className="left-menu__button__text">
                             <Translation>
-                                { t => <>{t('menu_sh_list_label')}</> }
+                                { t => <>{t('menu_manufacturers_label')}</> }
+                            </Translation>
+                        </div>
+                    </div>
+                </Link>
+                <Link to="/admin/locales">
+                    <div className="left-menu__button">
+                        <div className="left-menu__button__text">
+                            <Translation>
+                                { t => <>{t('menu_locales_label')}</> }
+                            </Translation>
+                        </div>
+                    </div>
+                </Link>
+                <Link to="/admin/currencies">
+                    <div className="left-menu__button">
+                        <div className="left-menu__button__text">
+                            <Translation>
+                                { t => <>{t('menu_currencies_label')}</> }
                             </Translation>
                         </div>
                     </div>
@@ -76,13 +96,15 @@ class CustomerMenu extends React.Component {
                         Log out
                     </div>
                 </div>
+                </ul>
+                </nav>
             </div>
         );
     }
 }
 
-CustomerMenu.propTypes = {
+AdminMenu.propTypes = {
     logout: PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CustomerMenu));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AdminMenu));

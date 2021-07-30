@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
-import { getUsers } from "../../js/actions/getUsers"
+import { getUsers } from "../../../js/actions/getUsers"
 
 
 function mapDispatchToProps(dispatch) {

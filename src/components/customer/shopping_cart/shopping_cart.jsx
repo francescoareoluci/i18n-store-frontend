@@ -3,18 +3,18 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
-import ProductCard from "../common/product_card";
+import ProductCard from "../../common/product_card/product_card";
 
-import { getCart } from "../../js/actions/getCart";
+import { getCart } from "../../../js/actions/getCart";
 import { 
     performCheckout,
     disablePerformCheckoutNotification,
     disablePerformCheckoutNotificationError 
-} from "../../js/actions/performCheckout";
+} from "../../../js/actions/performCheckout";
 import {
     disableRemoveProdFromCartNotification,
     disableRemoveProdFromCartNotificationError
-} from "../../js/actions/removeProductFromCart";
+} from "../../../js/actions/removeProductFromCart";
 
 
 function mapDispatchToProps(dispatch) {

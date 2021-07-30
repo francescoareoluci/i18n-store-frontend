@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
-import { getLocales } from "../../js/actions/getLocales";
+import { getLocales } from "../../../js/actions/getLocales";
 
 
 function mapDispatchToProps(dispatch) {

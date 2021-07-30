@@ -8,24 +8,27 @@ import {
   Redirect
 } from "react-router-dom";
 
-import Login from "./login"
-import AdminMenu from "../admin/admin_menu"
-import AdminProducts from "../admin/admin_products"
-import AdminProductInfo from "../admin/admin_product_info"
-import Locales from "../admin/locales"
-import Users from "../admin/users"
-import Manufacturers from "../admin/manufacturers"
-import Currencies from "../admin/currencies"
-import CustomerMenu from "../customer/customer_menu"
-import CustomerProducts from "../customer/customer_products"
-import CustomerProductInfo from "../customer/customer_product_info"
-import ShoppingCart from "../customer/shopping_cart"
-import ShoppingList from "../customer/shopping_list"
-import AdminAddProduct from "../admin/admin_add_product"
-import AdminEditProduct from "../admin/admin_edit_product"
-import i18n from "./i18n"
+/* Common imports */
+import i18n from "../i18n/i18n"
+import Login from "../login/login"
+/* Administration imports */
+import AdminMenu from "../../admin/admin_menu/admin_menu"
+import AdminProducts from "../../admin/admin_products/admin_products"
+import AdminProductInfo from "../../admin/admin_product_info/admin_product_info"
+import Locales from "../../admin/locales/locales"
+import Users from "../../admin/users/users"
+import Manufacturers from "../../admin/manufacturers/manufacturers"
+import Currencies from "../../admin/currencies/currencies"
+import AdminAddProduct from "../../admin/admin_add_product/admin_add_product"
+import AdminEditProduct from "../../admin/admin_edit_product/admin_edit_product"
+/* Customer imports */
+import CustomerMenu from "../../customer/customer_menu/customer_menu"
+import CustomerProducts from "../../customer/customer_products/customer_products"
+import CustomerProductInfo from "../../customer/customer_product_info/customer_product_info"
+import ShoppingCart from "../../customer/shopping_cart/shopping_cart"
+import ShoppingList from "../../customer/shopping_list/shopping_list"
 
-import { logout } from "../../js/actions/logout";
+import { logout } from "../../../js/actions/logout";
 
 
 function mapDispatchToProps(dispatch) {

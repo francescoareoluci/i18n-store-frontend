@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 import { Translation } from 'react-i18next';
 
-import { changeCustomerSelectedProduct } from "../../js/actions/changeCustomerSelectedProduct";
-import { changeAdminSelectedProduct } from "../../js/actions/changeAdminSelectedProduct";
-import { removeProductFromCart } from "../../js/actions/removeProductFromCart";
+import { changeCustomerSelectedProduct } from "../../../js/actions/changeCustomerSelectedProduct";
+import { changeAdminSelectedProduct } from "../../../js/actions/changeAdminSelectedProduct";
+import { removeProductFromCart } from "../../../js/actions/removeProductFromCart";
 
 
 function mapDispatchToProps(dispatch) {

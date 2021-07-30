@@ -4,8 +4,8 @@ import { Provider } from "react-redux"
 
 import "../css/reset.css";
 import "../css/style.css";
-import '../components/common/i18n';
-import App from '../components/common/router'
+import '../components/common/i18n/i18n';
+import App from '../components/common/router/router'
 import { store } from "./store/store";
 
 

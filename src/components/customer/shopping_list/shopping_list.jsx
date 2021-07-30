@@ -1,14 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import {
-    Link
-} from "react-router-dom";
 import { Translation } from 'react-i18next';
 
-import ProductCard from "../common/product_card";
+import ProductCard from "../../common/product_card/product_card";
 
-import { getShoppingList } from "../../js/actions/getShoppingList";
+import { getShoppingList } from "../../../js/actions/getShoppingList";
 
 
 function mapDispatchToProps(dispatch) {

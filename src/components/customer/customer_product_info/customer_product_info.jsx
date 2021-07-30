@@ -7,7 +7,7 @@ import {
     addProductToCart,
     disableAddProductToCartNotification,
     disableAddProductToCartNotificationError 
-} from "../../js/actions/addProductToCart";
+} from "../../../js/actions/addProductToCart";
 
 
 function mapDispatchToProps(dispatch) {

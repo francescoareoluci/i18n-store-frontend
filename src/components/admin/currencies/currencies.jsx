@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
-import { getCurrencies } from "../../js/actions/getCurrencies"
+import { getCurrencies } from "../../../js/actions/getCurrencies"
 
 
 function mapDispatchToProps(dispatch) {

@@ -3,15 +3,15 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
-import ProductMgmtCard from "./product_mgmt_card";
+import ProductMgmtCard from "../product_mgmt_card/product_mgmt_card";
 
-import { getCurrencies } from "../../js/actions/getCurrencies"
-import { getLocales } from "../../js/actions/getLocales";
+import { getCurrencies } from "../../../js/actions/getCurrencies"
+import { getLocales } from "../../../js/actions/getLocales";
 import { 
     editProduct, 
     disableEditProductNotification,
     disableEditProductNotificationError 
-} from "../../js/actions/editProduct";
+} from "../../../js/actions/editProduct";
 
 
 function mapDispatchToProps(dispatch) {
