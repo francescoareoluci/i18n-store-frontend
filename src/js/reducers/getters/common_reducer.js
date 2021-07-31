@@ -1,6 +1,6 @@
 import { updateStateObject } from "../state_utils";
 import { 
-    GET_PRODUCT_LIST, 
+    GET_PRODUCT_LIST,
     PERFORM_SEARCH
 } from "../../constants/action_types";
 

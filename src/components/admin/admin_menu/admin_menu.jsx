@@ -7,17 +7,21 @@ import {
 import { withRouter } from "react-router-dom";
 import { Translation } from 'react-i18next';
 
+import { changeSelectedMenuBtn } from "../../../js/actions/changeSelectedMenuBtn";
 import { logout } from "../../../js/actions/logout"
 
 
 function mapDispatchToProps(dispatch) {
     return {
+        changeSelectedMenuBtn: (idx) => dispatch(changeSelectedMenuBtn(idx)),
         logout: () => dispatch(logout())
     };
 }
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        selectedMenuBtn: state.ui.selectedMenuBtn
+    };
 };
 
 class AdminMenu extends React.Component {
@@ -31,15 +35,21 @@ class AdminMenu extends React.Component {
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        // Allow to change menu selected button on router redirect
+        const locationChanged = this.props.location !== prevProps.location;
+        if (locationChanged && this.props.location.pathname == "/admin/products") {
+            this.props.changeSelectedMenuBtn(1);
+        }
+    }
+
     handleLogout() {
         this.props.logout();
         this.props.history.push("/");
     }
 
     handleButtonClick(e, idx) {
-        this.setState({
-            clickedBtn: idx
-        });
+        this.props.changeSelectedMenuBtn(idx);
     }
 
     render() {
@@ -56,7 +66,7 @@ class AdminMenu extends React.Component {
                 <ul>
                 <Link to="/admin/products"
                       onClick={(e) => {this.handleButtonClick(e, 1)}}>
-                    <div className={"left-menu__button" + (this.state.clickedBtn == 1 ? "-focused" : "")}>
+                    <div className={"left-menu__button" + (this.props.selectedMenuBtn == 1 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_product_label')}</> }
@@ -66,7 +76,7 @@ class AdminMenu extends React.Component {
                 </Link>
                 <Link to="/admin/users"
                       onClick={(e) => {this.handleButtonClick(e, 2)}}>
-                    <div className={"left-menu__button" + (this.state.clickedBtn == 2 ? "-focused" : "")}>
+                    <div className={"left-menu__button" + (this.props.selectedMenuBtn == 2 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_users_label')}</> }
@@ -76,7 +86,7 @@ class AdminMenu extends React.Component {
                 </Link>
                 <Link to="/admin/manufacturers"
                       onClick={(e) => {this.handleButtonClick(e, 3)}}>
-                    <div className={"left-menu__button" + (this.state.clickedBtn == 3 ? "-focused" : "")}>
+                    <div className={"left-menu__button" + (this.props.selectedMenuBtn == 3 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_manufacturers_label')}</> }
@@ -86,7 +96,7 @@ class AdminMenu extends React.Component {
                 </Link>
                 <Link to="/admin/locales"
                       onClick={(e) => {this.handleButtonClick(e, 4)}}>
-                    <div className={"left-menu__button" + (this.state.clickedBtn == 4 ? "-focused" : "")}>
+                    <div className={"left-menu__button" + (this.props.selectedMenuBtn == 4 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_locales_label')}</> }
@@ -96,7 +106,7 @@ class AdminMenu extends React.Component {
                 </Link>
                 <Link to="/admin/currencies"
                       onClick={(e) => {this.handleButtonClick(e, 5)}}>
-                    <div className={"left-menu__button" + (this.state.clickedBtn == 5 ? "-focused" : "")}>
+                    <div className={"left-menu__button" + (this.props.selectedMenuBtn == 5 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_currencies_label')}</> }

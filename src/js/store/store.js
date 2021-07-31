@@ -15,6 +15,7 @@ import { LOGOUT } from "../constants/action_types";
 import { authReducer } from "../reducers/auth/auth_reducer";
 import { gettersReducer } from "../reducers/getters/getters_reducer";
 import { notificationsReducer } from "../reducers/notifications/notifications_reducer";
+import { uiReducer } from "../reducers/ui/ui_reducer";
 
 
 const persistConfig = {
@@ -25,7 +26,8 @@ const persistConfig = {
 const appReducer = combineReducers({
   auth: authReducer,
   getters: gettersReducer,
-  notifications: notificationsReducer
+  notifications: notificationsReducer,
+  ui: uiReducer
 })
 
 const rootReducer = (state, action) => {

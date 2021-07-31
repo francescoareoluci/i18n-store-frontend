@@ -7,17 +7,21 @@ import {
 import { withRouter } from "react-router-dom";
 import { Translation } from 'react-i18next';
 
+import { changeSelectedMenuBtn } from "../../../js/actions/changeSelectedMenuBtn";
 import { logout } from "../../../js/actions/logout"
 
 
 function mapDispatchToProps(dispatch) {
     return {
+        changeSelectedMenuBtn: (idx) => dispatch(changeSelectedMenuBtn(idx)),
         logout: () => dispatch(logout())
     };
 }
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+        selectedMenuBtn: state.ui.selectedMenuBtn
+    };
 };
 
 class CustomerMenu extends React.Component {
@@ -31,15 +35,21 @@ class CustomerMenu extends React.Component {
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
+    componentDidUpdate(prevProps) {
+        // Allow to change menu selected button on router redirect
+        const locationChanged = this.props.location !== prevProps.location;
+        if (locationChanged && this.props.location.pathname == "/customer/products") {
+            this.props.changeSelectedMenuBtn(1);
+        }
+    }
+
     handleLogout() {
         this.props.logout();
         this.props.history.push("/");
     }
 
     handleButtonClick(e, idx) {
-        this.setState({
-            clickedBtn: idx
-        });
+        this.props.changeSelectedMenuBtn(idx);
     }
 
     render() {
@@ -54,7 +64,7 @@ class CustomerMenu extends React.Component {
                 </div>
                 <Link to="/customer/products"
                       onClick={(e) => {this.handleButtonClick(e, 1)}}>
-                    <div className={"left-menu__button" + (this.state.clickedBtn == 1 ? "-focused" : "")}>
+                    <div className={"left-menu__button" + (this.props.selectedMenuBtn == 1 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_product_label')}</> }
@@ -64,7 +74,7 @@ class CustomerMenu extends React.Component {
                 </Link>
                 <Link to="/customer/shopping-cart"
                       onClick={(e) => {this.handleButtonClick(e, 2)}}>
-                    <div className={"left-menu__button" + (this.state.clickedBtn == 2 ? "-focused" : "")}>
+                    <div className={"left-menu__button" + (this.props.selectedMenuBtn == 2 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_sh_cart_label')}</> }
@@ -74,7 +84,7 @@ class CustomerMenu extends React.Component {
                 </Link>
                 <Link to="/customer/shopping-list"
                       onClick={(e) => {this.handleButtonClick(e, 3)}}>
-                    <div className={"left-menu__button" + (this.state.clickedBtn == 3 ? "-focused" : "")}>
+                    <div className={"left-menu__button" + (this.props.selectedMenuBtn == 3 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_sh_list_label')}</> }
