@@ -2,8 +2,8 @@ export const BASE_URL = 'http://localhost:8080/i18n-store-1.0-SNAPSHOT/api';
 export const CUSTOMER_BASE_URL = '/customer';
 
 export const URL_LOGIN = '/auth/login';
-export const URL_SEARCH = '/search/kw-products';
-export const URL_SEARCH_SIMILAR = '/search/similar-products';
+export const URL_SEARCH = '/kw-products';
+export const URL_SEARCH_SIMILAR = '/mlt-products';
 
 export const URL_ADMIN_USERS = '/users';
 export const URL_ADMIN_CURRENCIES = '/currencies';

@@ -13,7 +13,7 @@ export function getSimilarProducts(prodId, token) {
     return function (dispatch) {
         let products = [];
         let url = URL_SEARCH_SIMILAR;
-        url += "/" + prodId;
+        url += "?like=" + prodId;
         const axiosInstance = buildCustomAxios(token);          
         
         return axiosInstance.get(url)

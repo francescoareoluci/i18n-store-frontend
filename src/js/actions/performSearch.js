@@ -14,7 +14,7 @@ export function performSearch(keywords, token) {
         let products = [];
         let url = URL_SEARCH;
         let searchKW = keywords.replaceAll(" ", "+");
-        url += "/" + searchKW;
+        url += "?query=" + searchKW;
         const axiosInstance = buildCustomAxios(token);          
         
         return axiosInstance.get(url)
