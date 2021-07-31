@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
+import ProductCard from "../../common/product_card/product_card";
+
+import { getSimilarProducts } from "../../../js/actions/getSimilarProducts";
 import { 
     addProductToCart,
     disableAddProductToCartNotification,
@@ -15,6 +18,7 @@ function mapDispatchToProps(dispatch) {
         addProductToCart: (prodId, userId, token) => dispatch(addProductToCart(prodId, userId, token)),
         disableAddProductToCartNotification: () => dispatch(disableAddProductToCartNotification()),
         disableAddProductToCartNotificationError: () => dispatch(disableAddProductToCartNotificationError()),
+        getSimilarProducts: (prodId, token) => dispatch(getSimilarProducts(prodId, token))
     };
 }
 
@@ -23,6 +27,7 @@ const mapStateToProps = (state) => {
         customerSelectedProduct: state.getters.customer.customerSelectedProduct,
         addCartProductNotification: state.notifications.cart.addCartProductNotification,
         addCartProductNotificationError: state.notifications.cart.addCartProductNotificationError,
+        similarProductList: state.getters.common.similarProductList,
         userId: state.auth.userId,
         token: state.auth.token
     };
@@ -44,6 +49,10 @@ class CustomerProductInfo extends React.Component {
     }
 
     componentDidUpdate(previousProps) {
+        if (this.props.customerSelectedProduct !== previousProps.customerSelectedProduct) {     
+            this.props.getSimilarProducts(this.props.customerSelectedProduct.id, this.props.token);
+        }
+
         if (this.props.addCartProductNotification !== previousProps.addCartProductNotification &&
                 this.props.addCartProductNotification) {     
             this.props.disableAddProductToCartNotification();
@@ -96,6 +105,12 @@ class CustomerProductInfo extends React.Component {
         let isProductEmtpy = true;
         if (Object.keys(this.props.customerSelectedProduct).length != 0) {
                     isProductEmtpy = false;
+        }
+        
+        let isSimilarProductListEmpty = true;
+        if (Object.keys(this.props.similarProductList).length != 0 &&
+                this.props.similarProductList.length != 0) {
+                    isSimilarProductListEmpty = false;
         }
 
         return (
@@ -155,6 +170,33 @@ class CustomerProductInfo extends React.Component {
                         </div>
                     </div>
                 </div>
+                }
+                {!isProductEmtpy &&
+                    <div className="product-info_similar-prods-container">
+                        <div className="product-info_similar-prods-container__text">
+                            <Translation>
+                                { t => <>{t('customer_prod_info_similar')}</> }
+                            </Translation>
+                        </div>
+                        {!isSimilarProductListEmpty && this.props.similarProductList.map((prod, i) => (
+                            <ProductCard 
+                                key={i}
+                                owner="customer"
+                                prodId={prod.id}
+                                name={prod.name}
+                                manufacturer={prod.manufacturer}
+                                price={prod.price}
+                                showRemove="false"
+                            />
+                        ))}
+                        {isSimilarProductListEmpty &&
+                            <div className="product-info_similar-prods-container-not-found">
+                                <Translation>
+                                    { t => <>{t('customer_prod_info_similar_not_found')}</> }
+                                </Translation>
+                            </div>
+                        }
+                    </div>
                 }
                 {this.state.showConfirm &&
                     <div className="product-wrapper_alertbox">

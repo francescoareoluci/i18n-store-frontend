@@ -578,6 +578,21 @@ a {
     border-color: #ec2121;
 }
 
+.product-info_similar-prods-container {
+    margin-top: 60px;
+    font-family: "montserrat-regular";
+    color: #2B2B2B;
+}
+
+.product-info_similar-prods-container__text {
+    font-size: 20px;
+}
+
+.product-info_similar-prods-container-not-found {
+    margin-top: 16px;
+    font-size: 16px;
+}
+
 .products-not-available {
     font-family: "montserrat-regular";
     color: #2B2B2B;
