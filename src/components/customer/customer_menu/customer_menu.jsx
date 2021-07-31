@@ -23,13 +23,23 @@ const mapStateToProps = (state) => {
 class CustomerMenu extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            clickedBtn: 1
+        }
 
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
     handleLogout() {
         this.props.logout();
         this.props.history.push("/");
+    }
+
+    handleButtonClick(e, idx) {
+        this.setState({
+            clickedBtn: idx
+        });
     }
 
     render() {
@@ -42,8 +52,9 @@ class CustomerMenu extends React.Component {
                         </Translation>
                     </div>
                 </div>
-                <Link to="/customer/products">
-                    <div className="left-menu__button">
+                <Link to="/customer/products"
+                      onClick={(e) => {this.handleButtonClick(e, 1)}}>
+                    <div className={"left-menu__button" + (this.state.clickedBtn == 1 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_product_label')}</> }
@@ -51,8 +62,9 @@ class CustomerMenu extends React.Component {
                         </div>
                     </div>
                 </Link>
-                <Link to="/customer/shopping-cart">
-                    <div className="left-menu__button">
+                <Link to="/customer/shopping-cart"
+                      onClick={(e) => {this.handleButtonClick(e, 2)}}>
+                    <div className={"left-menu__button" + (this.state.clickedBtn == 2 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_sh_cart_label')}</> }
@@ -60,8 +72,9 @@ class CustomerMenu extends React.Component {
                         </div>
                     </div>
                 </Link>
-                <Link to="/customer/shopping-list">
-                    <div className="left-menu__button">
+                <Link to="/customer/shopping-list"
+                      onClick={(e) => {this.handleButtonClick(e, 3)}}>
+                    <div className={"left-menu__button" + (this.state.clickedBtn == 3 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_sh_list_label')}</> }
@@ -70,7 +83,7 @@ class CustomerMenu extends React.Component {
                     </div>
                 </Link>
                 <div className="left-menu__spacer"></div>
-                <div className="left-menu__button"
+                <div className="left-menu__button-logout"
                      onClick={() => {this.handleLogout()}}>
                     <div className="left-menu__button__text">
                         Log out

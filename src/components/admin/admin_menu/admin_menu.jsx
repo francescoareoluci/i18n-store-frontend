@@ -23,13 +23,23 @@ const mapStateToProps = (state) => {
 class AdminMenu extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            clickedBtn: 1
+        };
 
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
     handleLogout() {
         this.props.logout();
         this.props.history.push("/");
+    }
+
+    handleButtonClick(e, idx) {
+        this.setState({
+            clickedBtn: idx
+        });
     }
 
     render() {
@@ -44,8 +54,9 @@ class AdminMenu extends React.Component {
                 </div>
                 <nav>
                 <ul>
-                <Link to="/admin/products">
-                    <div className="left-menu__button">
+                <Link to="/admin/products"
+                      onClick={(e) => {this.handleButtonClick(e, 1)}}>
+                    <div className={"left-menu__button" + (this.state.clickedBtn == 1 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_product_label')}</> }
@@ -53,8 +64,9 @@ class AdminMenu extends React.Component {
                         </div>
                     </div>
                 </Link>
-                <Link to="/admin/users">
-                    <div className="left-menu__button">
+                <Link to="/admin/users"
+                      onClick={(e) => {this.handleButtonClick(e, 2)}}>
+                    <div className={"left-menu__button" + (this.state.clickedBtn == 2 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_users_label')}</> }
@@ -62,8 +74,9 @@ class AdminMenu extends React.Component {
                         </div>
                     </div>
                 </Link>
-                <Link to="/admin/manufacturers">
-                    <div className="left-menu__button">
+                <Link to="/admin/manufacturers"
+                      onClick={(e) => {this.handleButtonClick(e, 3)}}>
+                    <div className={"left-menu__button" + (this.state.clickedBtn == 3 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_manufacturers_label')}</> }
@@ -71,8 +84,9 @@ class AdminMenu extends React.Component {
                         </div>
                     </div>
                 </Link>
-                <Link to="/admin/locales">
-                    <div className="left-menu__button">
+                <Link to="/admin/locales"
+                      onClick={(e) => {this.handleButtonClick(e, 4)}}>
+                    <div className={"left-menu__button" + (this.state.clickedBtn == 4 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_locales_label')}</> }
@@ -80,8 +94,9 @@ class AdminMenu extends React.Component {
                         </div>
                     </div>
                 </Link>
-                <Link to="/admin/currencies">
-                    <div className="left-menu__button">
+                <Link to="/admin/currencies"
+                      onClick={(e) => {this.handleButtonClick(e, 5)}}>
+                    <div className={"left-menu__button" + (this.state.clickedBtn == 5 ? "-focused" : "")}>
                         <div className="left-menu__button__text">
                             <Translation>
                                 { t => <>{t('menu_currencies_label')}</> }
@@ -90,7 +105,7 @@ class AdminMenu extends React.Component {
                     </div>
                 </Link>
                 <div className="left-menu__spacer"></div>
-                <div className="left-menu__button"
+                <div className="left-menu__button-logout"
                      onClick={() => {this.handleLogout()}}>
                     <div className="left-menu__button__text">
                         Log out
