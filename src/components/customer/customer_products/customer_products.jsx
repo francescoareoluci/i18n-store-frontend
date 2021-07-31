@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
 
+import RingLoader from "../../common/ring_loader/ring_loader"
 import ProductCard from "../../common/product_card/product_card"
 
 import { getProductList } from "../../../js/actions/getProductList"
@@ -30,7 +31,8 @@ class CustomerProducts extends React.Component {
         this.state = {
             inputText: "",
             showAllProducts: true,
-            searchResultLabel: ""
+            searchResultLabel: "",
+            isListLoading: false
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -40,6 +42,17 @@ class CustomerProducts extends React.Component {
     
     componentDidMount() {
         this.props.getProductList(false, this.props.token);
+        this.setState({
+            isListLoading: true
+        });
+    }
+
+    componentDidUpdate(previousProps) {
+        if (this.props.productList !== previousProps.productList) {
+            this.setState({
+                isListLoading: false
+            })
+        }
     }
 
     handleShowAll(e) {
@@ -118,14 +131,19 @@ class CustomerProducts extends React.Component {
                         </label>
                     }
                 </div>
-                {isListEmpty &&
+                {this.state.isListLoading &&
+                    <RingLoader />
+                }
+                {!this.state.isListLoading && 
+                 isListEmpty &&
                     <div className="products-not-available">
                         <Translation>
                             { t => <>{t('product_page_unavailable')}</> }
                         </Translation>
                     </div>
                 }
-                {!isListEmpty && this.props.productList.map((prod, i) => (
+                {!this.state.isListLoading &&
+                 !isListEmpty && this.props.productList.map((prod, i) => (
                     <ProductCard 
                         key={i}
                         owner="customer"
