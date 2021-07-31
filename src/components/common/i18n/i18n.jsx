@@ -6,7 +6,7 @@ const resources = {
     translation: {
       "admin_label": "Administration",
       "customer_label": "Shop",
-      "menu_product_label": "Product",
+      "menu_product_label": "Products",
       "menu_users_label": "Users",
       "menu_locales_label": "Locales",
       "menu_currencies_label": "Currencies",
