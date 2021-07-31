@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Translation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import RingLoader from "../../common/ring_loader/ring_loader"
 import ProductCard from "../../common/product_card/product_card"
@@ -107,7 +108,7 @@ class CustomerProducts extends React.Component {
                             <input className="products-header__searchbar__input" 
                                    type="text" 
                                    value={this.state.inputText}
-                                   placeholder="Search products"
+                                   placeholder={this.props.t('product_page_search')}
                                    onChange={(e) => {this.handleInputChange(e)}}
                                    onKeyPress={(e) => {if (e.key == "Enter") this.handleSearch();}}
                             />
@@ -166,4 +167,5 @@ CustomerProducts.propTypes = {
     token: PropTypes.string
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomerProducts)
+/* withTranslation HOC is needed to set the input placeholder text */
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(CustomerProducts))

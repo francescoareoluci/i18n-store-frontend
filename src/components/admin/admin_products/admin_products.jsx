@@ -5,6 +5,7 @@ import {
     Link
 } from "react-router-dom";
 import { Translation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 
 import ProductCard from "../../common/product_card/product_card"
 
@@ -106,7 +107,7 @@ class AdminProducts extends React.Component {
                             <input className="products-header__searchbar__input" 
                                    type="text" 
                                    value={this.state.inputText}
-                                   placeholder="Search products"
+                                   placeholder={this.props.t('product_page_search')}
                                    onChange={(e) => {this.handleInputChange(e)}}
                                    onKeyPress={(e) => {if (e.key == "Enter") this.handleSearch();}}
                             />
@@ -160,4 +161,5 @@ AdminProducts.propTypes = {
     token: PropTypes.string
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminProducts)
+/* withTranslation HOC is needed to set the input placeholder text */
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(AdminProducts))
