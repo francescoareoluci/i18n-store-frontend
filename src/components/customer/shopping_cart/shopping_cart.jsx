@@ -148,8 +148,7 @@ class ShoppingCart extends React.Component {
                         : {this.props.shoppingCart.totalCost}
                     </div>
                     <div className="shopping-cart-checkout-spacer"></div>
-                    <div 
-                        className={"shopping-cart-checkout-button" + (isCartEmpty ? "_disabled" : "")}
+                    <div className={"shopping-cart-checkout-button" + (isCartEmpty ? "_disabled" : "")}
                         onClick={() => {!isCartEmpty && this.handleCheckout()}}>
                         <Translation>
                             { t => <>{t('shopping_cart_checkout')}</> }
@@ -205,6 +204,7 @@ ShoppingCart.propTypes = {
     checkoutNotificationError: PropTypes.bool,
     removeProductFromCartNotification: PropTypes.bool,
     removeProductFromCartNotificationError: PropTypes.bool,
+    userId: PropTypes.number,
     token: PropTypes.string
 }
 

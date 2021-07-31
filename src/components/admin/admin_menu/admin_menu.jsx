@@ -62,8 +62,6 @@ class AdminMenu extends React.Component {
                         </Translation>
                     </div>
                 </div>
-                <nav>
-                <ul>
                 <Link to="/admin/products"
                       onClick={(e) => {this.handleButtonClick(e, 1)}}>
                     <div className={"left-menu__button" + (this.props.selectedMenuBtn == 1 ? "-focused" : "")}>
@@ -121,8 +119,6 @@ class AdminMenu extends React.Component {
                         Log out
                     </div>
                 </div>
-                </ul>
-                </nav>
             </div>
         );
     }

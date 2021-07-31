@@ -71,6 +71,7 @@ class ShoppingList extends React.Component {
 ShoppingList.propTypes = {
     getShoppingList: PropTypes.func,
     shoppingList: PropTypes.object,
+    userId: PropTypes.number,
     token: PropTypes.string
 }
 

@@ -106,9 +106,11 @@ class AdminProductInfo extends React.Component {
                         <div className="product-wrapper__name__removespacer">
                         </div>
                         <Link to="/admin/products/edit">
-                        <div className="product-wrapper__name__removeproduct">
-                            Edit Product 
-                        </div>
+                            <div className="product-wrapper__name__removeproduct">
+                                <Translation>
+                                    { t => <>{t('admin_prod_info_edit_prod')}</> }
+                                </Translation> 
+                            </div>
                         </Link>
                         <div className="product-wrapper__name__removeproduct"
                              onClick={(e) => {this.handleProductRemove(e)}}>

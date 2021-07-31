@@ -1,4 +1,6 @@
+/* =============================================== */
 /* =============== Importing fonts =============== */
+/* =============================================== */
 @font-face {
     font-family: "montserrat-regular";
     src: url(../fonts/Montserrat-Regular.ttf);
@@ -14,7 +16,9 @@
     src: url(../fonts/Montserrat-Medium.ttf);
 }
 
+/* ============================================== */
 /* =============== Setting styles =============== */
+/* ============================================== */
 .page-root {
     background-color: #F8F8F8;
     padding-bottom: 40px;
@@ -32,7 +36,9 @@ a {
     text-decoration: none;
 }
 
+/* ============================= */
 /* ======= Login styling ======= */
+/* ============================= */
 .login-card {
     width: 300px;
     min-height: 328px;
@@ -110,7 +116,9 @@ a {
     color: red;
 }
 
+/* ============================== */
 /* ======= Header styling ======= */
+/* ===============================*/
 .header {
     background-color: #83B0DE;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .40);
@@ -134,7 +142,9 @@ a {
     flex: 1 1 auto;
 }
 
+/* ================================= */
 /* ======= Left Menu Styling ======= */
+/* ================================= */
 .left-menu nav {
     height: 100%
 }
@@ -237,15 +247,9 @@ a {
     color: #EBEBEB;
 }
 
-.left-menu__spacer {
-    /* @TODO: how to handle this?
-    flex-grow: 1;
-    max-height: 400px;
-    */
-}
-
+/* ====================== */
 /* ====== Products ====== */
-
+/* ====================== */
 .products-container {
     margin-top: 20px;
     margin-left: 220px;    
@@ -292,7 +296,6 @@ a {
 }
 
 .products-header__button__text {
-    /* margin-top: 4px; */
     font-family: "montserrat-regular";
     color: #EBEBEB;
 }
@@ -314,7 +317,6 @@ a {
 }
 
 .products-header__searchbar__text {
-    /*margin-top: 4px;*/
     font-family: "montserrat-regular";
     color: rgb(157, 157, 157);
 }
@@ -341,6 +343,9 @@ a {
     margin-bottom: 40px;
 }
 
+/* ============================== */
+/* ======== Product Card ======== */
+/* ============================== */
 .product-card {
     margin-top: 32px;
     margin-bottom: 24px;
@@ -401,9 +406,9 @@ a {
     background-color: #418bd6;
 }
 
-
+/* ============================== */
 /* ========== Product Info ====== */
-
+/* ============================== */
 .product-info-container {
     margin-left: 220px;
     position: relative;
@@ -614,8 +619,9 @@ a {
     border-color: #ec2121;
 }
 
+/* ======================================= */
 /* =========== Product Info Card ========= */
-
+/* ======================================= */
 .product-info-card-wrapper {
     margin-top: 28px;
     margin-bottom: 24px;
@@ -688,8 +694,9 @@ a {
     font-size: 16px;
 }
 
+/* ============================= */
 /* ====== Shopping Cart ======== */
-
+/* ============================= */
 .shopping-cart-container {
     margin-left: 220px;
     font-family: "montserrat-regular";
@@ -796,8 +803,9 @@ a {
     border-color: #ec2121;
 }
 
+/* ============================= */
 /* ====== Shopping List ======== */
-
+/* ============================= */
 .shopping-list-container {
     margin-left: 220px;
     font-family: "montserrat-regular";
@@ -811,8 +819,9 @@ a {
     font-size: 24px;
 }
 
+/* ============================ */
 /* =========== Users ========== */
-
+/* ============================ */
 .users-container {
     margin-left: 220px;
     font-family: "montserrat-regular";
@@ -824,10 +833,6 @@ a {
     margin-bottom: 40px;
     display: inline-block;
     font-size: 24px;
-}
-
-.users-wrapper {
-    
 }
 
 .users-card {
@@ -872,8 +877,9 @@ a {
     color: #2B2B2B;
 }
 
+/* ============================== */
 /* =========== Locales ========== */
-
+/* ============================== */
 .locales-container {
     margin-left: 220px;
     font-family: "montserrat-regular";
@@ -885,10 +891,6 @@ a {
     margin-bottom: 40px;
     display: inline-block;
     font-size: 24px;
-}
-
-.locales-wrapper {
-    
 }
 
 .locales-card {
@@ -921,8 +923,9 @@ a {
     color: #2B2B2B;
 }
 
+/* ================================= */
 /* =========== Currencies ========== */
-
+/* ================================= */
 .currencies-container {
     margin-left: 220px;
     font-family: "montserrat-regular";
@@ -934,10 +937,6 @@ a {
     margin-bottom: 40px;
     display: inline-block;
     font-size: 24px;
-}
-
-.currencies-wrapper {
-    
 }
 
 .currencies-card {
@@ -964,8 +963,9 @@ a {
     color: #2B2B2B;
 }
 
+/* ==================================== */
 /* =========== Manufacturers ========== */
-
+/* ==================================== */
 .manufacturers-container {
     margin-left: 220px;
     font-family: "montserrat-regular";
@@ -977,10 +977,6 @@ a {
     margin-bottom: 40px;
     display: inline-block;
     font-size: 24px;
-}
-
-.manufacturers-wrapper {
-    
 }
 
 .manufacturers-card {
@@ -1007,8 +1003,9 @@ a {
     color: #2B2B2B;
 }
 
+/* ================================== */
 /* ======== Add product page ======== */
-
+/* ================================== */
 .add-product-container {
     margin-left: 220px;
     font-family: "montserrat-regular";
@@ -1075,8 +1072,9 @@ a {
     border-color: #ec2121;
 }
 
+/* =================================== */
 /* ======== Edit product page ======== */
-
+/* =================================== */
 .edit-product-container {
     margin-left: 220px;
     font-family: "montserrat-regular";
@@ -1143,8 +1141,9 @@ a {
     border-color: #ec2121;
 }
 
+/* ======================================= */
 /* ======= Product management card ======= */
-
+/* ======================================= */
 .product-mgmt-wrapper {
     min-width: 500px;
     max-width: 700px;

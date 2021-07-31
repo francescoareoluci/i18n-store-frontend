@@ -221,9 +221,12 @@ CustomerProductInfo.propTypes = {
     addProductToCart: PropTypes.func,
     disableAddProductToCartNotification: PropTypes.func,
     disableAddProductToCartNotificationError: PropTypes.func,
+    getSimilarProducts: PropTypes.func,
     customerSelectedProduct: PropTypes.object,
     addCartProductNotification: PropTypes.bool,
     addCartProductNotificationError: PropTypes.bool,
+    similarProductList: PropTypes.array,
+    userId: PropTypes.number,
     token: PropTypes.string
 }
 

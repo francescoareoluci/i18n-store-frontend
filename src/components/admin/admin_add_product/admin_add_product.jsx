@@ -396,28 +396,28 @@ class AdminAddProduct extends React.Component {
                     </div>
                 }
                 {!areLocalesEmtpy && !areCurrenciesEmpty &&
-                <ProductMgmtCard
-                    showSelectLabel={true}
-                    showAddLocalization={showAddLocalization}
-                    handleManufacturerChoice={this.handleManufacturerChoice}
-                    manufacturer={this.state.manufacturer}
-                    locs={this.state.locs}
-                    handleLocalizationChoice={this.handleLocalizationChoice}
-                    selectedLocales={this.state.selectedLocales}
-                    localeList={this.props.localeList}
-                    handleNameChoice={this.handleNameChoice}
-                    selectedNames={this.state.selectedNames}
-                    handleCategoryChoice={this.handleCategoryChoice}
-                    selectedCategories={this.state.selectedCategories}
-                    handleDescriptionChoice={this.handleDescriptionChoice}
-                    selectedDescriptions={this.state.selectedDescriptions}
-                    handlePriceChoice={this.handlePriceChoice}
-                    selectedPrices={this.state.selectedPrices}
-                    handleCurrencyChoice={this.handleCurrencyChoice}
-                    selectedCurrencies={this.state.selectedCurrencies}
-                    currencyList={this.props.currencyList}
-                    handleAddProdLocalization={this.handleAddProdLocalization}
-                />
+                    <ProductMgmtCard
+                        showSelectLabel={true}
+                        showAddLocalization={showAddLocalization}
+                        handleManufacturerChoice={this.handleManufacturerChoice}
+                        manufacturer={this.state.manufacturer}
+                        locs={this.state.locs}
+                        handleLocalizationChoice={this.handleLocalizationChoice}
+                        selectedLocales={this.state.selectedLocales}
+                        localeList={this.props.localeList}
+                        handleNameChoice={this.handleNameChoice}
+                        selectedNames={this.state.selectedNames}
+                        handleCategoryChoice={this.handleCategoryChoice}
+                        selectedCategories={this.state.selectedCategories}
+                        handleDescriptionChoice={this.handleDescriptionChoice}
+                        selectedDescriptions={this.state.selectedDescriptions}
+                        handlePriceChoice={this.handlePriceChoice}
+                        selectedPrices={this.state.selectedPrices}
+                        handleCurrencyChoice={this.handleCurrencyChoice}
+                        selectedCurrencies={this.state.selectedCurrencies}
+                        currencyList={this.props.currencyList}
+                        handleAddProdLocalization={this.handleAddProdLocalization}
+                    />
                 }
                 <div className="add-product-confirm-button"
                      onClick={(e) => {this.handleSubmit(e)}}>

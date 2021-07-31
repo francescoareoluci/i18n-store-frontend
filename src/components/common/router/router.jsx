@@ -11,6 +11,7 @@ import {
 /* Common imports */
 import i18n from "../i18n/i18n"
 import Login from "../login/login"
+import ScrollToTop from "../scroll_to_top/scroll_to_top"
 /* Administration imports */
 import AdminMenu from "../../admin/admin_menu/admin_menu"
 import AdminProducts from "../../admin/admin_products/admin_products"
@@ -108,33 +109,35 @@ class App extends React.Component {
       </div>
       <Router>
         {userMenu}
-        <Switch>
-          <Route exact path="/">
-            <Redirect to={defaultPath} />
-          </Route>
-          {this.props.role == 'ADMIN' &&
-            <Switch>
-              <Route exact path="/admin/products" component={AdminProducts} />
-              <Route exact path="/admin/products/info" component={AdminProductInfo} />
-              <Route exact path="/admin/products/add" component={AdminAddProduct} />
-              <Route exact path="/admin/products/edit" component={AdminEditProduct} />
-              <Route exact path="/admin/users" component={Users} />
-              <Route exact path="/admin/locales" component={Locales} />
-              <Route exact path="/admin/manufacturers" component={Manufacturers} />
-              <Route exact path="/admin/currencies" component={Currencies} />
+        <ScrollToTop>
+          <Switch>
+            <Route exact path="/">
               <Redirect to={defaultPath} />
-            </Switch>
-          }
-          {this.props.role == 'CUSTOMER' &&
-            <Switch>
-              <Route exact path="/customer/products" component={CustomerProducts} />
-              <Route exact path="/customer/products/info" component={CustomerProductInfo} />
-              <Route exact path="/customer/shopping-cart" component={ShoppingCart} />
-              <Route exact path="/customer/shopping-list" component={ShoppingList} />
-              <Redirect to={defaultPath} />
-            </Switch>
-          }
-        </Switch>
+            </Route>
+            {this.props.role == 'ADMIN' &&
+              <Switch>
+                <Route exact path="/admin/products" component={AdminProducts} />
+                <Route exact path="/admin/products/info" component={AdminProductInfo} />
+                <Route exact path="/admin/products/add" component={AdminAddProduct} />
+                <Route exact path="/admin/products/edit" component={AdminEditProduct} />
+                <Route exact path="/admin/users" component={Users} />
+                <Route exact path="/admin/locales" component={Locales} />
+                <Route exact path="/admin/manufacturers" component={Manufacturers} />
+                <Route exact path="/admin/currencies" component={Currencies} />
+                <Redirect to={defaultPath} />
+              </Switch>
+            }
+            {this.props.role == 'CUSTOMER' &&
+              <Switch>
+                <Route exact path="/customer/products" component={CustomerProducts} />
+                <Route exact path="/customer/products/info" component={CustomerProductInfo} />
+                <Route exact path="/customer/shopping-cart" component={ShoppingCart} />
+                <Route exact path="/customer/shopping-list" component={ShoppingList} />
+                <Redirect to={defaultPath} />
+              </Switch>
+            }
+          </Switch>
+        </ScrollToTop>
       </Router>
       </div>
     );
